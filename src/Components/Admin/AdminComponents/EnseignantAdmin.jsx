@@ -16,7 +16,7 @@ import ModeIcon from "@mui/icons-material/Mode";
 import Modal from "@mui/material/Modal";
 import "../../../style/AdminDashboard.css";
 import { Button } from "@mui/material";
-import {  Backdrop } from '@mui/material';
+import { Backdrop } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -41,6 +41,9 @@ export default function EnseignantAdmin(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  function AnnulerValues() {
+    setAddedEnseignant({ nom: "", prenom: "", email: "", labo: "" });
+  }
   axios
     .get("http://localhost:8080/FSTBM/Admin/Enseignant/getAll")
     .then((response) => {
@@ -78,16 +81,32 @@ export default function EnseignantAdmin(props) {
     }
   }
 
-  function tester() {
-    axios
-      .post(
-        "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",
-        enseignantAdded
-      )
-      .then((response) => {})
-      .catch((error) => {
-        console.log("Error: " + error);
-      });
+  function AjouterEnseignant() {
+    if (enseignantAdded.email == "") {
+      document.getElementById("email-error").style.visibility = "visible";
+      document.getElementById("email-error").style.backgroundColor = "red"
+    }if(enseignantAdded.labo == "") {
+      document.getElementById("labo-error").style.visibility = "visible";
+    }if(enseignantAdded.nom == "") {
+      document.getElementById("nom-error").style.visibility = "visible";
+    }if(enseignantAdded.prenom == "") {
+      document.getElementById("prenom-error").style.visibility = "visible";
+    }
+    else {
+      axios
+        .post(
+          "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",
+          enseignantAdded
+        )
+        .then((response) => {})
+        .catch((error) => {
+          console.log("Error: " + error);
+        });
+        document.getElementById("nom-error").style.visibility = "hidden";
+        document.getElementById("prenom-error").style.visibility = "hidden";
+        document.getElementById("email-error").style.visibility = "hidden";
+        document.getElementById("labo-error").style.visibility = "hidden";
+    }
   }
 
   return (
@@ -170,7 +189,9 @@ export default function EnseignantAdmin(props) {
                                 // aria-labelledby="modal-modal-title"
                                 // aria-describedby="modal-modal-description"
                                 BackdropProps={{
-                                  style: { backgroundColor: 'rgba(0, 0, 0, 0.5)' }, // Customize backdrop color and opacity
+                                  style: {
+                                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                  }, // Customize backdrop color and opacity
                                 }}
                               >
                                 <Box sx={style}>
@@ -242,10 +263,11 @@ export default function EnseignantAdmin(props) {
                       nom: e.target.value,
                     });
                   }}
-                  className="w-72"
+                  className="EnseignantField w-72"
+                  value={enseignantAdded.nom}
                 />
                 <br />
-                <label style={{ color: "red", visibility: "hidden" }}>
+                <label style={{ color: "red", visibility: "hidden" }} id="nom-error">
                   *Ce champ est obligatoitre !
                 </label>
               </div>
@@ -268,10 +290,11 @@ export default function EnseignantAdmin(props) {
                       prenom: e.target.value,
                     });
                   }}
-                  className="w-72"
+                  className="EnseignantField w-72"
+                  value={enseignantAdded.prenom}
                 />
                 <br />
-                <label style={{ color: "red", visibility: "hidden" }}>
+                <label style={{ color: "red", visibility: "hidden" }} id="prenom-error">
                   *Ce champ est obligatoitre !
                 </label>
               </div>
@@ -294,10 +317,14 @@ export default function EnseignantAdmin(props) {
                       email: e.target.value,
                     });
                   }}
-                  className="w-72"
+                  className="EnseignantField w-72"
+                  value={enseignantAdded.email}
                 />
                 <br />
-                <label style={{ color: "red", visibility: "hidden" }}>
+                <label
+                  style={{ color: "red", visibility: "hidden" }}
+                  id="email-error"
+                >
                   *Ce champ est obligatoitre !
                 </label>
               </div>
@@ -319,16 +346,17 @@ export default function EnseignantAdmin(props) {
                 <TextField
                   id="outlined-basic"
                   style={{ width: "570px" }}
-                  className=""
+                  className="EnseignantField"
                   onChange={(e) => {
                     setAddedEnseignant({
                       ...enseignantAdded,
                       labo: e.target.value,
                     });
                   }}
+                  value={enseignantAdded.labo}
                 />
                 <br />
-                <label style={{ color: "red", visibility: "hidden" }}>
+                <label style={{ color: "red", visibility: "hidden" }} id="labo-error">
                   *Ce champ est obligatoitre !
                 </label>
               </div>
@@ -346,7 +374,7 @@ export default function EnseignantAdmin(props) {
                 <TextField
                   id="outlined-basic"
                   style={{ width: "400px" }}
-                  className=""
+                  className="EnseignantField"
                 />
                 <br />
                 <label style={{ color: "red", visibility: "hidden" }}>
@@ -371,7 +399,7 @@ export default function EnseignantAdmin(props) {
                 <TextField
                   id="outlined-basic"
                   style={{ width: "400px" }}
-                  className=""
+                  className="EnseignantField"
                 />
                 <br />
                 <label style={{ color: "red", visibility: "hidden" }}>
@@ -392,7 +420,7 @@ export default function EnseignantAdmin(props) {
                 <TextField
                   id="outlined-basic"
                   style={{ width: "400px" }}
-                  className=""
+                  className="EnseignantField"
                 />
               </div>
             </div>
@@ -407,7 +435,7 @@ export default function EnseignantAdmin(props) {
                     padding: "15px 80px",
                     marginRight: "20px",
                   }}
-                  onClick={tester}
+                  onClick={AjouterEnseignant}
                 >
                   Ajouter
                 </Button>
@@ -418,6 +446,7 @@ export default function EnseignantAdmin(props) {
                     color: "#2d0560",
                     padding: "15px 40px",
                   }}
+                  onClick={AnnulerValues}
                 >
                   Annuler
                 </Button>

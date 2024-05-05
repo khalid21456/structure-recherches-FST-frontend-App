@@ -8,7 +8,6 @@ export default function AdminAccueil(props) {
   const [enseignantCount, setEnseignantsCount] = useState();
   const [doctorantsCount, setDoctorantsCount] = useState();
 
-
   axios
     .get("http://localhost:8080/FSTBM/Admin/Enseignant/countEnseignants")
     .then((response) => {
@@ -18,7 +17,7 @@ export default function AdminAccueil(props) {
       console.error("Error: " + error);
     });
 
-    axios
+  axios
     .get("http://localhost:8080/FSTBM/Admin/Doctorant/countDoctorants")
     .then((response) => {
       setDoctorantsCount(response.data);
@@ -27,7 +26,6 @@ export default function AdminAccueil(props) {
       console.error("Error: " + error);
     });
 
-
   return (
     <div>
       <div className="flex justify-around pt-10">
@@ -35,7 +33,7 @@ export default function AdminAccueil(props) {
           <div className="mt-5">
             <img
               className="w-24 ml-2"
-              src={require("../../../icons/enseignant-statis.png")}
+              src={require("../../../icons/teacher-icon.png")}
             />
             <div
               style={{ fontFamily: "Poppins" }}
@@ -55,7 +53,7 @@ export default function AdminAccueil(props) {
           <div className="mt-5">
             <img
               className="w-24 ml-2"
-              src={require("../../../icons/doctorant-statis.png")}
+              src={require("../../../icons/master-icon.png")}
             />
             <div
               style={{ fontFamily: "Poppins" }}
@@ -73,12 +71,13 @@ export default function AdminAccueil(props) {
         </div>
         <div className="w-1/5 h-56 shadow-md mb-2 flex justify-center bg-white rounded-lg">
           <div className="mt-5">
-            <EventIcon
-              sx={{ fontSize: 96, color: "#2d0560", marginLeft: "5px" }}
+            <img
+              className="w-28 ml-2"
+              src={require("../../../icons/event-icon.jpg")}
             />
             <div
               style={{ fontFamily: "Poppins" }}
-              className="text-center text-3xl mt-4"
+              className="text-center text-3xl"
             >
               23
             </div>
@@ -92,7 +91,10 @@ export default function AdminAccueil(props) {
         </div>
         <div className="w-1/5 h-56 shadow-md flex justify-center mb-2 bg-white rounded-lg">
           <div className="mt-5">
-            <ShareIcon sx={{ fontSize: 96, color: "#2d0560" }} />
+            <img
+              className="w-32 ml-2"
+              src={require("../../../icons/pub-icon.jpg")}
+            />
             <div
               style={{ fontFamily: "Poppins" }}
               className="text-center text-3xl mt-4"
@@ -110,24 +112,34 @@ export default function AdminAccueil(props) {
       </div>
       <div className=" mt-10 flex justify-center">
         <div>
-        <div className="Enseignants-show border bg-white rounded-lg shadow-md">
-          <div
-            style={{ fontFamily: "Poppins", fontSize: "25px" ,backgroundColor:"#2d0560", color:"white"}}
-            className="h-20 border-b pt-5 pl-7"
-          >
-            Les Enseignants
+          <div className="Enseignants-show border bg-white rounded-lg shadow-md">
+            <div
+              style={{
+                fontFamily: "Poppins",
+                fontSize: "25px",
+                backgroundColor: "#2d0560",
+                color: "white",
+              }}
+              className="h-20 border-b pt-5 pl-7"
+            >
+              Les Enseignants
+            </div>
           </div>
-        </div>
-        <div className="expand-overflow">
-        <div className="Doctorants-show border bg-white rounded-lg shadow-md mt-7">
-          <div
-            style={{ fontFamily: "Poppins", fontSize: "25px" ,backgroundColor:"#2d0560", color:"white"}}
-            className="h-20 border-b pt-5 pl-7"
-          >
-            Les Doctorants
+          <div className="expand-overflow">
+            <div className="Doctorants-show border bg-white rounded-lg shadow-md mt-7">
+              <div
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "25px",
+                  backgroundColor: "#2d0560",
+                  color: "white",
+                }}
+                className="h-20 border-b pt-5 pl-7"
+              >
+                Les Doctorants
+              </div>
+            </div>
           </div>
-          </div>
-        </div>
         </div>
       </div>
     </div>
