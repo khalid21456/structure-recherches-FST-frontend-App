@@ -1,0 +1,41 @@
+.Recherche-container {
+  height: 1700px;
+}
+
+.presentRecherche {
+  height: 770px;
+  background-image: url("../pictures/background-recherche.jpg");
+  background-size: cover;
+}
+
+.headerA {
+  position: relative;
+  transform: translateX(-500px);
+  opacity: 0;
+  transition: all 2s ease;
+}
+
+.headerB {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+.Introduction-content {
+  font-family: "Roboto";
+  font-size: 20px 
+}
+
+
+@media (max-width:1280px) {
+    .Recherche-title {
+        font-size:80px;
+    }
+
+    .Introduction-content {
+      font-size:17px;
+    }
+}
+
+.Theme-Recherches-Container {
+    height: 1000px;
+}

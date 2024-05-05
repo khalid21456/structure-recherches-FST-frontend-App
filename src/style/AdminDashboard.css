@@ -1,0 +1,80 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.AdminDashboard-container {
+    width:1510px;
+    height:845px;
+    /* background-color: rgb(210, 210, 210); */
+    overflow: auto;
+}
+
+.navDashh {
+    height: 80px;
+    width: 1400px;
+}
+
+.sideBar-Container {
+    background-color: #1E0342;
+    height: 848px;
+    /* position: fixed; */
+}
+
+#dashboardContent {
+    width: 1400px;
+    height: 740px;
+    margin-left:22px;
+}
+
+.PCard {
+    background-color: #2d0560;
+}
+
+.sideBar-Container:hover {
+    border-right-width: 7px;
+    border-right-color:orange;
+    transition: 0.5s ease;
+}
+
+.Enseignants-show {
+    width: 1000px;
+    height: 600px;
+}
+
+.Doctorants-show {
+    width: 1000px;
+    height: 600px;
+}
+
+.doctorantEspace {
+    height: 750px;
+}
+
+.expand-overflow {
+    height:730px;
+}
+
+
+.online {
+    opacity: 0;
+    animation: appearAndDisappear 1s infinite  ease-out;
+} 
+
+@keyframes appearAndDisappear {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75%{
+        opacity: 0.75;
+    }
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,50 @@
+.Departement-Container {
+    height: 2800px;
+
+}
+
+.presentDepartement {
+    height: 770px;
+    background-image: url("../pictures/departement-background.jpg");
+    background-size:cover;
+}
+
+
+
+#list-vocation {
+    list-style-type: disc;
+}
+
+.departement-page-container {
+    height: 1900px;
+}
+
+.membres {
+    height: 800px;
+}
+
+.Accueil-Container {
+    height: 1200px;
+}
+
+.presentation-Title {
+    margin-left:290px;
+}
+
+.departement-header {
+    margin-left:290px;
+}
+
+@media (max-width: 1280px) {
+    .departement-header {
+        margin-left:130px ;
+    }
+
+    .departement-title {
+        font-size:80px;
+    }
+
+    .presentation-Title {
+        margin-left: 143px;
+    }
+}
