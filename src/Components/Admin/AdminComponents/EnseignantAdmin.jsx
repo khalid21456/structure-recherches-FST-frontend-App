@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, useStyles } from "react";
 import ReactDOM from "react-dom";
 import Box from "@mui/material/Box";
 import axios from "axios";
@@ -42,7 +43,13 @@ export default function EnseignantAdmin(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   function AnnulerValues() {
-    setAddedEnseignant({ nom: "", prenom: "", email: "", labo: "" });
+    setAddedEnseignant({
+      nom: "",
+      prenom: "",
+      email: "",
+      labo: "",
+      address: "",
+    });
   }
   axios
     .get("http://localhost:8080/FSTBM/Admin/Enseignant/getAll")
@@ -86,10 +93,15 @@ export default function EnseignantAdmin(props) {
       document.getElementById("email-error").style.visibility = "visible";
       document.getElementById("email-error").style.backgroundColor = "red"
     }if(enseignantAdded.labo == "") {
+    }
+    if (enseignantAdded.labo == "") {
       document.getElementById("labo-error").style.visibility = "visible";
     }if(enseignantAdded.nom == "") {
       document.getElementById("nom-error").style.visibility = "visible";
     }if(enseignantAdded.prenom == "") {
+      document.getElementById("EnseignantFieldNom").style.color = "red";
+    }
+    if (enseignantAdded.prenom == "") {
       document.getElementById("prenom-error").style.visibility = "visible";
     }
     else {
@@ -375,6 +387,12 @@ export default function EnseignantAdmin(props) {
                   id="outlined-basic"
                   style={{ width: "400px" }}
                   className="EnseignantField"
+                  onChange={(e) => {
+                    setAddedEnseignant({
+                      ...enseignantAdded,
+                      address: e.target.value,
+                    });
+                  }}
                 />
                 <br />
                 <label style={{ color: "red", visibility: "hidden" }}>
