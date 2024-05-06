@@ -1,7 +1,7 @@
+import React from 'react';
 import EnseignantProfileCard from './EnseignantProfileCard'
 import './../../style/EnseignantDashboard.css'
-const activeClass = 'border-blue-500';
-  const inactiveClass = 'border-transparent';
+import { Link } from 'react-router-dom';
 export default function EnseignantSideBar() {
     return (
         <div className='enseiSideBar-Container w-80 h-full shadow-lg hover:border-r-4 hover:border-r-orange-500'>
@@ -14,6 +14,7 @@ export default function EnseignantSideBar() {
                 </h1>
             </div>
                 <nav className='mt-10'>
+                 <button className='w-full'>
                   <div className='flex items-center px-6 py-2 mt-4 duration-200 border-l-4 hover:border-l-4 hover:border-l-sky-900 hover:bg-white div'>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                   className='w-8 h-8 icon'
@@ -24,7 +25,8 @@ export default function EnseignantSideBar() {
                   </svg>
                    <span class="mx-4 text-xl text-white hover:text-sky-900 font-semibold">Accueil</span>
                    </div>
-
+                   </button>
+                   <button className='w-full'>
                    <div className='flex items-center px-6 py-2 mt-4 duration-200 hover:border-l-4 hover:border-l-sky-900 hover:bg-white div'>
                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                     className='w-8 h-8 icon'
@@ -35,7 +37,8 @@ export default function EnseignantSideBar() {
                    </svg>
                    <span class="mx-4 text-xl text-white hover:text-sky-900 font-semibold">Evenements</span>
                    </div>
-
+                   </button>
+                   <button className='w-full'>
                    <div className='flex items-center px-6 py-2 mt-4 duration-200 hover:border-l-4 hover:border-l-sky-900 hover:bg-white div'>
                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                    className='w-8 h-8 icon'
@@ -46,7 +49,8 @@ export default function EnseignantSideBar() {
                    </svg>
                    <span class="mx-4 text-xl text-white hover:text-sky-900 font-semibold">Publications</span>
                    </div>
-
+                   </button>
+                   <button className='w-full'>
                    <div className='flex items-center px-6 py-2 mt-4 duration-200 hover:border-l-4 hover:border-l-sky-900 hover:bg-white div'>
                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                    className='w-8 h-8 icon'
@@ -57,6 +61,7 @@ export default function EnseignantSideBar() {
                    </svg>
                    <span class="mx-4 text-xl text-white hover:text-sky-900 font-semibold">Paramètres</span>
                    </div>
+                   </button>
                 </nav>
             </div>
     )

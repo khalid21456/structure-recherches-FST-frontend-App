@@ -21,6 +21,9 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import LogoutIcon from '@mui/icons-material/Logout';
 import './../../style/EnseignantDashboard.css';
+import EnseignantAccueil from "./EnseignantComponents/EnseignantAccueil";
+import EnseignantPublication from "./EnseignantComponents/EnseignantPublication";
+import EnseignantEvenement from "./EnseignantComponents/EnseignantEvenement";
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -73,6 +76,7 @@ export default function DashboardNav() {
             setAnchorElUser(null);
           };
   return (
+     <div>
         <div className="flex justify-between h-full navDash bg-slate-400 border rounded-lg shadow-md mt-3 mr-16 ml-2">
           <div>
             <h1
@@ -144,6 +148,10 @@ export default function DashboardNav() {
           </Box>
               </div>
             </div>
+        </div>
+        <div className="flex justify-between bg-slate-100 border rounded-lg shadow-md mt-3 mr-16 ml-2 mb-3" style={{width:'1060px'}}>
+            <EnseignantEvenement/>
+        </div>
         </div>
   );
 }

@@ -5,9 +5,6 @@ export default function EnseignantDashboard() {
     return (
         <div className='EnseignantDashboard-container overflow-auto bg-gray-200'>
             <EnseignantDashNav />
-            <div>
-                <EnseignantAccueil />
-            </div>
         </div>
     )
 }

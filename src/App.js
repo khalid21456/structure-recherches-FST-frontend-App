@@ -9,6 +9,12 @@ import AdminDashboard from './Components/Admin/AdminDashboard'
 import EnseignantProfileCard from './Components/Enseignant/EnseignantProfileCard'
 import EnseignantSideBar from "./Components/Enseignant/EnseignantSideBar";
 import EnseignantDashboard from './Components/Enseignant/EnseignantDashboard'
+import EnseignantAccueil from "./Components/Enseignant/EnseignantComponents/EnseignantAccueil";
+import RechercheAdmin from "./Components/Admin/AdminComponents/RechercheAdmin";
+import EnseignantAdmin from "./Components/Admin/AdminComponents/EnseignantAdmin";
+import DoctorantAdmin from "./Components/Admin/AdminComponents/DoctorantAdmin";
+import AdminAccueil from "./Components/Admin/AdminComponents/AdminAccueil";
+
 function App() {
   return (
     <>
@@ -17,15 +23,16 @@ function App() {
       </nav>
       <section className="mainSection flex justify-normal">
       <aside>
-        <SideBar/>
+        <EnseignantSideBar/>
       </aside>
       <main id="main">
-        <AdminDashboard/>
+        <EnseignantDashboard/>
       </main>
       </section>
       <footer className="hidden">
         <Footer/>
       </footer>
+      
     </>
   );
 }
