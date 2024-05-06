@@ -196,6 +196,7 @@ export default function EnseignantAdmin(props) {
                               />
                               <Modal
                                 open={open}
+                                key={enseignant.id}
                                 onClose={handleClose}
                                 BackdropComponent={Backdrop}
                                 // aria-labelledby="modal-modal-title"
@@ -416,7 +417,7 @@ export default function EnseignantAdmin(props) {
                 <br />
                 <TextField
                   id="outlined-basic"
-                  style={{ width: "400px" }}
+                  style={{ width: "500px" }}
                   className="EnseignantField"
                 />
                 <br />
@@ -437,14 +438,14 @@ export default function EnseignantAdmin(props) {
                 <br />
                 <TextField
                   id="outlined-basic"
-                  style={{ width: "400px" }}
+                  style={{ width: "480px" }}
                   className="EnseignantField"
                 />
               </div>
             </div>
           </div>
           <div className="btnAjouterEnseignant">
-            <div className="flex justify-end w-11/12 mt-4">
+            <div className="flex justify-center w-11/12 mt-4">
               <div>
                 <Button
                   variant="contained"

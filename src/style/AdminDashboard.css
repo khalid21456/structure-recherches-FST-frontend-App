@@ -78,3 +78,9 @@
         opacity: 1;
     }
 }
+
+
+.image-back-theme {
+    background-image: url("../pictures/sciences-ecole-primaire.jpg");
+    background-size: cover;
+  }
