@@ -1,15 +1,24 @@
 import React from 'react';
-import EnseignantProfileCard from './EnseignantProfileCard'
-import './../../style/EnseignantDashboard.css'
-import { Link } from 'react-router-dom';
+import ReactDOM  from 'react-dom';
+import EnseignantProfileCard from './EnseignantProfileCard';
+import './../../style/EnseignantDashboard.css';
+import EnseignantAccueil from './EnseignantComponents/EnseignantAccueil';
+import EnseignantEvenement from './EnseignantComponents/EnseignantEvenement';
+import EnseignantPublication from './EnseignantComponents/EnseignantPublication';
 const renderEnseignantAccueil = ()=>{
-
+  ReactDOM.render(
+    <EnseignantAccueil/>, document.getElementById("EnseignantContent")
+  )
 }
 const renderEnseignantEvenement = ()=>{
-
+   ReactDOM.render(
+    <EnseignantEvenement/>, document.getElementById("EnseignantContent")
+   )
 }
 const renderEnseignantPublication = ()=>{
-  
+   ReactDOM.render(
+    <EnseignantPublication/>, document.getElementById("EnseignantContent")
+   )
 }
 export default function EnseignantSideBar() {
     return (
