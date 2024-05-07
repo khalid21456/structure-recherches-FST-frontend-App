@@ -62,9 +62,9 @@ export default function RechercheAdmin(props) {
                 <AccordionDetails>
                   {theme.recherches.map((recherche) => {
                     return (
-                      <ul>
+                      <ul key={recherche.id}>
                         <li className="mt-3" key={recherche.id}>
-                          {recherche.titre}
+                          {recherche.titre} 
                         </li>
                       </ul>
                     );

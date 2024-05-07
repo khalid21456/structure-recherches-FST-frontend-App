@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
+import TextField from "@mui/material/TextField";
+import ImageUploader from "../../ImageUploader";
 
 export default function AjouterTheme() {
   const [themes, setThemes] = useState([]);
@@ -28,7 +30,33 @@ export default function AjouterTheme() {
           >
             Ajouter un thème de recherche
           </h1>
-          <div></div>
+          <div className="flex justify-center">
+            <div className="w-9/12 h-96 mt-14">
+              <lable
+                style={{ fontSize: "20px", fontFamily: "Poppins" }}
+                className="pl-3"
+              >
+                Titre
+              </lable>
+              <br />
+              <TextField id="outlined-basic" className="w-full" />
+              <br />
+              <br />
+              <lable
+                style={{ fontSize: "20px", fontFamily: "Poppins" }}
+                className="pl-3"
+              >
+                Déscription
+              </lable>
+              <br />
+              <TextField id="outlined-multiline-static" className="w-full" multiline rows={6} />
+              <br />
+              <br />
+              <label style={{ fontSize: "20px", fontFamily: "Poppins" }}
+                className="pl-3">Image</label><br/>
+              <ImageUploader/>
+            </div>
+          </div>
         </div>
         <div
           style={{ height: "700px" }}
@@ -44,7 +72,11 @@ export default function AjouterTheme() {
             <div className="w-11/12 mt-10">
               {themes.map((theme) => {
                 return (
-                  <div style={{backgroundColor:"#2d0560"}} className="w-full h-16 mt-3 flex border rounded-md" key={theme.id}>
+                  <div
+                    style={{ backgroundColor: "#2d0560" }}
+                    className="w-full h-16 mt-3 flex border rounded-md"
+                    key={theme.id}
+                  >
                     <span
                       style={{ fontSize: "16px", fontFamily: "Roboto" }}
                       className="w-11/12 pt-5 pl-3 text-white"
