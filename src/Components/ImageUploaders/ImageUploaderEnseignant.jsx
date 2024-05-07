@@ -26,7 +26,7 @@ function ImageUploaderEnseignant() {
 
   return (
     <div>
-      <input type="file"  onChange={handleFileChange} />
+      <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload Image</button>
     </div>
   );

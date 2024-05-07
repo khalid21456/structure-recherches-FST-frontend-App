@@ -79,7 +79,7 @@ export default function RechercheAdmin(props) {
       </div>
       <div className="flex justify-end mt-3 mr-14">
         <a
-          className="cursor-pointer underline hover:text-orange-500"
+          className="cursor-pointer pb-10 underline hover:text-orange-500"
           onClick={renderAjouterTheme}
         >
           Modifier

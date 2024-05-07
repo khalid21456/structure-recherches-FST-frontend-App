@@ -1,6 +1,4 @@
-
 import React, { useEffect, useState, useStyles } from "react";
-import ReactDOM from "react-dom";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
@@ -39,6 +37,8 @@ export default function EnseignantAdmin(props) {
     prenom: "",
     email: "",
     labo: "",
+    dateNaissance: "",
+    // address :new Date("")
   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -50,41 +50,30 @@ export default function EnseignantAdmin(props) {
       email: "",
       labo: "",
       address: "",
+      dateNaissance: "",
     });
   }
 
+  useEffect(() => {
+    const fetchDataEnseignant = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/FSTBM/Admin/Enseignant/getAll"
+        );
+        setEnseignants(response.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+        setEnseignants([]);
+      }
+    };
 
-    useEffect(() => {
-      const fetchDataEnseignant = async () => {
-        try {
-          const response = await axios.get("http://localhost:8080/FSTBM/Admin/Enseignant/getAll");
-          console.log("khalid")
-          setEnseignants(response.data); 
-          
-        } catch (error) {
-          console.log(error.response.data.message); 
-          setEnseignants([]); 
-        }
-      };
-  
-      fetchDataEnseignant(); // Call the fetchData function when the component is mounted
-  
-    }, []); 
+    fetchDataEnseignant();
+  }, []);
 
   function deleteEnseignant(event) {
     let id = event.target.parentElement.id;
     console.log(id);
-    let fullName;
-    axios
-      .get(`http://localhost:8080/FSTBM/Admin/Enseignant/getNameById/${id}`)
-      .then((response) => {
-        fullName = response.data.fullName;
-        console.log(fullName);
-      })
-      .catch((error) => {
-        console.log("Error : " + error);
-      });
-    console.log(fullName);
+    let fullName = null;
     if (
       window.confirm(
         "voulez-vous vraiment supprimer les données de " + fullName
@@ -92,7 +81,9 @@ export default function EnseignantAdmin(props) {
     ) {
       axios
         .delete(`http://localhost:8080/FSTBM/Admin/Enseignant/deleteEns/${id}`)
-        .then((response) => {})
+        .then((response) => {
+          setEnseignants(response.data);
+        })
         .catch((error) => {
           console.error("Error : ", error);
         });
@@ -100,35 +91,43 @@ export default function EnseignantAdmin(props) {
   }
 
   function AjouterEnseignant() {
+    document.getElementById("nom-error").style.visibility = "hidden";
+    document.getElementById("prenom-error").style.visibility = "hidden";
+    document.getElementById("email-error").style.visibility = "hidden";
+    document.getElementById("labo-error").style.visibility = "hidden";
     if (enseignantAdded.email == "") {
       document.getElementById("email-error").style.visibility = "visible";
-      document.getElementById("email-error").style.backgroundColor = "red"
-    }if(enseignantAdded.labo == "") {
     }
     if (enseignantAdded.labo == "") {
       document.getElementById("labo-error").style.visibility = "visible";
-    }if(enseignantAdded.nom == "") {
+    }
+    if (enseignantAdded.nom == "") {
       document.getElementById("nom-error").style.visibility = "visible";
-    }if(enseignantAdded.prenom == "") {
-      document.getElementById("EnseignantFieldNom").style.color = "red";
     }
     if (enseignantAdded.prenom == "") {
       document.getElementById("prenom-error").style.visibility = "visible";
     }
-    else {
+    if (
+      enseignantAdded.prenom != "" &&
+      enseignantAdded.nom != "" &&
+      enseignantAdded.labo != "" &&
+      enseignantAdded.email != ""
+    ) {
       axios
         .post(
           "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",
           enseignantAdded
         )
-        .then((response) => {})
+        .then((response) => {
+          setEnseignants(response.data);
+        })
         .catch((error) => {
           console.log("Error: " + error);
         });
-        document.getElementById("nom-error").style.visibility = "hidden";
-        document.getElementById("prenom-error").style.visibility = "hidden";
-        document.getElementById("email-error").style.visibility = "hidden";
-        document.getElementById("labo-error").style.visibility = "hidden";
+      document.getElementById("nom-error").style.visibility = "hidden";
+      document.getElementById("prenom-error").style.visibility = "hidden";
+      document.getElementById("email-error").style.visibility = "hidden";
+      document.getElementById("labo-error").style.visibility = "hidden";
     }
   }
 
@@ -146,7 +145,7 @@ export default function EnseignantAdmin(props) {
             Les Enseignants
           </div>
           <div className="table-enseignants flex justify-center mt-10 ">
-            <div style={{ width: "1200px", height: "600px" }} className="">
+            <div style={{ width: "1200px", height: "300px" }}>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
@@ -256,6 +255,9 @@ export default function EnseignantAdmin(props) {
               </TableContainer>
             </div>
           </div>
+          {/* <div className="block">
+              <div className="w-full h-24"></div>
+          </div> */}
         </div>
       </div>
       <div className="doctorantEspace flex justify-center pt-10">
@@ -291,7 +293,10 @@ export default function EnseignantAdmin(props) {
                   value={enseignantAdded.nom}
                 />
                 <br />
-                <label style={{ color: "red", visibility: "hidden" }} id="nom-error">
+                <label
+                  style={{ color: "red", visibility: "hidden" }}
+                  id="nom-error"
+                >
                   *Ce champ est obligatoitre !
                 </label>
               </div>
@@ -318,7 +323,10 @@ export default function EnseignantAdmin(props) {
                   value={enseignantAdded.prenom}
                 />
                 <br />
-                <label style={{ color: "red", visibility: "hidden" }} id="prenom-error">
+                <label
+                  style={{ color: "red", visibility: "hidden" }}
+                  id="prenom-error"
+                >
                   *Ce champ est obligatoitre !
                 </label>
               </div>
@@ -380,7 +388,10 @@ export default function EnseignantAdmin(props) {
                   value={enseignantAdded.labo}
                 />
                 <br />
-                <label style={{ color: "red", visibility: "hidden" }} id="labo-error">
+                <label
+                  style={{ color: "red", visibility: "hidden" }}
+                  id="labo-error"
+                >
                   *Ce champ est obligatoitre !
                 </label>
               </div>
@@ -426,7 +437,22 @@ export default function EnseignantAdmin(props) {
                   Date De naissance
                 </label>
                 <br />
-                <input type="date" style={{width:"590px",borderRadius:"5px",borderWidth:"1px",padding:"15px"}}/>
+                <input
+                  // value={enseignantAdded.dateNaissance || ""}
+                  // onChange={(e) =>
+                  //   setAddedEnseignant({
+                  //     ...EnseignantAdmin,
+                  //     dateNaissance: e.target.value,
+                  //   })
+                  // }
+                  type="date"
+                  style={{
+                    width: "590px",
+                    borderRadius: "5px",
+                    borderWidth: "1px",
+                    padding: "15px",
+                  }}
+                />
                 <br />
                 <label style={{ color: "red", visibility: "hidden" }}>
                   *Ce champ est obligatoitre !
@@ -443,7 +469,7 @@ export default function EnseignantAdmin(props) {
                   Image de profile
                 </label>
                 <br />
-                <ImageUploaderEnseignant className="mt-5"/>
+                <ImageUploaderEnseignant className="mt-5" />
               </div>
             </div>
           </div>
