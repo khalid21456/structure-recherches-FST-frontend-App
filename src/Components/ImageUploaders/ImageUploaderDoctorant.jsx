@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function ImageUploader() {
+function ImageUploaderDoctorant() {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -13,7 +13,7 @@ function ImageUploader() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await axios.post("http://localhost:8080/FSTBM/images/uploads", formData, {
+      const response = await axios.post("http://localhost:8080/FSTBM/images/uploads/Profile", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -32,4 +32,4 @@ function ImageUploader() {
   );
 }
 
-export default ImageUploader;
+export default ImageUploaderDoctorant;

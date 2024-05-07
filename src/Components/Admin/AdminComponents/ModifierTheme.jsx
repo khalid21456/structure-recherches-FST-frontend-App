@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
-import ImageUploader from "../../ImageUploader";
+import ImageUploaderTheme from "../../ImageUploaders/ImageUploaderTheme";
 
 export default function AjouterTheme() {
   const [themes, setThemes] = useState([]);
 
-  axios
-    .get("http://localhost:8080/FSTBM/Admin/Theme/retournerTousLesThemes")
-    .then((response) => {
-      setThemes(response.data);
-    })
-    .catch((error) => {
-      console.error("Error: " + error);
-    });
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/FSTBM/Admin/Theme/retournerTousLesThemes");
+          console.log("khalid")
+          setThemes(response.data); 
+          
+        } catch (error) {
+          console.log(error.response.data.message); 
+          setThemes([]); 
+        }
+      };
+  
+      fetchData(); // Call the fetchData function when the component is mounted
+  
+    }, []); 
 
   return (
     <>
@@ -54,7 +62,7 @@ export default function AjouterTheme() {
               <br />
               <label style={{ fontSize: "20px", fontFamily: "Poppins" }}
                 className="pl-3">Image</label><br/>
-              <ImageUploader/>
+              <ImageUploaderTheme/>
             </div>
           </div>
         </div>

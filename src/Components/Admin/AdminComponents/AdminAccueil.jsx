@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import EventIcon from "@mui/icons-material/Event";
@@ -8,23 +8,38 @@ export default function AdminAccueil(props) {
   const [enseignantCount, setEnseignantsCount] = useState();
   const [doctorantsCount, setDoctorantsCount] = useState();
 
-  axios
-    .get("http://localhost:8080/FSTBM/Admin/Enseignant/countEnseignants")
-    .then((response) => {
-      setEnseignantsCount(response.data);
-    })
-    .catch((error) => {
-      console.error("Error: " + error);
-    });
+    useEffect(() => {
+      const fetchDataCountEnseignant = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/FSTBM/Admin/Enseignant/countEnseignants");
+          setEnseignantsCount(response.data); 
+          
+        } catch (error) {
+          console.log(error.response.data.message); 
+          setEnseignantsCount([]); 
+        }
+      };
+  
+      fetchDataCountEnseignant(); // Call the fetchData function when the component is mounted
+  
+    }, []); 
 
-  axios
-    .get("http://localhost:8080/FSTBM/Admin/Doctorant/countDoctorants")
-    .then((response) => {
-      setDoctorantsCount(response.data);
-    })
-    .catch((error) => {
-      console.error("Error: " + error);
-    });
+
+    useEffect(()=>{
+      const fetchDataCountDoctorant = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/FSTBM/Admin/Doctorant/countDoctorants");
+          setDoctorantsCount(response.data); 
+          
+        } catch (error) {
+          console.log(error.response.data.message); 
+          setDoctorantsCount([]);
+        }
+      
+      };
+      fetchDataCountDoctorant();
+  }, [])
+
 
   return (
     <div>

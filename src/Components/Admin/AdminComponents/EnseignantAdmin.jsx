@@ -18,6 +18,7 @@ import Modal from "@mui/material/Modal";
 import "../../../style/AdminDashboard.css";
 import { Button } from "@mui/material";
 import { Backdrop } from "@mui/material";
+import ImageUploaderEnseignant from "../../ImageUploaders/ImageUploaderEnseignant";
 
 const style = {
   position: "absolute",
@@ -51,14 +52,24 @@ export default function EnseignantAdmin(props) {
       address: "",
     });
   }
-  axios
-    .get("http://localhost:8080/FSTBM/Admin/Enseignant/getAll")
-    .then((response) => {
-      setEnseignants(response.data);
-    })
-    .catch((error) => {
-      console.error("Error: " + error);
-    });
+
+
+    useEffect(() => {
+      const fetchDataEnseignant = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/FSTBM/Admin/Enseignant/getAll");
+          console.log("khalid")
+          setEnseignants(response.data); 
+          
+        } catch (error) {
+          console.log(error.response.data.message); 
+          setEnseignants([]); 
+        }
+      };
+  
+      fetchDataEnseignant(); // Call the fetchData function when the component is mounted
+  
+    }, []); 
 
   function deleteEnseignant(event) {
     let id = event.target.parentElement.id;
@@ -415,11 +426,7 @@ export default function EnseignantAdmin(props) {
                   Date De naissance
                 </label>
                 <br />
-                <TextField
-                  id="outlined-basic"
-                  style={{ width: "500px" }}
-                  className="EnseignantField"
-                />
+                <input type="date" style={{width:"590px",borderRadius:"5px",borderWidth:"1px",padding:"15px"}}/>
                 <br />
                 <label style={{ color: "red", visibility: "hidden" }}>
                   *Ce champ est obligatoitre !
@@ -436,11 +443,7 @@ export default function EnseignantAdmin(props) {
                   Image de profile
                 </label>
                 <br />
-                <TextField
-                  id="outlined-basic"
-                  style={{ width: "480px" }}
-                  className="EnseignantField"
-                />
+                <ImageUploaderEnseignant className="mt-5"/>
               </div>
             </div>
           </div>

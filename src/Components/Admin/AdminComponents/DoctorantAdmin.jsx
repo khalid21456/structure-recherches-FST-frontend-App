@@ -18,11 +18,22 @@ export default function DoctorantAdmin(props) {
 
   const [doctorants,setDoctorants] = useState([])
 
-  axios.get("http://localhost:8080/FSTBM/Admin/Doctorant/getAll").then((response)=> {
-    setDoctorants(response.data)
-  }).catch((error)=> {
-    console.error("Error : ",error)
-  }) 
+  useEffect(() => {
+    const fetchDataDoctorant = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/FSTBM/Admin/Doctorant/getAll");
+        console.log("khalid")
+        setDoctorants(response.data); 
+        
+      } catch (error) {
+        console.log(error.response.data.message); 
+        setDoctorants([]); 
+      }
+    };
+
+    fetchDataDoctorant(); // Call the fetchData function when the component is mounted
+
+  }, []); 
 
 
   return (

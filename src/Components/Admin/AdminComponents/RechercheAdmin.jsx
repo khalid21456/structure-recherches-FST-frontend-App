@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import Accordion from "@mui/material/Accordion";
@@ -10,29 +10,31 @@ import Button from "@mui/material/Button";
 import AjouterTheme from "./ModifierTheme";
 
 export default function RechercheAdmin(props) {
-  //   const [themes, setThemes] = useState({
-  //     id: null,
-  //     nomtheme: "",
-  //     contentTheme: "",
-  //     recherches: { id: null, titre: "", theme: "" },
-  //   });
+
 
   const [themes, setThemes] = useState([]);
 
-  axios
-    .get("http://localhost:8080/FSTBM/Admin/Theme/retournerTousLesThemes")
-    .then((response) => {
-      setThemes(response.data);
-    })
-    .catch((error) => {
-      console.error("Error: " + error);
-    });
+  useEffect(() => {
+    const fetchDataThemes = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/FSTBM/Admin/Theme/retournerTousLesThemes"
+        );
+        setThemes(response.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+        setThemes([]);
+      }
+    };
+    fetchDataThemes();
+  }, []);
 
-    function renderAjouterTheme() {
-        ReactDOM.render(
-            <AjouterTheme/>,document.getElementById("dashboardContent")
-        )
-    }
+  function renderAjouterTheme() {
+    ReactDOM.render(
+      <AjouterTheme />,
+      document.getElementById("dashboardContent")
+    );
+  }
   return (
     <>
       <h1
@@ -64,7 +66,7 @@ export default function RechercheAdmin(props) {
                     return (
                       <ul key={recherche.id}>
                         <li className="mt-3" key={recherche.id}>
-                          {recherche.titre} 
+                          {recherche.titre}
                         </li>
                       </ul>
                     );
@@ -77,9 +79,8 @@ export default function RechercheAdmin(props) {
       </div>
       <div className="flex justify-end mt-3 mr-14">
         <a
-            className="cursor-pointer underline hover:text-orange-500"
-            onClick={renderAjouterTheme}
-            
+          className="cursor-pointer underline hover:text-orange-500"
+          onClick={renderAjouterTheme}
         >
           Modifier
         </a>
