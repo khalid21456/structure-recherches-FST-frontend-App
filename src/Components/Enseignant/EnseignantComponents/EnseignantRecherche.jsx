@@ -1,8 +1,8 @@
 import { Button } from "@mui/material"
 export default function EnseignantRecherche() {
     return (
-        <div className="">
-             <div className="ml-14 mb-7 mt-7 rounded-lg bg-white">
+        <div className="w-full h-auto">
+             <div className="mx-10 my-7 rounded-lg bg-white">
                 <h2 className="text-white font-bold pl-8 py-4 text-xl" style={{backgroundColor:'#25476A'}}>Publier un recherche</h2>
                 <form className="pb-7">
                    <div className="px-12 py-6">
