@@ -149,7 +149,7 @@ export default function DashboardNav() {
               </div>
             </div>
         </div>
-        <div id="EnseignantContent" className="flex justify-between bg-slate-100 border rounded-lg shadow-md mt-3 mr-16 ml-2 mb-3" style={{width:'1060px'}}>
+        <div id="EnseignantContent" className="flex justify-between border rounded-lg shadow-md mt-3 mr-16 ml-2 mb-3 bg-gray-200" style={{width:'1060px'}}>
             <EnseignantAccueil/>
         </div>
         </div>

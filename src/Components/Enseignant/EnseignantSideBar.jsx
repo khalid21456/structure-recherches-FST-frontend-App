@@ -5,9 +5,15 @@ import './../../style/EnseignantDashboard.css';
 import EnseignantAccueil from './EnseignantComponents/EnseignantAccueil';
 import EnseignantEvenement from './EnseignantComponents/EnseignantEvenement';
 import EnseignantPublication from './EnseignantComponents/EnseignantPublication';
+import EnseignantRecherche from './EnseignantComponents/EnseignantRecherche';
 const renderEnseignantAccueil = ()=>{
   ReactDOM.render(
     <EnseignantAccueil/>, document.getElementById("EnseignantContent")
+  )
+}
+const renderEnseignantRecherche = () =>{
+  ReactDOM.render(
+    <EnseignantRecherche />, document.getElementById("EnseignantContent")
   )
 }
 const renderEnseignantEvenement = ()=>{
@@ -44,7 +50,7 @@ export default function EnseignantSideBar() {
                    <span class="mx-4 text-xl text-white hover:text-sky-900 font-semibold">Accueil</span>
                    </div>
                    </button>
-                   <button className='w-full'>
+                   <button className='w-full' onClick={renderEnseignantRecherche}>
                   <div className='flex items-center px-6 py-2 mt-4 duration-200 hover:border-l-4 hover:border-l-sky-900 hover:bg-white div'>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                   className='w-8 h-8 icon'
