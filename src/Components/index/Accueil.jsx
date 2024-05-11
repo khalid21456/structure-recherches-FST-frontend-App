@@ -49,7 +49,7 @@ export default function Accueil() {
   };
 
   return (
-    <div className="Accueil-Container">
+    <div className="Accueil-Container h-auto">
       <div className="pb-4 bg-gray-100">
         {/* <h1 className="text-6xl text-black cursor-default hover:text-blue-500 hover:transition-colors w-fit">
           Galerie

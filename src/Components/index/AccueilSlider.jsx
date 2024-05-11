@@ -17,7 +17,7 @@ function AccueilSlider() {
   };
   return (
     <div className="mx-14">
-      <div className="flex justify-around">
+      <div className="flex justify-around shadow-2xl">
         {/* Left Arrow */}
         {/* hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer */}
         <div className="group-hover:block absolute top-[300px] left-28 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer object-cover">

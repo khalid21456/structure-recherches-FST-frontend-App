@@ -2,8 +2,8 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 function AccueilMarquee() {
   return (
-    <div className="relative flex items-center justify-between py-5">
-      <div className="absolute inset-y-0 left-0 flex items-center h-full mr-2 bg-sky-700 text-white font-bold flex items-center px-2">
+    <div className="relative flex items-center justify-between py-5 shadow-lg">
+      <div className="absolute inset-y-0 left-0 flex items-center h-full mr-2 bg-blue-500 text-white font-bold flex items-center px-2">
         Actualités
       </div>
       <Marquee
