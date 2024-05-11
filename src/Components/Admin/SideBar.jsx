@@ -13,6 +13,7 @@ import EnseignantAdmin from "./AdminComponents/EnseignantAdmin";
 import DoctorantAdmin from "./AdminComponents/DoctorantAdmin";
 import RechercheAdmin from "./AdminComponents/RechercheAdmin";
 import "../../style/EnseignantSideBar.css";
+import EvenementAdmin from "./AdminComponents/EvenementAdmin";
 
 function HomeIcon(props) {
   return (
@@ -43,6 +44,12 @@ function renderDoctorantAdmin() {
 function renderRechercheAdmin() {
   ReactDOM.render(
       <RechercheAdmin/>,document.getElementById("dashboardContent")
+  )
+}
+
+function renderEvenementAdmin() {
+  ReactDOM.render(
+    <EvenementAdmin/>,document.getElementById("dashboardContent")
   )
 }
 
@@ -109,11 +116,12 @@ export default function SideBar() {
           </button>
         </div>
         <div className="btn">
-          <button className="flex mt-1 pt-3 pb-3 pl-7 w-full">
+          <button className="flex mt-1 pt-3 pb-3 pl-7 w-full" onClick={renderEvenementAdmin}>
             <EventIcon sx={{ fontSize: 35, color: "orange" }} />
             <h1
               style={{ fontFamily: "Poppins", paddingTop: "6px" }}
               className="text-xl pl-5 text-white"
+              
             >
               Evenements
             </h1>

@@ -22,7 +22,6 @@ export default function DoctorantAdmin(props) {
     const fetchDataDoctorant = async () => {
       try {
         const response = await axios.get("http://localhost:8080/FSTBM/Admin/Doctorant/getAll");
-        console.log("khalid")
         setDoctorants(response.data); 
         
       } catch (error) {

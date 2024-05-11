@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
+let imageName = "";
 function ImageUploaderEnseignant() {
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -19,6 +21,7 @@ function ImageUploaderEnseignant() {
         }
       });
       console.log('Image uploaded successfully:', response.data);
+      imageName = response.data;
     } catch (error) {
       console.error('Error uploading image:', error);
     }
@@ -31,5 +34,11 @@ function ImageUploaderEnseignant() {
     </div>
   );
 }
+
+function imageEnseignantName() {
+  return imageName;
+}
+
+export {imageEnseignantName}
 
 export default ImageUploaderEnseignant;

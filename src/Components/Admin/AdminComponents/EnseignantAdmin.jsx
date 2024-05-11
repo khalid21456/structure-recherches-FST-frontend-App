@@ -16,7 +16,9 @@ import Modal from "@mui/material/Modal";
 import "../../../style/AdminDashboard.css";
 import { Button } from "@mui/material";
 import { Backdrop } from "@mui/material";
-import ImageUploaderEnseignant from "../../ImageUploaders/ImageUploaderEnseignant";
+import ImageUploaderEnseignant,{imageEnseignantName} from "../../ImageUploaders/ImageUploaderEnseignant";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 
 const style = {
   position: "absolute",
@@ -51,6 +53,7 @@ export default function EnseignantAdmin(props) {
       labo: "",
       address: "",
       dateNaissance: "",
+      profile:""
     });
   }
 
@@ -113,6 +116,7 @@ export default function EnseignantAdmin(props) {
       enseignantAdded.labo != "" &&
       enseignantAdded.email != ""
     ) {
+      enseignantAdded.profile = imageEnseignantName();
       axios
         .post(
           "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",
@@ -138,11 +142,16 @@ export default function EnseignantAdmin(props) {
           style={{ height: "600px" }}
           className="w-11/12  overflow-auto bg-white border-2"
         >
+          <div className="flex justify-between bg-slate-200">
           <div
             style={{ fontFamily: "Poppins" }}
-            className="h-20 pt-5 pl-10 border-b text-3xl  bg-slate-200 "
+            className="h-20 pt-5 pl-10 border-b text-3xl   "
           >
             Les Enseignants
+          </div>
+          <div>
+            <img className="w-16 mr-10 mt-2" src={require("../../../icons/enseignant-statis.png")}/>
+          </div>
           </div>
           <div className="table-enseignants flex justify-center mt-10 ">
             <div style={{ width: "1200px", height: "300px" }}>
@@ -209,8 +218,6 @@ export default function EnseignantAdmin(props) {
                                 key={enseignant.id}
                                 onClose={handleClose}
                                 BackdropComponent={Backdrop}
-                                // aria-labelledby="modal-modal-title"
-                                // aria-describedby="modal-modal-description"
                                 BackdropProps={{
                                   style: {
                                     backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -262,11 +269,16 @@ export default function EnseignantAdmin(props) {
       </div>
       <div className="doctorantEspace flex justify-center pt-10">
         <div style={{ height: "550px" }} className="w-11/12  bg-white border-2">
+        <div className="flex justify-between bg-slate-200">
           <div
             style={{ fontFamily: "Poppins" }}
-            className="h-20 pt-5 pl-10 border-b text-3xl bg-slate-200"
+            className="h-20 pt-5 pl-10 border-b text-3xl   "
           >
             Ajouter Un Enseignant
+          </div>
+          <div className="mr-10 mt-4">
+            <AddCircleIcon style={{color:"#2d0560",fontSize:"50px"}}/>
+          </div>
           </div>
           <div className="inputs flex justify-center">
             <div className="w-11/12 mt-5 flex justify-around">
@@ -469,7 +481,9 @@ export default function EnseignantAdmin(props) {
                   Image de profile
                 </label>
                 <br />
-                <ImageUploaderEnseignant className="mt-5" />
+                <div className="mt-3">
+                <ImageUploaderEnseignant/>
+                </div>
               </div>
             </div>
           </div>

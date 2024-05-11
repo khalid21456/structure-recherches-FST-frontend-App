@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "../../style/Recherche.css";
 import ThemeCard from "./ThemeCard";
 import themes from "../../data/Themes";
+import axios from "axios";
 
 window.addEventListener("scroll", () => {
   let image = document.querySelectorAll(".trans");
@@ -30,17 +31,32 @@ window.addEventListener("scroll", () => {
 });
 
 export default function Recherche() {
-  const myRef = useRef();
+  const myRef = useRef()
+  const [Themes, setThemes] = useState([])
 
+  let minHeight = 1700; 
+  let heightAdded = Themes.length * 250;
+  let newHeight = minHeight + heightAdded;
+  if (myRef.current) {
+    myRef.current.style.height = newHeight + "px";
+  } 
   useEffect(() => {
-    let minHeight = 1700;
-    let heightAdded = themes.length * 250;
-    let newHeight = minHeight + heightAdded;
-    if (myRef.current) {
-      myRef.current.style.height = newHeight + "px";
-    }
-  }, []);
+    console.log("khalid")
+    const fetchDataThemes = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/FSTBM/Admin/Theme/retournerTousLesThemes"
+        );
+        setThemes(response.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+        setThemes([]);
+      }
+    };
 
+    fetchDataThemes();
+  }, []);
+ 
   return (
     <div className="Recherche-container" ref={myRef}>
       <div className="presentRecherche">
@@ -87,9 +103,7 @@ export default function Recherche() {
                 className="max-xl:h-full"
               />
             </div>
-            <div
-              className="trans cardRetarded Introduction-content mt-1 ml-10 w-6/12 text-justify max-xl:w-5/12"
-            >
+            <div className="trans cardRetarded Introduction-content mt-1 ml-10 w-6/12 text-justify max-xl:w-5/12">
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Recusandae laborum aut laboriosam neque voluptates? Non,
@@ -124,13 +138,13 @@ export default function Recherche() {
         </h1>
       </div>
       <div className="themes mt-10">
-        {themes.map((theme, index) => {
+        {Themes.map((Theme, index) => {
           return (
             <ThemeCard
               key={index}
-              image={theme.image}
-              title={theme.title}
-              desc={theme.desc}
+              title={Theme.nomtheme}
+              desc={Theme.contentTheme}
+              image={Theme.imagePath}
             />
           );
         })}

@@ -37,12 +37,17 @@ export default function RechercheAdmin(props) {
   }
   return (
     <>
-      <h1
-        style={{ fontFamily: "Noto Sans", color: "#2d0560" }}
-        className="text-3xl pt-4 pl-3"
-      >
-        Les thèmes de recherche
-      </h1>
+      <div style={{width:"1380px",backgroundColor:"#2d0560"}} className=" h-20 mr-1 bg-slate-200 flex">
+        <div className="h-full w-7" style={{backgroundColor:"#FF5722"}}>
+          
+        </div>
+        <p className="text-3xl pt-5 pl-10 text-white" style={{fontFamily:"Poppins"}}>
+          Les thèmes de recherche 
+        </p>
+        <div>
+
+        </div>
+      </div>
       <div className="themes w-full flex justify-center mt-6 overflow-auto">
         <div className="w-11/12 relative z-20">
           {themes.map((theme) => {
