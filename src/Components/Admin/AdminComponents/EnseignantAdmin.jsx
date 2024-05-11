@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useStyles } from "react";
+import ReactDom from "react-dom";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
@@ -16,9 +17,11 @@ import Modal from "@mui/material/Modal";
 import "../../../style/AdminDashboard.css";
 import { Button } from "@mui/material";
 import { Backdrop } from "@mui/material";
-import ImageUploaderEnseignant,{imageEnseignantName} from "../../ImageUploaders/ImageUploaderEnseignant";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-
+import ImageUploaderEnseignant, {
+  imageEnseignantName,
+} from "../../ImageUploaders/ImageUploaderEnseignant";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AdminProfileEnseignant from "./AdminProfileEnseignant";
 
 const style = {
   position: "absolute",
@@ -53,7 +56,7 @@ export default function EnseignantAdmin(props) {
       labo: "",
       address: "",
       dateNaissance: "",
-      profile:""
+      profile: "",
     });
   }
 
@@ -135,6 +138,13 @@ export default function EnseignantAdmin(props) {
     }
   }
 
+  function renderProfile(event) {
+    ReactDom.render(
+      <AdminProfileEnseignant nom={event.target.textContent}/>,
+      document.getElementById("dashboardContent")
+    );
+  }
+
   return (
     <div>
       <div className="flex justify-center pt-10">
@@ -143,15 +153,18 @@ export default function EnseignantAdmin(props) {
           className="w-11/12  overflow-auto bg-white border-2"
         >
           <div className="flex justify-between bg-slate-200">
-          <div
-            style={{ fontFamily: "Poppins" }}
-            className="h-20 pt-5 pl-10 border-b text-3xl   "
-          >
-            Les Enseignants
-          </div>
-          <div>
-            <img className="w-16 mr-10 mt-2" src={require("../../../icons/enseignant-statis.png")}/>
-          </div>
+            <div
+              style={{ fontFamily: "Poppins" }}
+              className="h-20 pt-5 pl-10 border-b text-3xl   "
+            >
+              Les Enseignants
+            </div>
+            <div>
+              <img
+                className="w-16 mr-10 mt-2"
+                src={require("../../../icons/enseignant-statis.png")}
+              />
+            </div>
           </div>
           <div className="table-enseignants flex justify-center mt-10 ">
             <div style={{ width: "1200px", height: "300px" }}>
@@ -196,7 +209,12 @@ export default function EnseignantAdmin(props) {
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <TableCell component="th" scope="row">
+                        <TableCell
+                          component="th"
+                          onClick={renderProfile}
+                          className="cursor-pointer hover:bg-slate-200"
+                          scope="row"
+                        >
                           {enseignant.nom} {enseignant.prenom}
                         </TableCell>
                         <TableCell align="left">{enseignant.email}</TableCell>
@@ -269,16 +287,16 @@ export default function EnseignantAdmin(props) {
       </div>
       <div className="doctorantEspace flex justify-center pt-10">
         <div style={{ height: "550px" }} className="w-11/12  bg-white border-2">
-        <div className="flex justify-between bg-slate-200">
-          <div
-            style={{ fontFamily: "Poppins" }}
-            className="h-20 pt-5 pl-10 border-b text-3xl   "
-          >
-            Ajouter Un Enseignant
-          </div>
-          <div className="mr-10 mt-4">
-            <AddCircleIcon style={{color:"#2d0560",fontSize:"50px"}}/>
-          </div>
+          <div className="flex justify-between bg-slate-200">
+            <div
+              style={{ fontFamily: "Poppins" }}
+              className="h-20 pt-5 pl-10 border-b text-3xl   "
+            >
+              Ajouter Un Enseignant
+            </div>
+            <div className="mr-10 mt-4">
+              <AddCircleIcon style={{ color: "#2d0560", fontSize: "50px" }} />
+            </div>
           </div>
           <div className="inputs flex justify-center">
             <div className="w-11/12 mt-5 flex justify-around">
@@ -482,7 +500,7 @@ export default function EnseignantAdmin(props) {
                 </label>
                 <br />
                 <div className="mt-3">
-                <ImageUploaderEnseignant/>
+                  <ImageUploaderEnseignant />
                 </div>
               </div>
             </div>
