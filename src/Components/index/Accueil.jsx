@@ -5,6 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import AccueilSlider from "./AccueilSlider";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,11 +49,12 @@ export default function Accueil() {
 
   return (
     <div className="Accueil-Container">
-      <div className="pt-20 pl-24 pb-16">
-        <h1 className="text-6xl text-black cursor-default hover:text-blue-500 hover:transition-colors w-fit">
+      <div className="pb-20 bg-gray-100">
+        {/* <h1 className="text-6xl text-black cursor-default hover:text-blue-500 hover:transition-colors w-fit">
           Galerie
         </h1>
-        <div className="w-40 h-2 bg-yellow-400 mt-5"></div>
+        <div className="w-40 h-2 bg-yellow-400 mt-5"></div> */}
+        <AccueilSlider />
       </div>
       <div className="actualites bg-blue-100 pb-20">
         <div className="pt-20 pl-24 pb-10">
@@ -94,7 +96,7 @@ export default function Accueil() {
                 <div className="bg-white rounded-md overflow-hidden shadow-md">
                   <ul className="border-b-1 border-gray-400">
                     <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative">
+                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
                         <div>
                           <img
                             className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
@@ -103,12 +105,12 @@ export default function Accueil() {
                           />
                         </div>
                         <div>
-                          <span className="text-xl text-blue-500 hover:text-blue-700 font-bold h-full top-9 ml-20 left-44 absolute">
+                          <span className="text-xl text-blue-400 hover:text-blue-700 font-bold h-full top-9 ml-20 left-44 absolute">
                             La recherche scientifique sur l'examen d'hypothèses{" "}
                           </span>
                         </div>
                         <div>
-                          <span className="mr-3 text-sm text-gray-500 font-semibold h-full top-10 ml-20 right-0 absolute">
+                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
                             Avril 24, 2024
                           </span>
                         </div>
@@ -118,7 +120,7 @@ export default function Accueil() {
                   <hr />
                   <ul className="border-b-1 border-gray-400">
                     <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative">
+                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
                         <div>
                           <img
                             className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
@@ -132,7 +134,7 @@ export default function Accueil() {
                           </span>
                         </div>
                         <div>
-                          <span className="mr-3 text-sm text-gray-500 font-semibold h-full top-10 ml-20 right-0 absolute">
+                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
                             Avril 24, 2024
                           </span>
                         </div>
@@ -142,7 +144,7 @@ export default function Accueil() {
                   <hr />
                   <ul className="border-b-1 border-gray-400">
                     <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative">
+                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
                         <div>
                           <img
                             className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
@@ -156,7 +158,7 @@ export default function Accueil() {
                           </span>
                         </div>
                         <div>
-                          <span className="mr-3 text-sm text-gray-500 font-semibold h-full top-10 ml-20 right-0 absolute">
+                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
                             Avril 24, 2024
                           </span>
                         </div>
@@ -179,7 +181,7 @@ export default function Accueil() {
                 <div className="bg-white rounded-md overflow-hidden shadow-md">
                   <ul className="border-b-1 border-gray-400">
                     <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative">
+                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
                         <div>
                           <img
                             className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
@@ -193,7 +195,7 @@ export default function Accueil() {
                           </span>
                         </div>
                         <div>
-                          <span className="mr-3 text-sm text-gray-500 font-semibold h-full top-10 ml-20 right-0 absolute">
+                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
                             Avril 24, 2024
                           </span>
                         </div>
@@ -203,7 +205,7 @@ export default function Accueil() {
                   <hr />
                   <ul className="border-b-1 border-gray-400">
                     <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative">
+                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
                         <div>
                           <img
                             className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
@@ -217,7 +219,7 @@ export default function Accueil() {
                           </span>
                         </div>
                         <div>
-                          <span className="mr-3 text-sm text-gray-500 font-semibold h-full top-10 ml-20 right-0 absolute">
+                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
                             Avril 24, 2024
                           </span>
                         </div>
@@ -227,7 +229,7 @@ export default function Accueil() {
                   <hr />
                   <ul className="border-b-1 border-gray-400">
                     <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative">
+                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
                         <div>
                           <img
                             className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
@@ -241,7 +243,7 @@ export default function Accueil() {
                           </span>
                         </div>
                         <div>
-                          <span className="mr-3 text-sm text-gray-500 font-semibold h-full top-10 ml-20 right-0 absolute">
+                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
                             Avril 24, 2024
                           </span>
                         </div>
