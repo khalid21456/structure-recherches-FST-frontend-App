@@ -6,6 +6,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AccueilSlider from "./AccueilSlider";
+import AccueilMarquee from "./AccueilMarquee";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,12 +50,15 @@ export default function Accueil() {
 
   return (
     <div className="Accueil-Container">
-      <div className="pb-20 bg-gray-100">
+      <div className="pb-4 bg-gray-100">
         {/* <h1 className="text-6xl text-black cursor-default hover:text-blue-500 hover:transition-colors w-fit">
           Galerie
         </h1>
         <div className="w-40 h-2 bg-yellow-400 mt-5"></div> */}
         <AccueilSlider />
+        <div className="mx-14 bg-yellow-400 mt-5">
+          <AccueilMarquee />
+        </div>
       </div>
       <div className="actualites bg-blue-100 pb-20">
         <div className="pt-20 pl-24 pb-10">
