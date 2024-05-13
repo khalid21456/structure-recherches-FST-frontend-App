@@ -7,7 +7,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 
 export default function Footer() {
   return (
-    <div className="Footer-Container mt-[300px]">
+    <div className="Footer-Container">
       <div className="flex justify-evenly mr-10 pt-5">
         <div className="title-footer text-yellow-400  font-bold">
           Faculté des Sciences et Techniques

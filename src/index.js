@@ -5,6 +5,6 @@ import App from "./App";
 
 const root = document.getElementById("root");
 // ReactDOM.render(<Admin/>,root);
-ReactDOM.render(<App />, root);
+ReactDOM.render(<Admin />, root);
 
 document.body.style.zoom = "87%";

@@ -28,8 +28,28 @@
 }
 
 .PCard {
-    background-color: #2d0560;
+    /* background-color: #2d0560; */
+    -webkit-animation: color-change-2x 2s ease-in infinite alternate both;
+	        animation: color-change-2x 2s ease-in infinite alternate both;
 }
+
+@-webkit-keyframes color-change-2x {
+    0% {
+      background: #2d0560;
+    }
+    100% {
+      background: #7f40d2;
+    }
+  }
+  @keyframes color-change-2x {
+    0% {
+      background: #263b82;
+    }
+    100% {
+      background: #2d0560;
+    }
+  }
+  
 
 .sideBar-Container:hover {
     border-right-width: 7px;
@@ -48,7 +68,7 @@
 }
 
 .doctorantEspace {
-    height: 750px;
+    height: 600px;
 }
 
 .expand-overflow {

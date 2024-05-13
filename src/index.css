@@ -8,10 +8,6 @@
 
 }
 
-html {
-	scroll-behavior: smooth;
-}
-
 body {
     overflow-x: hidden;
 }
@@ -27,7 +23,7 @@ body {
 }
 
 .Accueil-Container {
-    height: 1800px !important;
+    height: 2000px !important;
 }
 
 .Footer-Container {

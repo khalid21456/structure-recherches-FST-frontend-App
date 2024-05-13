@@ -144,10 +144,10 @@ export default function DashboardNav() {
                         <li className="pt-4 pl-3 pb-3 cursor-pointer transition-colors hover:bg-indigo-950 hover:text-white">
                           Aide
                         </li>
-                        <li className="pt-4 pl-3 pb-3 cursor-pointer transition-colors hover:bg-indigo-950 hover:text-red-400">
+                        <li onClick={Deconnecter} className="pt-4 pl-3 pb-3 cursor-pointer transition-colors hover:bg-indigo-950 hover:text-red-400">
                           <label
                             className="cursor-pointer"
-                            onClick={Deconnecter}
+                            
                           >
                             Déconnecter
                           </label>{" "}

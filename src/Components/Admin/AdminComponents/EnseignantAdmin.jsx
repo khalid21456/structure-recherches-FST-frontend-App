@@ -13,7 +13,6 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import ModeIcon from "@mui/icons-material/Mode";
-import Modal from "@mui/material/Modal";
 import "../../../style/AdminDashboard.css";
 import { Button } from "@mui/material";
 import { Backdrop } from "@mui/material";
@@ -22,18 +21,10 @@ import ImageUploaderEnseignant, {
 } from "../../ImageUploaders/ImageUploaderEnseignant";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AdminProfileEnseignant from "./AdminProfileEnseignant";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import PersonIcon from "@mui/icons-material/Person";
+import Tooltip from "@mui/material/Tooltip";
+import Alert from "@mui/material/Alert";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function EnseignantAdmin(props) {
   const [enseignants, setEnseignants] = useState([]);
@@ -45,9 +36,7 @@ export default function EnseignantAdmin(props) {
     dateNaissance: "",
     // address :new Date("")
   });
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [EnseignantAjouter, showEnseignant] = useState("");
   function AnnulerValues() {
     setAddedEnseignant({
       nom: "",
@@ -127,26 +116,55 @@ export default function EnseignantAdmin(props) {
         )
         .then((response) => {
           setEnseignants(response.data);
+          showEnseignant(enseignantAdded.nom + " " + enseignantAdded.prenom);
         })
         .catch((error) => {
           console.log("Error: " + error);
         });
+      
       document.getElementById("nom-error").style.visibility = "hidden";
       document.getElementById("prenom-error").style.visibility = "hidden";
       document.getElementById("email-error").style.visibility = "hidden";
       document.getElementById("labo-error").style.visibility = "hidden";
+      console.log(document.getElementById("alert"));
+      document.getElementById("alert").style.display = "";
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      // document.getElementsByClassName("row").item(document.getElementsByClassName("row").length-1).style.backgroundColor = "green"
+      // let ba = document.getElementsByClassName("row");
+      // console.log(ba)
     }
   }
 
   function renderProfile(event) {
     ReactDom.render(
-      <AdminProfileEnseignant nom={event.target.textContent}/>,
+      <AdminProfileEnseignant nom={event.target.textContent} />,
       document.getElementById("dashboardContent")
     );
   }
 
+  function closeAlert() {
+    document.getElementById("alert").style.display="none"
+  }
+
   return (
     <div>
+      <div style={{ display: "none" }} id="alert">
+        <Alert variant="filled" severity="success">
+          <div className="flex justify-between">
+            <div>
+              <label>Vous Avez Ajouter l'Enseignant {EnseignantAjouter}</label>
+            </div>
+            <div className="pl-[970px]">
+              <div onClick={closeAlert} className="cursor-pointer">
+                <CloseIcon />
+              </div>
+            </div>
+          </div>
+        </Alert>
+      </div>
       <div className="flex justify-center pt-10">
         <div
           style={{ height: "600px" }}
@@ -208,13 +226,9 @@ export default function EnseignantAdmin(props) {
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
+                        className="row"
                       >
-                        <TableCell
-                          component="th"
-                          onClick={renderProfile}
-                          className="cursor-pointer hover:bg-slate-200"
-                          scope="row"
-                        >
+                        <TableCell component="th" className="" scope="row">
                           {enseignant.nom} {enseignant.prenom}
                         </TableCell>
                         <TableCell align="left">{enseignant.email}</TableCell>
@@ -225,40 +239,14 @@ export default function EnseignantAdmin(props) {
                         <TableCell align="left">
                           <div className="flex">
                             <div style={{ color: "green" }} id={enseignant.id}>
-                              <ModeIcon
-                                id={enseignant.id}
-                                style={{ fontSize: "30px" }}
-                                className="cursor-pointer mr-5"
-                                onClick={handleOpen}
-                              />
-                              <Modal
-                                open={open}
-                                key={enseignant.id}
-                                onClose={handleClose}
-                                BackdropComponent={Backdrop}
-                                BackdropProps={{
-                                  style: {
-                                    backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                  }, // Customize backdrop color and opacity
-                                }}
-                              >
-                                <Box sx={style}>
-                                  <Typography
-                                    id="modal-modal-title"
-                                    variant="h2"
-                                    component="h2"
-                                  >
-                                    Text in a modal
-                                  </Typography>
-                                  <Typography
-                                    id="modal-modal-description"
-                                    sx={{ mt: 2 }}
-                                  >
-                                    Duis mollis, est non commodo luctus, nisi
-                                    erat porttitor ligula.
-                                  </Typography>
-                                </Box>
-                              </Modal>
+                              <Tooltip title="Profile" arrow>
+                                <PersonIcon
+                                  onClick={renderProfile}
+                                  id={enseignant.id}
+                                  style={{ fontSize: "30px" }}
+                                  className="cursor-pointer mr-5"
+                                />
+                              </Tooltip>
                             </div>
                             <div
                               style={{ color: "red" }}
@@ -535,6 +523,7 @@ export default function EnseignantAdmin(props) {
           </div>
         </div>
       </div>
+      <div className="h-44"></div>
     </div>
   );
 }

@@ -55,7 +55,7 @@ function renderEvenementAdmin() {
 
 export default function SideBar() {
   return (
-    <div className="sideBar-Container w-80 h-full shadow-lg bg-yellow-500 ">
+    <div className="sideBar-Container w-80 h-full shadow-lg ">
       <div className="flex justify-center">
         <AdminProfileCard />
       </div>
