@@ -12,28 +12,26 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeIcon from "@mui/icons-material/Mode";
 import "../../../style/AdminDashboard.css";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 export default function DoctorantAdmin(props) {
-
-
-  const [doctorants,setDoctorants] = useState([])
+  const [doctorants, setDoctorants] = useState([]);
 
   useEffect(() => {
     const fetchDataDoctorant = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/FSTBM/Admin/Doctorant/getAll");
-        setDoctorants(response.data); 
-        
+        const response = await axios.get(
+          "http://localhost:8080/FSTBM/Admin/Doctorant/getAll"
+        );
+        setDoctorants(response.data);
       } catch (error) {
-        console.log(error.response.data.message); 
-        setDoctorants([]); 
+        console.log(error.response.data.message);
+        setDoctorants([]);
       }
     };
 
-    fetchDataDoctorant(); // Call the fetchData function when the component is mounted
-
-  }, []); 
-
+    fetchDataDoctorant(); 
+  }, []);
 
   return (
     <div>
@@ -42,11 +40,19 @@ export default function DoctorantAdmin(props) {
           style={{ height: "600px" }}
           className="w-11/12  overflow-auto bg-white border-2"
         >
-          <div
-            style={{ fontFamily: "Poppins" }}
-            className="h-20 pt-5 pl-10 border-b text-3xl  bg-slate-200 "
-          >
-            Les Doctorants
+          <div className="flex justify-between bg-slate-200">
+            <div
+              style={{ fontFamily: "Poppins" }}
+              className="h-20 pt-5 pl-10 border-b text-3xl   "
+            >
+              Les Doctorants
+            </div>
+            <div>
+              <img
+                className="w-16 mr-10 mt-2"
+                src={require("../../../icons/doctorant-statis.png")}
+              />
+            </div>
           </div>
           <div className="table-enseignants flex justify-center mt-10 ">
             <div style={{ width: "1200px", height: "600px" }} className="">
@@ -103,8 +109,10 @@ export default function DoctorantAdmin(props) {
                           {doctorant.date_inscri.substring(0, 10)}
                         </TableCell>
                         <TableCell align="left">{doctorant.email}</TableCell>
-                        
-                        <TableCell align="left">{doctorant.encadrant.nom} {doctorant.encadrant.prenom}</TableCell>
+
+                        <TableCell align="left">
+                          {doctorant.encadrant.nom} {doctorant.encadrant.prenom}
+                        </TableCell>
                         <TableCell align="left">{doctorant.these}</TableCell>
                         <TableCell align="left">
                           <div className="flex">
@@ -133,11 +141,16 @@ export default function DoctorantAdmin(props) {
       </div>
       <div className="doctorantEspace flex justify-center pt-10">
         <div style={{ height: "600px" }} className="w-11/12  bg-white border-2">
-          <div
-            style={{ fontFamily: "Poppins" }}
-            className="h-20 pt-5 pl-10 border-b text-3xl bg-slate-200"
-          >
-            Ajouter Un Doctorants
+          <div className="flex justify-between bg-slate-200">
+            <div
+              style={{ fontFamily: "Poppins" }}
+              className="h-20 pt-5 pl-10 border-b text-3xl   "
+            >
+              Ajouter Un Doctorant
+            </div>
+            <div className="mr-10 mt-4">
+              <AddCircleIcon style={{ color: "#2d0560", fontSize: "50px" }} />
+            </div>
           </div>
           <div className="inputs flex justify-center">
             <div className="w-11/12 mt-5 flex justify-around">
