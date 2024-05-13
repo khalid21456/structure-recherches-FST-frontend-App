@@ -197,6 +197,9 @@ export default function DoctorantAdmin(props) {
           </div>
         </div>
       </div>
+      <div className="h-44">
+
+      </div>
     </div>
   );
 }
