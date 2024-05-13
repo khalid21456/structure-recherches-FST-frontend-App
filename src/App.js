@@ -14,31 +14,24 @@ import RechercheAdmin from "./Components/Admin/AdminComponents/RechercheAdmin";
 import EnseignantAdmin from "./Components/Admin/AdminComponents/EnseignantAdmin";
 import DoctorantAdmin from "./Components/Admin/AdminComponents/DoctorantAdmin";
 import AdminAccueil from "./Components/Admin/AdminComponents/AdminAccueil";
+import EvenementDetail from "./Components/Admin/AdminComponents/EvenementDetail";
+import EvenementAdmin from "./Components/Admin/AdminComponents/EvenementAdmin";
 
 function App() {
   return (
     <>
-      {/* <nav className="hidden">  
-        <Navbar/>
-      </nav>
-      <section className="mainSection flex justify-normal">
-      <aside>
-        <EnseignantSideBar/>
-      </aside>
-      <main id="main">
-        <EnseignantDashboard/>
-      </main>
-      </section>
-      <footer className="hidden">
-        <Footer/>
-      </footer> */}
-      <nav>
+      <nav className="hidden">
         <Navbar />
       </nav>
-      <main id="main">
-        <Accueil />
-      </main>
-      <footer>
+      <section className="mainSection flex justify-normal">
+        <aside>
+          <EnseignantSideBar />
+        </aside>
+        <main id="main">
+          <EnseignantDashboard />
+        </main>
+      </section>
+      <footer className="hidden">
         <Footer />
       </footer>
     </>
