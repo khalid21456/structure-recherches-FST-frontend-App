@@ -13,6 +13,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeIcon from "@mui/icons-material/Mode";
 import "../../../style/AdminDashboard.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Tooltip from "@mui/material/Tooltip";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function DoctorantAdmin(props) {
   const [doctorants, setDoctorants] = useState([]);
@@ -30,8 +32,20 @@ export default function DoctorantAdmin(props) {
       }
     };
 
-    fetchDataDoctorant(); 
+    fetchDataDoctorant();
   }, []);
+
+  function deleteDoctorant(event) {
+    let id = event.target.parentElement.id
+    console.log(id)
+    axios
+      .delete(`http://localhost:8080/FSTBM/Admin/Doctorant/deleteDoc/${id}`)
+      .then((response) => {
+        setDoctorants(response.data)
+      }).catch((error)=>{
+        console.error("Error : "+error)
+      })
+  }
 
   return (
     <div>
@@ -116,16 +130,22 @@ export default function DoctorantAdmin(props) {
                         <TableCell align="left">{doctorant.these}</TableCell>
                         <TableCell align="left">
                           <div className="flex">
-                            <div style={{ color: "green" }}>
-                              <ModeIcon
-                                style={{ fontSize: "30px" }}
-                                className="cursor-pointer mr-5"
-                              />
+                            <div style={{ color: "green" }} id={doctorant.id}>
+                              <Tooltip title="Profile" arrow>
+                                <PersonIcon
+                                  // onClick={renderProfile}
+                                  // id={enseignant.id}
+                                  style={{ fontSize: "30px" }}
+                                  className="cursor-pointer mr-5"
+                                />
+                              </Tooltip>
                             </div>
-                            <div style={{ color: "red" }}>
+                            <div style={{ color: "red" }} id={doctorant.id}>
                               <DeleteIcon
                                 style={{ fontSize: "30px" }}
                                 className="cursor-pointer"
+                                id={doctorant.id}
+                                onClick={deleteDoctorant}
                               />
                             </div>
                           </div>
@@ -197,9 +217,7 @@ export default function DoctorantAdmin(props) {
           </div>
         </div>
       </div>
-      <div className="h-44">
-
-      </div>
+      <div className="h-44"></div>
     </div>
   );
 }

@@ -108,7 +108,12 @@ export default function EnseignantAdmin(props) {
       enseignantAdded.labo != "" &&
       enseignantAdded.email != ""
     ) {
-      enseignantAdded.profile = imageEnseignantName();
+      if(imageEnseignantName() == "") {
+        enseignantAdded.profile = "userUnknown.png";
+      } else {
+        enseignantAdded.profile = imageEnseignantName();
+      }
+      
       axios
         .post(
           "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",

@@ -3,8 +3,6 @@ import Accueil from "./Components/index/Accueil";
 import Navbar from "./Components/index/Navbar";
 import Login from "./Components/login/Login";
 import Footer from "./Components/index/Footer";
-import SideBar from "./Components/Admin/SideBar";
-import AdminProfileCard from "./Components/Admin/AdminProfileCard";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
 import EnseignantProfileCard from "./Components/Enseignant/EnseignantProfileCard";
 import EnseignantSideBar from "./Components/Enseignant/EnseignantSideBar";
@@ -16,22 +14,27 @@ import DoctorantAdmin from "./Components/Admin/AdminComponents/DoctorantAdmin";
 import AdminAccueil from "./Components/Admin/AdminComponents/AdminAccueil";
 import EvenementDetail from "./Components/Admin/AdminComponents/EvenementDetail";
 import EvenementAdmin from "./Components/Admin/AdminComponents/EvenementAdmin";
+import SideBar from "./Components/Admin/SideBar";
+import React,{useState,useEffect} from "react"
+
+
 
 function App() {
+
   return (
     <>
-      <nav className="hidden">
+
+      <nav>
         <Navbar />
       </nav>
-      <section className="mainSection flex justify-normal">
+      <section>
         <aside>
-          <EnseignantSideBar />
         </aside>
         <main id="main">
-          <EnseignantDashboard />
+          <Accueil/>
         </main>
       </section>
-      <footer className="hidden">
+      <footer>
         <Footer />
       </footer>
     </>
