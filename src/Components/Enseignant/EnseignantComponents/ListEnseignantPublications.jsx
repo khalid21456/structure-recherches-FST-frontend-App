@@ -79,7 +79,7 @@ export default function ListEnseignantPublications() {
               <div className="flex justify-center mt-7">
                 <h1 style={{ fontFamily: "Platypi" }} className="text-center">
                   INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE AND GREEN
-                  COMPUTING
+                  COMPUTING...
                 </h1>
               </div>
               <div className="h-5 mt-12 flex justify-end">
@@ -130,7 +130,7 @@ export default function ListEnseignantPublications() {
               <div className="flex justify-center mt-7">
                 <h1 style={{ fontFamily: "Platypi" }} className="text-center">
                   INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE AND GREEN
-                  COMPUTING
+                  COMPUTING...
                 </h1>
               </div>
               <div className="h-5 mt-12 flex justify-end">
@@ -181,7 +181,7 @@ export default function ListEnseignantPublications() {
               <div className="flex justify-center mt-7">
                 <h1 style={{ fontFamily: "Platypi" }} className="text-center">
                   INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE AND GREEN
-                  COMPUTING
+                  COMPUTING...
                 </h1>
               </div>
               <div className="h-5 mt-12 flex justify-end">
@@ -232,7 +232,7 @@ export default function ListEnseignantPublications() {
               <div className="flex justify-center mt-7">
                 <h1 style={{ fontFamily: "Platypi" }} className="text-center">
                   INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE AND GREEN
-                  COMPUTING
+                  COMPUTING...
                 </h1>
               </div>
               <div className="h-5 mt-12 flex justify-end">
