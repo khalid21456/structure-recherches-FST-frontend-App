@@ -90,32 +90,32 @@ export default function Navbar() {
         <ul className="flex justify-between text-xl mr-5 h-14 font-thin">
           <li
             onClick={showAccueil}
-            className="pt-3 rounded-md hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
           >
             Accueil
           </li>
           <li
             onClick={showPublications}
-            className="pt-3 rounded-md hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
           >
             Publications
           </li>
           <li
             onClick={showRecherche}
-            className="pt-3 rounded-md hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
             id="searchs"
           >
             Recherches
           </li>
           <li
             onClick={showDepartement}
-            className="pt-3 rounded-md hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
           >
             Départements
           </li>
           <li
             onClick={showPropos}
-            className="pt-3 rounded-md hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
           >
             Propos
           </li>
