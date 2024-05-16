@@ -10,7 +10,7 @@ export default function EnseignantPublication() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("No selected file");
-
+  const [files, setFiles] = useState(null);
   const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${2}`;
   const addpublication = (publication) => {
     return axios.post(REST_API_BASE_URL, publication);
@@ -88,6 +88,26 @@ export default function EnseignantPublication() {
         contenu: contenu.current.value,
         imagePath: imagefileName,
       };
+
+      const formData = new FormData();
+      formData.append("file", imageUpload);
+
+      try {
+        const response = axios.post(
+          "http://localhost:8080/FSTBM/images/uploads/Publication",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("Image uploaded successfully:", response.data);
+        setImagefileName(response.data);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+
       addpublication(publication).then((response) => {
         console.log(response.data);
       });
@@ -199,17 +219,19 @@ export default function EnseignantPublication() {
                   ref={image}
                   onChange={(event) => {
                     handlChange(event);
-                    const files = event.target.files;
+                    // const files = event.target.files;
+                    setFiles(event.target.files);
                     if (files && files.length > 0) {
                       setImagefileName(files[0].name);
-                      setImageUpload(URL.createObjectURL(files[0]));
+                      // setImageUpload(URL.createObjectURL(files[0]));
+                      setImageUpload(event.target.files[0]);
                     }
                   }}
                   hidden
                 />
                 {imageUpload ? (
                   <img
-                    src={imageUpload}
+                    src={URL.createObjectURL(files[0])}
                     alt={imagefileName}
                     style={{
                       width: "500px",
