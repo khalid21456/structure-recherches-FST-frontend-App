@@ -34,7 +34,8 @@ export default function EnseignantAdmin(props) {
     email: "",
     labo: "",
     // dateNaissance: "",
-    profile: "",
+    dateNaissance: "",
+    profile:"",
   });
   const [EnseignantAjouter, showEnseignant] = useState("");
   function AnnulerValues() {
@@ -108,12 +109,14 @@ export default function EnseignantAdmin(props) {
       enseignantAdded.labo != "" &&
       enseignantAdded.email != ""
     ) {
-      if (imageEnseignantName() == "") {
+
+      if(imageEnseignantName() == "") {
         enseignantAdded.profile = "userUnknown.png";
       } else {
         enseignantAdded.profile = imageEnseignantName();
       }
 
+      
       axios
         .post(
           "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",
