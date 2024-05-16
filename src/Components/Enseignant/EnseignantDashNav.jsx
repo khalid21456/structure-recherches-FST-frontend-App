@@ -75,7 +75,7 @@ export default function DashboardNav() {
     setAnchorElUser(null);
   };
   return (
-    <div className="">
+    <div className="ml-80">
       <div className="flex justify-between h-full navDash bg-slate-400 border rounded-lg shadow-md mt-3 mr-16 ml-2">
         <div>
           <h1

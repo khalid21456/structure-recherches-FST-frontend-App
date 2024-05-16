@@ -33,8 +33,8 @@ export default function EnseignantAdmin(props) {
     prenom: "",
     email: "",
     labo: "",
-    dateNaissance: "",
-    profile:"",
+    // dateNaissance: "",
+    profile: "",
   });
   const [EnseignantAjouter, showEnseignant] = useState("");
   function AnnulerValues() {
@@ -108,12 +108,12 @@ export default function EnseignantAdmin(props) {
       enseignantAdded.labo != "" &&
       enseignantAdded.email != ""
     ) {
-      if(imageEnseignantName() == "") {
+      if (imageEnseignantName() == "") {
         enseignantAdded.profile = "userUnknown.png";
       } else {
         enseignantAdded.profile = imageEnseignantName();
       }
-      
+
       axios
         .post(
           "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",
@@ -126,7 +126,7 @@ export default function EnseignantAdmin(props) {
         .catch((error) => {
           console.log("Error: " + error);
         });
-      
+
       document.getElementById("nom-error").style.visibility = "hidden";
       document.getElementById("prenom-error").style.visibility = "hidden";
       document.getElementById("email-error").style.visibility = "hidden";
@@ -135,7 +135,7 @@ export default function EnseignantAdmin(props) {
       document.getElementById("alert").style.display = "";
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
       // document.getElementsByClassName("row").item(document.getElementsByClassName("row").length-1).style.backgroundColor = "green"
       // let ba = document.getElementsByClassName("row");
@@ -151,7 +151,7 @@ export default function EnseignantAdmin(props) {
   }
 
   function closeAlert() {
-    document.getElementById("alert").style.display="none"
+    document.getElementById("alert").style.display = "none";
   }
 
   return (

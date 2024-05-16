@@ -10,6 +10,9 @@ export default function EnseignantPublication() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("No selected file");
+  console.log(imageUpload);
+  console.log(imagefileName);
+  console.log(image);
   const validateForm = () => {
     setErrors([]);
     const titreValue = titre.current.value;

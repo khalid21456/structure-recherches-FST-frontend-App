@@ -15,23 +15,18 @@ import AdminAccueil from "./Components/Admin/AdminComponents/AdminAccueil";
 import EvenementDetail from "./Components/Admin/AdminComponents/EvenementDetail";
 import EvenementAdmin from "./Components/Admin/AdminComponents/EvenementAdmin";
 import SideBar from "./Components/Admin/SideBar";
-import React,{useState,useEffect} from "react"
-
-
+import React, { useState, useEffect } from "react";
 
 function App() {
-
   return (
     <>
-
       <nav>
         <Navbar />
       </nav>
       <section>
-        <aside>
-        </aside>
+        <aside></aside>
         <main id="main">
-          <Accueil/>
+          <Accueil />
         </main>
       </section>
       <footer>

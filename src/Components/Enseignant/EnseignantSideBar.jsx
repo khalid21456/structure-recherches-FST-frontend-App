@@ -33,7 +33,7 @@ const renderEnseignantPublication = () => {
 };
 export default function EnseignantSideBar() {
   return (
-    <div className="enseiSideBar-Container w-80 h-full shadow-lg hover:border-r-4 hover:border-r-orange-500">
+    <div className="enseiSideBar-Container w-80 h-full shadow-lg hover:border-r-4 hover:border-r-orange-500 fixed">
       <div className="flex justify-center">
         <EnseignantProfileCard />
       </div>
