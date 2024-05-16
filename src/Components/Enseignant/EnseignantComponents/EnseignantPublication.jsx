@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-
+import axios from "axios";
 export default function EnseignantPublication() {
   const titre = useRef();
   const image = useRef();
@@ -10,13 +10,14 @@ export default function EnseignantPublication() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("No selected file");
-  console.log(imageUpload);
-  console.log(imagefileName);
-  console.log(image);
+
+  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${2}`;
+  const addpublication = (publication) => {
+    return axios.post(REST_API_BASE_URL, publication);
+  };
   const validateForm = () => {
     setErrors([]);
     const titreValue = titre.current.value;
-    // const datePublicationValue = datePublication.current.value;
     const imageValue = image.current.files[0];
     const contenuValue = contenu.current.value;
     let isFormValide = true;
@@ -29,14 +30,7 @@ export default function EnseignantPublication() {
       });
       isFormValide = false;
     }
-    // if(datePublicationValue.trim() === ''){
-    //   setErrors(prevState =>{
-    //     return {
-    //       ...prevState,
-    //        ...{date: 'Date de publication est vide'}}
-    //   })
-    //   isFormValide = false;
-    // }
+
     if (!imageValue) {
       setErrors((prevState) => {
         return {
@@ -46,6 +40,7 @@ export default function EnseignantPublication() {
       });
       isFormValide = false;
     }
+
     if (contenuValue.trim() === "") {
       setErrors((prevState) => {
         return {
@@ -68,31 +63,39 @@ export default function EnseignantPublication() {
       });
       isFormValide = false;
     }
+
     setIsFormValid(isFormValide);
     return isFormValide;
   };
+
   const resetForm = () => {
     titre.current.value = "";
-    // datePublication.current.value = '';
     image.current.value = "";
     contenu.current.value = "";
   };
+
   const handlChange = (e) => {
     validateForm();
   };
+
   const submitForm = (e) => {
     e.preventDefault();
     setImageUpload(null);
     setIsFormSent(false);
     if (validateForm()) {
+      const publication = {
+        titre: titre.current.value,
+        contenu: contenu.current.value,
+        imagePath: imagefileName,
+      };
+      addpublication(publication).then((response) => {
+        console.log(response.data);
+      });
       setIsFormSent(true);
       resetForm();
     }
-    const titreValue = titre.current.value;
-    // const datePublicationValue = datePublication.current.value;
-    const imageValue = image.current.files[0];
-    const contenuValue = contenu.current.value;
   };
+
   const getError = (inputName) => {
     return errors[inputName];
   };
@@ -131,14 +134,6 @@ export default function EnseignantPublication() {
       ) : (
         ""
       )}
-      {/* {Object.keys(errors).length>0 ?
-          <div className="text-white mx-10 mt-7 rounded-md h-auto flex items-center justify-start pl-3" style={{backgroundColor:'red'}}>
-             <ul>
-              {displayErrors()}
-             </ul>
-        </div>
-        : ''
-        } */}
       <div className="ml-14 mb-7 mt-7 rounded-lg bg-white">
         <h2
           className="text-white font-bold pl-8 py-4 text-xl"
@@ -164,12 +159,6 @@ export default function EnseignantPublication() {
               />
               {displayError("titre")}
             </div>
-            {/* <div>
-                      <label className="block text-white mb-1 font-semibold text-xl">Date de publication</label>
-                      <input type="date" id="date" className="px-4 py-1 w-64" ref={datePublication} onChange={handlChange}/>
-                      {displayError('date')}
-                  </div> */}
-
             <div className="mb-4">
               <label
                 className="block mb-1 font-semibold"
@@ -203,7 +192,6 @@ export default function EnseignantPublication() {
                 }}
                 onClick={() => document.querySelector("#image").click()}
               >
-                {/* <input type="file" id="image" className="px-4 py-1" ref={image} onChange={handlChange} hidden/> */}
                 <input
                   type="file"
                   id="image"
