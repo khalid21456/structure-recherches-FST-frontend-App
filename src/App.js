@@ -16,7 +16,6 @@ import EvenementDetail from "./Components/Admin/AdminComponents/EvenementDetail"
 import EvenementAdmin from "./Components/Admin/AdminComponents/EvenementAdmin";
 import SideBar from "./Components/Admin/SideBar";
 import React, { useState, useEffect } from "react";
-import React,{useState,useEffect} from "react"
 
 
 

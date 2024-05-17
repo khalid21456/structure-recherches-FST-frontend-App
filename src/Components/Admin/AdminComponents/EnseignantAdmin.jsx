@@ -282,7 +282,7 @@ export default function EnseignantAdmin(props) {
         </div>
       </div>
       <div className="doctorantEspace flex justify-center pt-10">
-        <div style={{ height: "550px" }} className="w-11/12  bg-white border-2">
+        <div style={{ height: "580px" }} className="w-11/12  bg-white border-2">
           <div className="flex justify-between bg-slate-200">
             <div
               style={{ fontFamily: "Poppins" }}
