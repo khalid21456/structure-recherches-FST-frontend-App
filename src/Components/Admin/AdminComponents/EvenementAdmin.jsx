@@ -14,16 +14,21 @@ function renderEvenementDetail() {
 export default function EvenementAdmin() {
   return (
     <>
-      <div style={{width:"1380px",backgroundColor:"#2d0560"}} className="flex h-20 mr-1 bg-slate-200">
-      <div className="h-full w-7" style={{backgroundColor:"#FF5722"}}>
-          
-          </div>
-        <p className="text-3xl pt-5 pl-10 text-white" style={{fontFamily:"Poppins"}}>
-          Les demandes 
+      <div
+        style={{ width: "1380px", backgroundColor: "#2d0560" }}
+        className="flex h-20 mr-1 bg-slate-200"
+      >
+        <div
+          className="h-full w-7"
+          style={{ backgroundColor: "#FF5722" }}
+        ></div>
+        <p
+          className="text-3xl pt-5 pl-10 text-white"
+          style={{ fontFamily: "Poppins" }}
+        >
+          Les demandes
         </p>
-        <div>
-
-        </div>
+        <div></div>
       </div>
       <div className="events w-full flex justify-center">
         <div className="w-9/12">

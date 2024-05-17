@@ -50,6 +50,8 @@ export default function EnseignantAdmin(props) {
     });
   }
 
+
+
   useEffect(() => {
     const fetchDataEnseignant = async () => {
       try {
