@@ -34,7 +34,8 @@ export default function EnseignantAdmin(props) {
     email: "",
     labo: "",
     // dateNaissance: "",
-    profile: "",
+    dateNaissance: "",
+    profile:"",
   });
   const [EnseignantAjouter, showEnseignant] = useState("");
   function AnnulerValues() {
@@ -48,6 +49,8 @@ export default function EnseignantAdmin(props) {
       profile: "",
     });
   }
+
+
 
   useEffect(() => {
     const fetchDataEnseignant = async () => {
@@ -108,12 +111,14 @@ export default function EnseignantAdmin(props) {
       enseignantAdded.labo != "" &&
       enseignantAdded.email != ""
     ) {
-      if (imageEnseignantName() == "") {
+
+      if(imageEnseignantName() == "") {
         enseignantAdded.profile = "userUnknown.png";
       } else {
         enseignantAdded.profile = imageEnseignantName();
       }
 
+      
       axios
         .post(
           "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",
@@ -273,13 +278,10 @@ export default function EnseignantAdmin(props) {
               </TableContainer>
             </div>
           </div>
-          {/* <div className="block">
-              <div className="w-full h-24"></div>
-          </div> */}
         </div>
       </div>
       <div className="doctorantEspace flex justify-center pt-10">
-        <div style={{ height: "550px" }} className="w-11/12  bg-white border-2">
+        <div style={{ height: "580px" }} className="w-11/12  bg-white border-2">
           <div className="flex justify-between bg-slate-200">
             <div
               style={{ fontFamily: "Poppins" }}

@@ -7,13 +7,15 @@ import { pink } from "@mui/material/colors";
 import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
 import EventIcon from "@mui/icons-material/Event";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ShareIcon from '@mui/icons-material/Share';
+import ShareIcon from "@mui/icons-material/Share";
 import AdminAccueil from "./AdminComponents/AdminAccueil";
 import EnseignantAdmin from "./AdminComponents/EnseignantAdmin";
 import DoctorantAdmin from "./AdminComponents/DoctorantAdmin";
 import RechercheAdmin from "./AdminComponents/RechercheAdmin";
 import "../../style/EnseignantSideBar.css";
 import EvenementAdmin from "./AdminComponents/EvenementAdmin";
+import EquipeAdmin from "./AdminComponents/EquipeAdmin";
+import BiotechIcon from '@mui/icons-material/Biotech';
 
 function HomeIcon(props) {
   return (
@@ -24,33 +26,45 @@ function HomeIcon(props) {
 }
 
 function renderAdminAccueil() {
-    ReactDOM.render(
-        <AdminAccueil/>,document.getElementById("dashboardContent")
-    )
+  ReactDOM.render(
+    <AdminAccueil />,
+    document.getElementById("dashboardContent")
+  );
 }
 
 function renderEnseignantAdmin() {
-    ReactDOM.render(
-        <EnseignantAdmin/>,document.getElementById("dashboardContent")
-    )
+  ReactDOM.render(
+    <EnseignantAdmin />,
+    document.getElementById("dashboardContent")
+  );
 }
 
 function renderDoctorantAdmin() {
   ReactDOM.render(
-      <DoctorantAdmin/>,document.getElementById("dashboardContent")
-  )
+    <DoctorantAdmin />,
+    document.getElementById("dashboardContent")
+  );
 }
 
 function renderRechercheAdmin() {
   ReactDOM.render(
-      <RechercheAdmin/>,document.getElementById("dashboardContent")
-  )
+    <RechercheAdmin />,
+    document.getElementById("dashboardContent")
+  );
 }
 
 function renderEvenementAdmin() {
   ReactDOM.render(
-    <EvenementAdmin/>,document.getElementById("dashboardContent")
-  )
+    <EvenementAdmin />,
+    document.getElementById("dashboardContent")
+  );
+}
+
+function renderEquipeAdmin() {
+  ReactDOM.render(
+    <EquipeAdmin />,
+    document.getElementById("dashboardContent")
+  );
 }
 
 export default function SideBar() {
@@ -116,12 +130,14 @@ export default function SideBar() {
           </button>
         </div>
         <div className="btn">
-          <button className="flex mt-1 pt-3 pb-3 pl-7 w-full" onClick={renderEvenementAdmin}>
+          <button
+            className="flex mt-1 pt-3 pb-3 pl-7 w-full"
+            onClick={renderEvenementAdmin}
+          >
             <EventIcon sx={{ fontSize: 35, color: "orange" }} />
             <h1
               style={{ fontFamily: "Poppins", paddingTop: "6px" }}
               className="text-xl pl-5 text-white"
-              
             >
               Evenements
             </h1>
@@ -146,13 +162,28 @@ export default function SideBar() {
           </button>
         </div>
         <div className="btn">
-          <button className="flex mt-1 pt-3 pb-3 pl-7 w-full">
-            <ShareIcon sx={{ fontSize: 35, color: "orange" }} />
+          <button onClick={renderEquipeAdmin} className="flex mt-1 pt-3 pb-3 pl-7 w-full">
+            <img
+              style={{ width: "35px" }}
+              src={require("../../icons/teams.png")}
+              alt=""
+            />
             <h1
               style={{ fontFamily: "Poppins", paddingTop: "6px" }}
               className="text-xl pl-5 text-white"
             >
-              Publications
+              Equipes
+            </h1>
+          </button>
+        </div>
+        <div className="btn">
+          <button className="flex mt-1 pt-3 pb-3 pl-7 w-full">
+            <BiotechIcon sx={{ fontSize: 38, color: "orange" }} />
+            <h1
+              style={{ fontFamily: "Poppins", paddingTop: "6px" }}
+              className="text-xl pl-4 text-white"
+            >
+              Laboratoires
             </h1>
           </button>
         </div>

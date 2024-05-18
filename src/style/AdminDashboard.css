@@ -58,12 +58,12 @@
 }
 
 .Enseignants-show {
-    width: 1000px;
+    width: 1200px;
     height: 600px;
 }
 
 .Doctorants-show {
-    width: 1000px;
+    width: 1200px;
     height: 600px;
 }
 
@@ -104,3 +104,8 @@
     background-image: url("../pictures/sciences-ecole-primaire.jpg");
     background-size: cover;
   }
+
+
+.rowEquipe {
+    background-color: #8d3bf8;
+}
