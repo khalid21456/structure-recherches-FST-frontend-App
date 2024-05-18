@@ -278,9 +278,6 @@ export default function EnseignantAdmin(props) {
               </TableContainer>
             </div>
           </div>
-          {/* <div className="block">
-              <div className="w-full h-24"></div>
-          </div> */}
         </div>
       </div>
       <div className="doctorantEspace flex justify-center pt-10">

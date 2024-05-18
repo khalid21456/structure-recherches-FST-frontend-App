@@ -15,6 +15,7 @@ import RechercheAdmin from "./AdminComponents/RechercheAdmin";
 import "../../style/EnseignantSideBar.css";
 import EvenementAdmin from "./AdminComponents/EvenementAdmin";
 import EquipeAdmin from "./AdminComponents/EquipeAdmin";
+import BiotechIcon from '@mui/icons-material/Biotech';
 
 function HomeIcon(props) {
   return (
@@ -172,6 +173,17 @@ export default function SideBar() {
               className="text-xl pl-5 text-white"
             >
               Equipes
+            </h1>
+          </button>
+        </div>
+        <div className="btn">
+          <button className="flex mt-1 pt-3 pb-3 pl-7 w-full">
+            <BiotechIcon sx={{ fontSize: 38, color: "orange" }} />
+            <h1
+              style={{ fontFamily: "Poppins", paddingTop: "6px" }}
+              className="text-xl pl-4 text-white"
+            >
+              Laboratoires
             </h1>
           </button>
         </div>

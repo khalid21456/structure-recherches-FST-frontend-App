@@ -13,7 +13,7 @@ export default function MembreEquipe(props) {
   const [equipe, setEquipe] = useState({
     id: "",
     nomEquipe: "",
-    responsable: "",
+    responsable: {nom:"",prenom:"",email:""},
     membres: [],
     acronyme: "",
   });
@@ -38,6 +38,38 @@ export default function MembreEquipe(props) {
     <div className="w-full">
       <div className="flex justify-center">
         <div
+          style={{ height: "200px" }}
+          className="w-11/12  overflow-auto bg-white border-2"
+        >
+          <div className="flex justify-between bg-slate-200">
+            <div
+              style={{ fontFamily: "Poppins" }}
+              className="h-20 pt-5 pl-10 border-b text-3xl   "
+            >
+              Le Responsable
+            </div>
+            <div>
+              {/* <GroupIcon
+                style={{
+                  fontSize: "64px",
+                  color: "#2d0560",
+                  marginRight: "40px",
+                  marginTop: "8px",
+                }}
+              /> */}
+            </div>
+          </div>
+          <div className="table-enseignants mt-7 flex justify-center">
+            <div className="w-11/12">
+              <h1 style={{fontFamily:"Poppins"}} className="text-2xl">{equipe.responsable.prenom} {equipe.responsable.nom}</h1>
+              <p>{equipe.responsable.email}</p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-center mt-5">
+        <div
           style={{ height: "600px" }}
           className="w-11/12  overflow-auto bg-white border-2"
         >
@@ -49,14 +81,14 @@ export default function MembreEquipe(props) {
               Les Membres
             </div>
             <div>
-              <GroupIcon
+              {/* <GroupIcon
                 style={{
                   fontSize: "64px",
                   color: "#2d0560",
                   marginRight: "40px",
                   marginTop: "8px",
                 }}
-              />
+              /> */}
             </div>
           </div>
           <div className="table-enseignants flex justify-center mt-10 ">
@@ -76,68 +108,23 @@ export default function MembreEquipe(props) {
                       >
                         Email
                       </TableCell>
-                      <TableCell
-                        style={{ backgroundColor: "#2d0560", color: "white" }}
-                        align="left"
-                      >
-                        Date d'embauche
-                      </TableCell>
-                      <TableCell
-                        style={{ backgroundColor: "#2d0560", color: "white" }}
-                        align="left"
-                      >
-                        Laboratoire
-                      </TableCell>
-                      <TableCell
-                        style={{ backgroundColor: "#2d0560", color: "white" }}
-                        align="left"
-                      ></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {/* {enseignants.map((enseignant) => (
+                    {equipe.membres.map((membre) => (
                       <TableRow
-                        key={enseignant.id}
+                        key={membre.id}
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                         className="row"
                       >
                         <TableCell component="th" className="" scope="row">
-                          {enseignant.nom} {enseignant.prenom}
+                          {membre.nom} {membre.prenom}
                         </TableCell>
-                        <TableCell align="left">{enseignant.email}</TableCell>
-                        <TableCell align="left">
-                          {enseignant.dateEmbauche.substring(0, 10)}
-                        </TableCell>
-                        <TableCell align="left">{enseignant.labo}</TableCell>
-                        <TableCell align="left">
-                          <div className="flex">
-                            <div style={{ color: "green" }} id={enseignant.id}>
-                              <Tooltip title="Profile" arrow>
-                                <PersonIcon
-                                  onClick={renderProfile}
-                                  id={enseignant.id}
-                                  style={{ fontSize: "30px" }}
-                                  className="cursor-pointer mr-5"
-                                />
-                              </Tooltip>
-                            </div>
-                            <div
-                              style={{ color: "red" }}
-                              id={enseignant.id}
-                              onClick={deleteEnseignant}
-                            >
-                              <DeleteIcon
-                                id={enseignant.id}
-                                style={{ fontSize: "30px" }}
-                                className="cursor-pointer"
-                              />
-                            </div>
-                          </div>
-                        </TableCell>
+                        <TableCell align="left">{membre.email}</TableCell>
                       </TableRow>
-                    ))} */}
+                    ))}
                   </TableBody>
                 </Table>
               </TableContainer>
