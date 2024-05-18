@@ -1,8 +1,10 @@
 .EnseiCard {
-    background-color: #25476A;
+    /* background-color: #25476A; */
+    background-image: linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1);
 }
 .enseiSideBar-Container {
-    background-color: #574476;
+    /* background-color: #574476; */
+    background-image: linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1);
     height: 848px;
 }
 .EnseignantDashboard-container {
@@ -12,7 +14,8 @@
     overflow: auto;
 }
 .cardStatistcs {
-  background-color: #574476;
+  /* background-color: #574476; */
+  background-image: linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1);
 }
 .enseignantAccueil {
   width: 1100px;

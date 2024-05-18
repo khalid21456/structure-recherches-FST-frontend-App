@@ -6,7 +6,7 @@ import App from "./App";
 import Enseignant from "./Components/login/Enseignant";
 
 const root = document.getElementById("root");
-ReactDOM.render(<Enseignant />, root);
-// ReactDOM.render(<App />, root);
+// ReactDOM.render(<Enseignant />, root);
+ReactDOM.render(<App />, root);
 
 document.body.style.zoom = "87%";

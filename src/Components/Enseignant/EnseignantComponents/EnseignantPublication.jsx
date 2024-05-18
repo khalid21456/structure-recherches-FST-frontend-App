@@ -9,9 +9,9 @@ export default function EnseignantPublication() {
   const [isFormSent, setIsFormSent] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
-  const [imagefileName, setImagefileName] = useState("No selected file");
+  const [imagefileName, setImagefileName] = useState("unknown.jpg");
   const [files, setFiles] = useState(null);
-  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${2}`;
+  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${1}`;
   const addpublication = (publication) => {
     return axios.post(REST_API_BASE_URL, publication);
   };
@@ -38,7 +38,7 @@ export default function EnseignantPublication() {
           ...{ image: "image de publication est vide" },
         };
       });
-      isFormValide = false;
+      // isFormValide = false;
     }
 
     if (contenuValue.trim() === "") {
@@ -77,6 +77,16 @@ export default function EnseignantPublication() {
   const handlChange = (e) => {
     validateForm();
   };
+  //----------------------
+  const handleChange = (event) => {
+    const selectedFiles = event.target.files;
+    setFiles(selectedFiles);
+    if (selectedFiles && selectedFiles.length > 0) {
+      setImagefileName(selectedFiles[0].name);
+      setImageUpload(selectedFiles[0]);
+    }
+  };
+  //----------------------
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -94,7 +104,7 @@ export default function EnseignantPublication() {
 
       try {
         const response = axios.post(
-          "http://localhost:8080/FSTBM/images/uploads/Publication",
+          "http://localhost:8080/FSTBM/images/uploads/Event",
           formData,
           {
             headers: {
@@ -157,7 +167,11 @@ export default function EnseignantPublication() {
       <div className="ml-14 mb-7 mt-7 rounded-lg bg-white">
         <h2
           className="text-white font-bold pl-8 py-4 text-xl"
-          style={{ backgroundColor: "#25476A" }}
+          // style={{ backgroundColor: "#25476A" }}
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
+          }}
         >
           Publier une publication
         </h2>
@@ -217,21 +231,25 @@ export default function EnseignantPublication() {
                   id="image"
                   className="px-4 py-1"
                   ref={image}
-                  onChange={(event) => {
-                    handlChange(event);
-                    // const files = event.target.files;
-                    setFiles(event.target.files);
-                    if (files && files.length > 0) {
-                      setImagefileName(files[0].name);
-                      // setImageUpload(URL.createObjectURL(files[0]));
-                      setImageUpload(event.target.files[0]);
-                    }
-                  }}
+                  onChange={handleChange}
+                  // onChange={(event) => {
+                  //   handlChange(event);
+                  //   // const files = event.target.files;
+                  //   setFiles(event.target.files);
+                  //   if (files && files.length > 0) {
+                  //     setImagefileName(files[0].name);
+                  //     // setImageUpload(URL.createObjectURL(files[0]));
+                  //     setImageUpload(event.target.files[0]);
+                  //   }
+                  // }}
                   hidden
                 />
+                {console.log(imagefileName)}
                 {imageUpload ? (
                   <img
-                    src={URL.createObjectURL(files[0])}
+                    // src={URL.createObjectURL(files[0])}
+                    // src={imageUpload}
+                    src={files.length > 0 ? URL.createObjectURL(files[0]) : ""}
                     alt={imagefileName}
                     style={{
                       width: "500px",
