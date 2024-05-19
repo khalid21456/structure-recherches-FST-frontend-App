@@ -1,7 +1,8 @@
+import React from "react";
 import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-export default function EnseignantPublication() {
+export default function AddPublication() {
   const titre = useRef();
   const image = useRef();
   const contenu = useRef();
@@ -11,7 +12,7 @@ export default function EnseignantPublication() {
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("unknown.jpg");
   const [files, setFiles] = useState(null);
-  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${1}`;
+  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Doctorant/PublierDoc/${1}`;
   const addpublication = (publication) => {
     return axios.post(REST_API_BASE_URL, publication);
   };
@@ -77,6 +78,7 @@ export default function EnseignantPublication() {
   const handlChange = (e) => {
     validateForm();
   };
+
   //----------------------
   const handleChange = (event) => {
     const selectedFiles = event.target.files;
@@ -125,7 +127,6 @@ export default function EnseignantPublication() {
       resetForm();
     }
   };
-
   const getError = (inputName) => {
     return errors[inputName];
   };
@@ -142,6 +143,7 @@ export default function EnseignantPublication() {
       input.removeAttribute("style");
     }
   };
+
   const displayErrors = () => {
     return Object.entries(errors).map((error, key) => {
       const [input, message] = error;
@@ -152,6 +154,7 @@ export default function EnseignantPublication() {
       );
     });
   };
+
   return (
     <div className="">
       {isFormSent ? (
@@ -247,8 +250,6 @@ export default function EnseignantPublication() {
                 {console.log(imagefileName)}
                 {imageUpload ? (
                   <img
-                    // src={URL.createObjectURL(files[0])}
-                    // src={imageUpload}
                     src={files.length > 0 ? URL.createObjectURL(files[0]) : ""}
                     alt={imagefileName}
                     style={{
@@ -278,7 +279,7 @@ export default function EnseignantPublication() {
             <Button
               variant="contained"
               style={{
-                backgroundColor: "#574476",
+                backgroundColor: "#2026f1",
                 padding: "12px 45px",
                 marginRight: "20px",
                 fontSize: "17px",
@@ -291,7 +292,7 @@ export default function EnseignantPublication() {
             <Button
               variant="outlined"
               style={{
-                borderColor: "#574476",
+                borderColor: "#2026f1",
                 color: "#2d0560",
                 padding: "12px 45px",
                 fontSize: "17px",

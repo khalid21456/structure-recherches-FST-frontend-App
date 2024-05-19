@@ -52,7 +52,7 @@ export default function ListEnseignantPublications() {
   const formatDate = (dateString, delimiter = "/") => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
     return `${day}${delimiter}${month}${delimiter}${year}`;
   };

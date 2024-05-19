@@ -20,11 +20,8 @@ import MuiAccordionSummary, {
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
-import "./../../style/EnseignantDashboard.css";
-import EnseignantAccueil from "./EnseignantComponents/EnseignantAccueil";
-import EnseignantPublication from "./EnseignantComponents/EnseignantPublication";
-import EnseignantEvenement from "./EnseignantComponents/EnseignantEvenement";
-import ListEnseignantPublications from "./EnseignantComponents/ListEnseignantPublications";
+import "./../../style/Doctorant.css";
+import DoctorantPublicationsList from "./DoctorantComponent/DoctorantPublicationsList";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -61,7 +58,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
-export default function DashboardNav() {
+export default function DoctorantDashNav() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [expanded, setExpanded] = React.useState("panel1");
 
@@ -119,7 +116,7 @@ export default function DashboardNav() {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
                     alt="Youssef"
-                    src={require("./../../profiles/Mr-ElMourabit.png")}
+                    src={require("./../../profiles/Mr-Nachaoui.jpg")}
                   />
                 </IconButton>
               </Tooltip>
@@ -160,7 +157,7 @@ export default function DashboardNav() {
         className="flex justify-between border rounded-lg shadow-md mt-3 mr-16 ml-2 mb-3 bg-sky-100"
         style={{ width: "1060px", height: "1500px" }}
       >
-        <EnseignantAccueil />
+        <DoctorantPublicationsList />
       </div>
     </div>
   );
