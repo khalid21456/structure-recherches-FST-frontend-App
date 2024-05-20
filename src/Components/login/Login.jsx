@@ -22,49 +22,7 @@ export default function Login() {
   const handlRole = (e) => {
     setRole(e.target.value);
   };
-  // const submitLogin = () => {
-  //   if (role === "Enseignant") {
-  //     const connectEns = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
-  //         );
-  //         setEnseignant(response.data);
-  //         console.log(response.data);
-  //       } catch (error) {
-  //         console.log(error.response.data.message);
-  //         setEnseignant({});
-  //       }
-  //     };
-  //     connectEns();
-  //   } else if (role === "Doctorant") {
-  //     const connectDoc = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `http://localhost:8080/FSTBM/Login/ConnectDoc/${email}/${password}`
-  //         );
-  //         setDoctorant(response.data);
-  //         console.log(response.data);
-  //       } catch (error) {
-  //         console.log(error.response.data.message);
-  //         setDoctorant({});
-  //       }
-  //     };
-  //     connectDoc();
-  //   }
-  //   if (enseignant !== null) {
-  //     ReactDOM.render(
-  //       <Enseignant enseignant={enseignant} />,
-  //       document.getElementById("root")
-  //     );
-  //   }
-  //   if (doctorant !== null) {
-  //     ReactDOM.render(
-  //       <Doctorant doctorant={doctorant} />,
-  //       document.getElementById("root")
-  //     );
-  //   }
-  // };
+
   const submitLogin = async () => {
     try {
       if (role === "Enseignant") {
@@ -72,23 +30,17 @@ export default function Login() {
           `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
         );
         const enseignant = response.data;
-        if (enseignant) {
-          ReactDOM.render(
-            <Enseignant enseignant={enseignant} />,
-            document.getElementById("root")
-          );
-        }
+        // if (enseignant) {
+        //   ReactDOM.render(<Enseignant />, document.getElementById("root"));
+        // }
       } else if (role === "Doctorant") {
         const response = await axios.get(
           `http://localhost:8080/FSTBM/Login/ConnectDoc/${email}/${password}`
         );
         const doctorant = response.data;
-        if (doctorant) {
-          ReactDOM.render(
-            <Doctorant doctorant={doctorant} />,
-            document.getElementById("root")
-          );
-        }
+        // if (doctorant) {
+        //   ReactDOM.render(<Doctorant />, document.getElementById("root"));
+        // }
       }
       //  else if (role === "Admin") {
       //   const response = await axios.get(`http://localhost:8080/FSTBM/Login/ConnectAdmin/${email}/${password}`);

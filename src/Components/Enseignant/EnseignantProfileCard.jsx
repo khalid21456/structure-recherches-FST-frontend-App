@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import "../../style/AdminDashboard.css";
 import "../../style/EnseignantDashboard.css";
-export default function AdminProfileCard({ enseignant }) {
+export default function AdminProfileCard() {
   // useEffect(() => {
   //   while(true) {
   //       let test = document.getElementsByClassName("online")[0];
@@ -22,7 +22,7 @@ export default function AdminProfileCard({ enseignant }) {
           style={{ fontFamily: "Poppins", fontSize: "18px" }}
           className=" mt-10 ml-5 text-white"
         >
-          {enseignant.nom} {enseignant.prenom}
+          El Mourabit Youssef
         </h1>
         <div className="flex ">
           <div

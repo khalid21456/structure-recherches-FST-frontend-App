@@ -8,10 +8,10 @@ import EnseignantPublication from "./EnseignantComponents/EnseignantPublication"
 import EnseignantRecherche from "./EnseignantComponents/EnseignantRecherche";
 import ListEnseignantPublications from "./EnseignantComponents/ListEnseignantPublications";
 
-export default function EnseignantSideBar({ enseignant }) {
+export default function EnseignantSideBar() {
   const renderEnseignantAccueil = () => {
     ReactDOM.render(
-      <EnseignantAccueil enseignant={enseignant} />,
+      <EnseignantAccueil />,
       document.getElementById("EnseignantContent")
     );
   };
@@ -29,15 +29,15 @@ export default function EnseignantSideBar({ enseignant }) {
   };
   const renderEnseignantPublication = () => {
     ReactDOM.render(
-      <ListEnseignantPublications enseignant={enseignant} />,
+      <ListEnseignantPublications />,
       document.getElementById("EnseignantContent")
     );
   };
-  console.log("EnseignantDashNav:", enseignant);
+  console.log("EnseignantDashNav:");
   return (
     <div className="enseiSideBar-Container w-80 h-full shadow-lg hover:border-r-4 hover:border-r-orange-500 fixed">
       <div className="flex justify-center">
-        <EnseignantProfileCard enseignant={enseignant} />
+        <EnseignantProfileCard />
       </div>
       <div className="text-white text-2xl h-16 border-b-2 border-b-orange-500">
         <h1 style={{ fontFamily: "Poppins" }} className="pt-4 pl-8">

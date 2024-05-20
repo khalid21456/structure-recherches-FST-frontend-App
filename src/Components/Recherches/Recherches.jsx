@@ -31,17 +31,17 @@ window.addEventListener("scroll", () => {
 });
 
 export default function Recherche() {
-  const myRef = useRef()
-  const [Themes, setThemes] = useState([])
+  const myRef = useRef();
+  const [Themes, setThemes] = useState([]);
 
-  let minHeight = 1700; 
+  let minHeight = 1700;
   let heightAdded = Themes.length * 250;
   let newHeight = minHeight + heightAdded;
   if (myRef.current) {
     myRef.current.style.height = newHeight + "px";
-  } 
+  }
   useEffect(() => {
-    console.log("khalid")
+    console.log("khalid");
     const fetchDataThemes = async () => {
       try {
         const response = await axios.get(
@@ -56,7 +56,7 @@ export default function Recherche() {
 
     fetchDataThemes();
   }, []);
- 
+
   return (
     <div className="Recherche-container" ref={myRef}>
       <div className="presentRecherche">
