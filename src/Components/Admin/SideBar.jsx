@@ -16,6 +16,7 @@ import "../../style/EnseignantSideBar.css";
 import EvenementAdmin from "./AdminComponents/EvenementAdmin";
 import EquipeAdmin from "./AdminComponents/EquipeAdmin";
 import BiotechIcon from '@mui/icons-material/Biotech';
+import LaboratoireAdmin from "./AdminComponents/LaboratoireAdmin";
 
 function HomeIcon(props) {
   return (
@@ -35,6 +36,13 @@ function renderAdminAccueil() {
 function renderEnseignantAdmin() {
   ReactDOM.render(
     <EnseignantAdmin />,
+    document.getElementById("dashboardContent")
+  );
+}
+
+function renderLaboratoireAdmin() {
+  ReactDOM.render(
+    <LaboratoireAdmin />,
     document.getElementById("dashboardContent")
   );
 }
@@ -182,6 +190,7 @@ export default function SideBar() {
             <h1
               style={{ fontFamily: "Poppins", paddingTop: "6px" }}
               className="text-xl pl-4 text-white"
+              onClick={renderLaboratoireAdmin}
             >
               Laboratoires
             </h1>

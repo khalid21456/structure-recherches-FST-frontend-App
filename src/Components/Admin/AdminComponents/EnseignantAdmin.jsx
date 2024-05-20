@@ -32,7 +32,7 @@ export default function EnseignantAdmin(props) {
     nom: "",
     prenom: "",
     email: "",
-    labo: "",
+    // labo: "",
     // dateNaissance: "",
     dateNaissance: "",
     profile:"",
@@ -43,7 +43,7 @@ export default function EnseignantAdmin(props) {
       nom: "",
       prenom: "",
       email: "",
-      labo: "",
+      // labo: "",
       address: "",
       dateNaissance: "",
       profile: "",
@@ -96,9 +96,9 @@ export default function EnseignantAdmin(props) {
     if (enseignantAdded.email == "") {
       document.getElementById("email-error").style.visibility = "visible";
     }
-    if (enseignantAdded.labo == "") {
-      document.getElementById("labo-error").style.visibility = "visible";
-    }
+    // if (enseignantAdded.labo == "") {
+    //   document.getElementById("labo-error").style.visibility = "visible";
+    // }
     if (enseignantAdded.nom == "") {
       document.getElementById("nom-error").style.visibility = "visible";
     }
@@ -108,7 +108,7 @@ export default function EnseignantAdmin(props) {
     if (
       enseignantAdded.prenom != "" &&
       enseignantAdded.nom != "" &&
-      enseignantAdded.labo != "" &&
+      // enseignantAdded.labo != "" &&
       enseignantAdded.email != ""
     ) {
 

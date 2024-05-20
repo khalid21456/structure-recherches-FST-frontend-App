@@ -72,6 +72,8 @@ export default function Login() {
           `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
         );
         const enseignant = response.data;
+        // setEnseignant(response.data)
+        console.log(enseignant)
         if (enseignant) {
           ReactDOM.render(
             <Enseignant enseignant={enseignant} />,
