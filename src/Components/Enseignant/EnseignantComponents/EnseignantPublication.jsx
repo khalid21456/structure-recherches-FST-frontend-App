@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-export default function EnseignantPublication() {
+export default function EnseignantPublication({ enseignant }) {
   const titre = useRef();
   const image = useRef();
   const contenu = useRef();
@@ -11,7 +11,7 @@ export default function EnseignantPublication() {
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("unknown.jpg");
   const [files, setFiles] = useState(null);
-  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${1}`;
+  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${enseignant.id}`;
   const addpublication = (publication) => {
     return axios.post(REST_API_BASE_URL, publication);
   };

@@ -4,17 +4,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import EnseignantPublication from "./EnseignantPublication";
 import PublicationDetails from "./PublicationDetails";
-export default function ListEnseignantPublications() {
+export default function ListEnseignantPublications({ enseignant }) {
   const [publications, setPublications] = useState([]);
+  const [error, setError] = useState(null);
   useEffect(() => {
     const fetchDataPublications = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/FSTBM/Enseignant/publicationsByEnseignant/${1}`
+          `http://localhost:8080/FSTBM/Enseignant/publicationsByEnseignant/${enseignant.id}`
         );
         setPublications(response.data);
+        console.log(response.data);
       } catch (error) {
-        console.log(error.response.data.message);
+        setError(error.response ? error.response.data.message : error.message);
         setPublications([]);
       }
     };
@@ -22,7 +24,7 @@ export default function ListEnseignantPublications() {
   }, []);
   const renderAddPublication = () => {
     ReactDOM.render(
-      <EnseignantPublication />,
+      <EnseignantPublication enseignant={enseignant} />,
       document.getElementById("EnseignantContent")
     );
   };
@@ -89,11 +91,16 @@ export default function ListEnseignantPublications() {
           {
             /* const imagePath = require(`E:/pfe/structure-recherches-FST-backend-App/src/main/resources/uploads/Publications/${publication.imagePath}`); */
           }
+
           const imagePath = `http://localhost:8080/FSTBM/readImages/Publication/${publication.imagePath}`;
           return (
             <div className="w-full mt-3 h-64 bg-white rounded-md shadow-md flex">
               <div className="w-1/4">
-                <img src={imagePath} className="w-full h-full rounded-s-md" />
+                <img
+                  src={imagePath}
+                  alt={publication.titre}
+                  className="w-full h-full rounded-s-md"
+                />
               </div>
               <div className="w-9/12 h-56 bg-white">
                 <div className="content">
@@ -145,209 +152,6 @@ export default function ListEnseignantPublications() {
             </div>
           );
         })}
-        {/* <div className="w-full mt-3 h-56 bg-white rounded-md shadow-md flex">
-          <div className="w-1/4">
-            <img
-              src={require("../../../pictures/cloud.jpg")}
-              className="w-full h-full rounded-s-md"
-            />
-          </div>
-          <div className="w-9/12 h-56 bg-white">
-            <div className="content">
-              <div className="w-11/12 h-14 flex ml-5 mt-3">
-                <div>
-                  <img
-                    className="w-14 h-14 rounded-full"
-                    src={require("../../../profiles/Mr-ElMourabit.png")}
-                  />
-                </div>
-                <div>
-                  <label
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: "18px",
-                      color: "#574476",
-                    }}
-                    className="ml-3 h-fit"
-                  >
-                    Youssef El Mourabit
-                  </label>
-                  <p className="w-fit ml-3 text-slate-400">
-                    Publier le 14/04/2024
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-center mt-7">
-                <h1 style={{ fontFamily: "Platypi" }} className="text-center">
-                  INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE AND GREEN
-                  COMPUTING...
-                </h1>
-              </div>
-              <div className="h-5 mt-12 flex justify-end">
-                <label
-                  className="mr-7 underline cursor-pointer hover:text-blue-500"
-                  style={{ fontFamily: "Roman", fontSize: "18px" }}
-                  onClick={renderPublicationDetails}
-                >
-                  Voir+
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full mt-3 h-56 bg-white rounded-md shadow-md flex">
-          <div className="w-1/4">
-            <img
-              src={require("../../../pictures/cloud.jpg")}
-              className="w-full h-full rounded-s-md"
-            />
-          </div>
-          <div className="w-9/12 h-56 bg-gray-010">
-            <div className="content">
-              <div className="w-11/12 h-14 flex ml-5 mt-3">
-                <div>
-                  <img
-                    className="w-14 h-14 rounded-full"
-                    src={require("../../../profiles/Mr-ElMourabit.png")}
-                  />
-                </div>
-                <div>
-                  <label
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: "18px",
-                      color: "#574476",
-                    }}
-                    className="ml-3 h-fit"
-                  >
-                    Youssef El Mourabit
-                  </label>
-                  <p className="w-fit ml-3 text-slate-400">
-                    Publier le 14/04/2024
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-center mt-7">
-                <h1 style={{ fontFamily: "Platypi" }} className="text-center">
-                  INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE AND GREEN
-                  COMPUTING...
-                </h1>
-              </div>
-              <div className="h-5 mt-12 flex justify-end">
-                <label
-                  className="mr-7 underline cursor-pointer hover:text-blue-500"
-                  style={{ fontFamily: "Roman", fontSize: "18px" }}
-                  onClick={renderPublicationDetails}
-                >
-                  Voir+
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full mt-3 h-56 bg-white rounded-md shadow-md flex">
-          <div className="w-1/4">
-            <img
-              src={require("../../../pictures/cloud.jpg")}
-              className="w-full h-full rounded-s-md"
-            />
-          </div>
-          <div className="w-9/12 h-56 bg-white">
-            <div className="content">
-              <div className="w-11/12 h-14 flex ml-5 mt-3">
-                <div>
-                  <img
-                    className="w-14 h-14 rounded-full"
-                    src={require("../../../profiles/Mr-ElMourabit.png")}
-                  />
-                </div>
-                <div>
-                  <label
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: "18px",
-                      color: "#574476",
-                    }}
-                    className="ml-3 h-fit"
-                  >
-                    Youssef El Mourabit
-                  </label>
-                  <p className="w-fit ml-3 text-slate-400">
-                    Publier le 14/04/2024
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-center mt-7">
-                <h1 style={{ fontFamily: "Platypi" }} className="text-center">
-                  INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE AND GREEN
-                  COMPUTING...
-                </h1>
-              </div>
-              <div className="h-5 mt-12 flex justify-end">
-                <label
-                  className="mr-7 underline cursor-pointer hover:text-blue-500"
-                  style={{ fontFamily: "Roman", fontSize: "18px" }}
-                  onClick={renderPublicationDetails}
-                >
-                  Voir+
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full mt-3 h-56 bg-white rounded-md shadow-md flex">
-          <div className="w-1/4">
-            <img
-              src={require("../../../pictures/cloud.jpg")}
-              className="w-full h-full rounded-s-md"
-            />
-          </div>
-          <div className="w-9/12 h-56 bg-white">
-            <div className="content">
-              <div className="w-11/12 h-14 flex ml-5 mt-3">
-                <div>
-                  <img
-                    className="w-14 h-14 rounded-full"
-                    src={require("../../../profiles/Mr-ElMourabit.png")}
-                  />
-                </div>
-                <div>
-                  <label
-                    style={{
-                      fontFamily: "Poppins",
-                      fontSize: "18px",
-                      color: "#574476",
-                    }}
-                    className="ml-3 h-fit"
-                  >
-                    Youssef El Mourabit
-                  </label>
-                  <p className="w-fit ml-3 text-slate-400">
-                    Publier le 14/04/2024
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-center mt-7">
-                <h1 style={{ fontFamily: "Platypi" }} className="text-center">
-                  INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE AND GREEN
-                  COMPUTING...
-                </h1>
-              </div>
-              <div className="h-5 mt-12 flex justify-end">
-                <label
-                  className="mr-7 underline cursor-pointer hover:text-blue-500"
-                  style={{ fontFamily: "Roman", fontSize: "18px" }}
-                  onClick={renderPublicationDetails}
-                >
-                  Voir+
-                </label>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

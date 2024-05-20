@@ -7,35 +7,37 @@ import EnseignantEvenement from "./EnseignantComponents/EnseignantEvenement";
 import EnseignantPublication from "./EnseignantComponents/EnseignantPublication";
 import EnseignantRecherche from "./EnseignantComponents/EnseignantRecherche";
 import ListEnseignantPublications from "./EnseignantComponents/ListEnseignantPublications";
-const renderEnseignantAccueil = () => {
-  ReactDOM.render(
-    <EnseignantAccueil />,
-    document.getElementById("EnseignantContent")
-  );
-};
-const renderEnseignantRecherche = () => {
-  ReactDOM.render(
-    <EnseignantRecherche />,
-    document.getElementById("EnseignantContent")
-  );
-};
-const renderEnseignantEvenement = () => {
-  ReactDOM.render(
-    <EnseignantEvenement />,
-    document.getElementById("EnseignantContent")
-  );
-};
-const renderEnseignantPublication = () => {
-  ReactDOM.render(
-    <ListEnseignantPublications />,
-    document.getElementById("EnseignantContent")
-  );
-};
-export default function EnseignantSideBar() {
+
+export default function EnseignantSideBar({ enseignant }) {
+  const renderEnseignantAccueil = () => {
+    ReactDOM.render(
+      <EnseignantAccueil enseignant={enseignant} />,
+      document.getElementById("EnseignantContent")
+    );
+  };
+  const renderEnseignantRecherche = () => {
+    ReactDOM.render(
+      <EnseignantRecherche />,
+      document.getElementById("EnseignantContent")
+    );
+  };
+  const renderEnseignantEvenement = () => {
+    ReactDOM.render(
+      <EnseignantEvenement />,
+      document.getElementById("EnseignantContent")
+    );
+  };
+  const renderEnseignantPublication = () => {
+    ReactDOM.render(
+      <ListEnseignantPublications enseignant={enseignant} />,
+      document.getElementById("EnseignantContent")
+    );
+  };
+  console.log("EnseignantDashNav:", enseignant);
   return (
     <div className="enseiSideBar-Container w-80 h-full shadow-lg hover:border-r-4 hover:border-r-orange-500 fixed">
       <div className="flex justify-center">
-        <EnseignantProfileCard />
+        <EnseignantProfileCard enseignant={enseignant} />
       </div>
       <div className="text-white text-2xl h-16 border-b-2 border-b-orange-500">
         <h1 style={{ fontFamily: "Poppins" }} className="pt-4 pl-8">

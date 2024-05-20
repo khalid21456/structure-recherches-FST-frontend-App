@@ -1,11 +1,15 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { useState } from "react";
 import axios from "axios";
+import Enseignant from "./Enseignant";
+import Doctorant from "./Doctorant";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [enseignant, setEnseignant] = useState({});
+  const [doctorant, setDoctorant] = useState({});
   console.log(email);
   console.log(password);
   console.log(role);
@@ -18,24 +22,91 @@ export default function Login() {
   const handlRole = (e) => {
     setRole(e.target.value);
   };
-  const submitLogin = () => {
-    if (role === "Enseignant") {
-      const connectEns = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
+  // const submitLogin = () => {
+  //   if (role === "Enseignant") {
+  //     const connectEns = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
+  //         );
+  //         setEnseignant(response.data);
+  //         console.log(response.data);
+  //       } catch (error) {
+  //         console.log(error.response.data.message);
+  //         setEnseignant({});
+  //       }
+  //     };
+  //     connectEns();
+  //   } else if (role === "Doctorant") {
+  //     const connectDoc = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           `http://localhost:8080/FSTBM/Login/ConnectDoc/${email}/${password}`
+  //         );
+  //         setDoctorant(response.data);
+  //         console.log(response.data);
+  //       } catch (error) {
+  //         console.log(error.response.data.message);
+  //         setDoctorant({});
+  //       }
+  //     };
+  //     connectDoc();
+  //   }
+  //   if (enseignant !== null) {
+  //     ReactDOM.render(
+  //       <Enseignant enseignant={enseignant} />,
+  //       document.getElementById("root")
+  //     );
+  //   }
+  //   if (doctorant !== null) {
+  //     ReactDOM.render(
+  //       <Doctorant doctorant={doctorant} />,
+  //       document.getElementById("root")
+  //     );
+  //   }
+  // };
+  const submitLogin = async () => {
+    try {
+      if (role === "Enseignant") {
+        const response = await axios.get(
+          `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
+        );
+        const enseignant = response.data;
+        if (enseignant) {
+          ReactDOM.render(
+            <Enseignant enseignant={enseignant} />,
+            document.getElementById("root")
           );
-          setEnseignant(response.data);
-          console.log(response.data);
-        } catch (error) {
-          console.log(error.response.data.message);
-          setEnseignant({});
         }
-      };
-      connectEns();
+      } else if (role === "Doctorant") {
+        const response = await axios.get(
+          `http://localhost:8080/FSTBM/Login/ConnectDoc/${email}/${password}`
+        );
+        const doctorant = response.data;
+        if (doctorant) {
+          ReactDOM.render(
+            <Doctorant doctorant={doctorant} />,
+            document.getElementById("root")
+          );
+        }
+      }
+      //  else if (role === "Admin") {
+      //   const response = await axios.get(`http://localhost:8080/FSTBM/Login/ConnectAdmin/${email}/${password}`);
+      //   const admin = response.data;
+      //   if (admin) {
+      //     ReactDOM.render(<Admin admin={admin} />, document.getElementById("root"));
+      //   }
+      // }
+      else {
+        console.error("Invalid role selected");
+      }
+    } catch (error) {
+      console.error(
+        "Login failed:",
+        error.response ? error.response.data.message : error.message
+      );
     }
   };
-
   return (
     <div className="w-full flex items-center justify-center h-auto bg-gray-200">
       <div className="bg-white rounded-2xl border-2 border-gray-200 shadow-md px-10 py-20 my-20">

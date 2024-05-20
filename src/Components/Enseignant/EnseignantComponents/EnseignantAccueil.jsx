@@ -1,14 +1,14 @@
 import "./../../../style/EnseignantDashboard.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-export default function EnseignantAccueil() {
+export default function EnseignantAccueil({ enseignant }) {
   const [publicationsCounter, setPublicationsCounter] = useState();
   const [recherchesCounter, setRecherchesCounter] = useState();
   useEffect(() => {
     const fetchDataCountPublications = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/FSTBM/Enseignant/countPublication/${1}`
+          `http://localhost:8080/FSTBM/Enseignant/countPublication/${enseignant.id}`
         );
         setPublicationsCounter(response.data);
       } catch (error) {

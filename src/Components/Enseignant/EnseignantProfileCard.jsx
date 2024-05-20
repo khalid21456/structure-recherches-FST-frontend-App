@@ -1,9 +1,9 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import "../../style/AdminDashboard.css";
-import "../../style/EnseignantDashboard.css"
-export default function AdminProfileCard() {
+import "../../style/EnseignantDashboard.css";
+export default function AdminProfileCard({ enseignant }) {
   // useEffect(() => {
   //   while(true) {
   //       let test = document.getElementsByClassName("online")[0];
@@ -11,7 +11,6 @@ export default function AdminProfileCard() {
   //       document.getElementsByClassName("online")[0].classList.remove("online-popUp")
   //   }
   // }, []);
-
   return (
     <div className="EnseiCard w-full h-32 flex">
       <img
@@ -23,16 +22,14 @@ export default function AdminProfileCard() {
           style={{ fontFamily: "Poppins", fontSize: "18px" }}
           className=" mt-10 ml-5 text-white"
         >
-          El Mourabit Youssef
+          {enseignant.nom} {enseignant.prenom}
         </h1>
         <div className="flex ">
           <div
             style={{ marginTop: "6px" }}
-            className="online w-3 h-3 bg-green-600 rounded-full ml-5">
-            </div>
-          <label className=" text-green-600 font-bold ml-2">
-            En ligne
-          </label>
+            className="online w-3 h-3 bg-green-600 rounded-full ml-5"
+          ></div>
+          <label className=" text-green-600 font-bold ml-2">En ligne</label>
         </div>
       </div>
     </div>
