@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import ReactDOM from "react-dom"
 import "../../style/Recherche.css";
 import ThemeCard from "./ThemeCard";
 import themes from "../../data/Themes";
@@ -10,6 +11,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import EquipePage from "./Equipe-page";
+import LaboPage from "./Labo-page";
+
+
 
 window.addEventListener("scroll", () => {
   let image = document.querySelectorAll(".trans");
@@ -63,7 +68,6 @@ export default function Recherche() {
   }
 
   useEffect(() => {
-    console.log("khalid");
     const fetchDataThemes = async () => {
       try {
         const response = await axios.get(
@@ -80,7 +84,6 @@ export default function Recherche() {
   }, []);
 
   useEffect(() => {
-    console.log("khalid");
     const fetchDataLaboratoires = async () => {
       try {
         const response = await axios.get(
@@ -97,7 +100,6 @@ export default function Recherche() {
   }, []);
 
   useEffect(() => {
-    console.log("khalid");
     const fetchDataEquipes = async () => {
       try {
         const response = await axios.get(
@@ -112,6 +114,37 @@ export default function Recherche() {
 
     fetchDataEquipes();
   }, []);
+
+  function renderEquipePage(event) {
+    window.scroll({
+      top: 0,
+      left: 500,
+      // behavior: "smooth",
+    });
+    ReactDOM.render(
+      <EquipePage ident={event.target.parentElement.id}/>,document.getElementById("main")
+    )
+  }
+
+  function renderLaboPage(event) {
+    window.scroll({
+      top: 0,
+      left: 500,
+      // behavior: "smooth",
+    });
+    // console.log(event.target.parentElement.id)
+    ReactDOM.render(
+      <LaboPage ident={event.target.parentElement.id}/>,document.getElementById("main")
+    )
+  }
+
+  function mouseEnteredHandle(event) {
+    event.target.parentElement.style.backgroundColor = "#DDE6ED";
+  }
+
+  function mouseLeavedHandle(event) {
+    event.target.parentElement.style.backgroundColor = "";
+  }
 
   return (
     <div className="Recherche-container" ref={myRef}>
@@ -220,6 +253,13 @@ export default function Recherche() {
                 {Laboratoires.map((labo) => (
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    key={labo.id}
+                    onClick={renderLaboPage}
+                    style={{cursor:"pointer"}}
+                    onMouseEnter={mouseEnteredHandle}
+                    onMouseLeave={mouseLeavedHandle}
+                    id={labo.id}
+
                   >
                     <TableCell component="th" scope="row">
                       {labo.nomLaboratoire}
@@ -274,6 +314,12 @@ export default function Recherche() {
                 {Equipes.map((equipe) => (
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    id={equipe.id}
+                    onClick={renderEquipePage}
+                    style={{cursor:"pointer"}}
+                    onMouseEnter={mouseEnteredHandle}
+                    onMouseLeave={mouseLeavedHandle}
+                    key={equipe.id}
                   >
                     <TableCell component="th" scope="row">
                       {equipe.nomEquipe}

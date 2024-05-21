@@ -14,17 +14,15 @@ import Paper from "@mui/material/Paper";
 import "../../../style/AdminDashboard.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
-// import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 import { useAutocomplete } from "@mui/base/useAutocomplete";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import MembreEquipe from "./MembreEquipe";
 import UndoIcon from "@mui/icons-material/Undo";
-import AdminAccueil from "./AdminAccueil";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
+import MembreLabo from "./MembreLabo";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -233,8 +231,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function LaboratoireAdmin() {
   const [Labos, setLabos] = useState([]);
-  const [equipeAdded, addEquipe] = useState({
-    nomEquipe: "",
+  const [laboAdded, addLabo] = useState({
+    nomLaboratoire: "",
     responsable: {},
     acronyme: "",
   });
@@ -266,13 +264,15 @@ export default function LaboratoireAdmin() {
     setIsHovered(true);
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
 
-  const [openAddEquipe, setOpenAddEquipe] = React.useState(false);
-  const handleOpenAddEquipe = () => setOpenAddEquipe(true);
-  const handleCloseAddEquipe = () => setOpenAddEquipe(false);
+
+  // const handleMouseLeave = () => {
+  //   setIsHovered(false);
+  // };
+
+  const [openAddLabo, setOpenAddLabo] = React.useState(false);
+  const handleOpenAddLabo = () => setOpenAddLabo(true);
+  const handleCloseAddLabo = () => setOpenAddLabo(false);
 
   const [openAddMembre, setOpenAddMembre] = React.useState(false);
   const handleOpenAddMembre = () => setOpenAddMembre(true);
@@ -316,23 +316,22 @@ export default function LaboratoireAdmin() {
     fetchDataLabos();
   }, []);
 
-  const [idEquipeClicked, setIdEquipeClicked] = useState(0);
+  const [idLaboClicked, setIdLaboClicked] = useState();
 
-  function renderMembreEquipe(event) {
-    setIdEquipeClicked(event.target.id);
+  function renderMembreLabo(event) {
+    let ident = event.target.id
+    setIdLaboClicked(ident)
+    console.log(ident)
     document.getElementById("addMembreIcon").style.display = "";
     document.getElementById("returnIcon").style.display = "";
     document.getElementById("addEquipeIcon").style.display = "none";
-    ReactDOM.render(
-      <MembreEquipe ident={event.target.id} />,
-      document.getElementById("Equipes")
-    );
-    // let titleBare = document.getElementById("titleBare");
-    // equipes.forEach((elem) => {
-    //   if (elem.id == event.target.id) {
-    //     titleBare.textContent = elem.nomEquipe;
-    //   }
-    // });
+    ReactDOM.render(<MembreLabo ident={ident}/>, document.getElementById("Equipes"));
+    let titleBare = document.getElementById("titleBare");
+    Labos.forEach((elem) => {
+      if (elem.id == event.target.id) {
+        titleBare.textContent = elem.nomLaboratoire;
+      }
+    });
   }
 
   function goBackToEquipe() {
@@ -346,18 +345,15 @@ export default function LaboratoireAdmin() {
     // );
   }
 
-  function ajouterEquipe() {
-    // console.log(responsable);
-    // console.log(equipeAdded);
-    console.log(responsable.value)
+  function ajouterLabo() {
+    console.log(responsable);
     axios
       .post(
-        `http://localhost:8080/FSTBM/Admin/Equipe/AjouterEquipe/${responsable.value}`,
-        equipeAdded
+        `http://localhost:8080/FSTBM/Admin/Laboratoire/addLabo/${responsable.value}`,
+        laboAdded
       )
       .then((response) => {
-        
-        // setEquipes(response.data);
+        setLabos(response.data);
       })
       .catch((error) => {
         console.log("Error : ", error);
@@ -367,14 +363,21 @@ export default function LaboratoireAdmin() {
   function ajouterMembre() {
     axios
       .post(
-        `http://localhost:8080/FSTBM/Admin/Equipe/addSeulMembre/${idEquipeClicked}`,
+        `http://localhost:8080/FSTBM/Admin/Laboratoire/addSeulMembre/${idLaboClicked}`,
         membre
       )
-      .then((response) => {
-
-      }).catch((error)=>{
-        console.log('Error : ',error)
+      .then((response) => {})
+      .catch((error) => {
+        console.log("Error : ", error);
       });
+  }
+
+  function mouseEnteredHandle(event) {
+    event.target.parentElement.style.backgroundColor = "#DDE6ED";
+  }
+
+  function mouseLeavedHandle(event) {
+    event.target.parentElement.style.backgroundColor = "";
   }
 
   return (
@@ -405,11 +408,11 @@ export default function LaboratoireAdmin() {
                 margin: "20px",
                 cursor: "pointer",
               }}
-              onClick={handleOpenAddEquipe}
+              onClick={handleOpenAddLabo}
             />
             <Modal
-              open={openAddEquipe}
-              onClose={handleCloseAddEquipe}
+              open={openAddLabo}
+              onClose={handleCloseAddLabo}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
@@ -443,12 +446,12 @@ export default function LaboratoireAdmin() {
                           <br />
                           <TextField
                             onChange={(e) => {
-                              addEquipe({
-                                ...equipeAdded,
-                                nomEquipe: e.target.value,
+                              addLabo({
+                                ...laboAdded,
+                                nomLaboratoire: e.target.value,
                               });
                             }}
-                            value={equipeAdded.nomEquipe}
+                            value={laboAdded.nomLaboratoire}
                             style={{ width: "500px" }}
                           />
                         </div>
@@ -464,6 +467,7 @@ export default function LaboratoireAdmin() {
                             onChange={(event, newValue) => {
                               setResponsable(newValue);
                             }}
+              
                             options={candidats}
                             sx={{ width: 300 }}
                             renderInput={(params) => <TextField {...params} />}
@@ -478,12 +482,12 @@ export default function LaboratoireAdmin() {
                           <br />
                           <TextField
                             onChange={(e) => {
-                              addEquipe({
-                                ...equipeAdded,
+                              addLabo({
+                                ...laboAdded,
                                 acronyme: e.target.value,
                               });
                             }}
-                            value={equipeAdded.acronyme}
+                            value={laboAdded.acronyme}
                             style={{ width: "300px" }}
                           />
                         </div>
@@ -531,7 +535,7 @@ export default function LaboratoireAdmin() {
                               padding: "15px 80px",
                               marginRight: "20px",
                             }}
-                            onClick={ajouterEquipe}
+                            onClick={ajouterLabo}
                           >
                             Ajouter
                           </Button>
@@ -668,11 +672,11 @@ export default function LaboratoireAdmin() {
               {Labos.map((labo) => (
                 <StyledTableRow
                   style={style}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={mouseEnteredHandle}
+                  onMouseLeave={mouseLeavedHandle}
                   key={labo.id}
-                  className="rowEquipe"
-                  onClick={renderMembreEquipe}
+                  // className="rowEquipe"
+                  onClick={renderMembreLabo}
                 >
                   <StyledTableCell
                     style={{ fontFamily: "Poppins" }}

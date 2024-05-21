@@ -14,7 +14,6 @@ import Paper from "@mui/material/Paper";
 import "../../../style/AdminDashboard.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
-// import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 import { useAutocomplete } from "@mui/base/useAutocomplete";
 import CheckIcon from "@mui/icons-material/Check";
@@ -23,7 +22,6 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import MembreEquipe from "./MembreEquipe";
 import UndoIcon from "@mui/icons-material/Undo";
-import AdminAccueil from "./AdminAccueil";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -374,6 +372,14 @@ export default function EquipeAdmin() {
       });
   }
 
+  function mouseEnteredHandle(event) {
+    event.target.parentElement.style.backgroundColor = "#DDE6ED";
+  }
+
+  function mouseLeavedHandle(event) {
+    event.target.parentElement.style.backgroundColor = "";
+  }
+
   return (
     <div>
       <div
@@ -665,8 +671,8 @@ export default function EquipeAdmin() {
               {equipes.map((equipe) => (
                 <StyledTableRow
                   style={style}
-                  // onMouseEnter={handleMouseEnter}
-                  // onMouseLeave={handleMouseLeave}
+                  onMouseEnter={mouseEnteredHandle}
+                  onMouseLeave={mouseLeavedHandle}
                   key={equipe.id}
                   // className="rowEquipe"
                   onClick={renderMembreEquipe}
