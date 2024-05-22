@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import Accordion from "@mui/material/Accordion";
@@ -8,10 +8,10 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import AjouterTheme from "./ModifierTheme";
+import { Link } from "react-router-dom";
+
 
 export default function RechercheAdmin(props) {
-
-
   const [themes, setThemes] = useState([]);
 
   useEffect(() => {
@@ -37,16 +37,21 @@ export default function RechercheAdmin(props) {
   }
   return (
     <>
-      <div style={{width:"1380px",backgroundColor:"#2d0560"}} className=" h-20 mr-1 bg-slate-200 flex">
-        <div className="h-full w-7" style={{backgroundColor:"#FF5722"}}>
-          
-        </div>
-        <p className="text-3xl pt-5 pl-10 text-white" style={{fontFamily:"Poppins"}}>
-          Les thèmes de recherche 
+      <div
+        style={{ width: "1380px", backgroundColor: "#2d0560" }}
+        className=" h-20 mr-1 bg-slate-200 flex"
+      >
+        <div
+          className="h-full w-7"
+          style={{ backgroundColor: "#FF5722" }}
+        ></div>
+        <p
+          className="text-3xl pt-5 pl-10 text-white"
+          style={{ fontFamily: "Poppins" }}
+        >
+          Les thèmes de recherche
         </p>
-        <div>
-
-        </div>
+        <div></div>
       </div>
       <div className="themes w-full flex justify-center mt-6 overflow-auto">
         <div className="w-11/12 relative z-20">
@@ -83,12 +88,14 @@ export default function RechercheAdmin(props) {
         </div>
       </div>
       <div className="flex justify-end mt-3 mr-14">
-        <a
-          className="cursor-pointer pb-10 underline hover:text-orange-500"
-          onClick={renderAjouterTheme}
-        >
-          Modifier
-        </a>
+        <Link to="/Admin/Recherche/ModifierTheme">
+          <a
+            className="cursor-pointer pb-10 underline hover:text-orange-500"
+            // onClick={renderAjouterTheme}
+          >
+            Modifier
+          </a>
+        </Link>
       </div>
     </>
   );

@@ -23,6 +23,8 @@ import Modal from "@mui/material/Modal";
 import UndoIcon from "@mui/icons-material/Undo";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
 import MembreLabo from "./MembreLabo";
+import { BrowserRouter, Link, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -332,6 +334,7 @@ export default function LaboratoireAdmin() {
         titleBare.textContent = elem.nomLaboratoire;
       }
     });
+    // return ident;
   }
 
   function goBackToEquipe() {
@@ -645,6 +648,8 @@ export default function LaboratoireAdmin() {
       </div>
 
       <div id="Equipes" className="mt-10 flex justify-center">
+        {/* <Routes> */}
+        {/* <Route path="/Laboratoire/membre" element={<MembreLabo ident={idLaboClicked}/>}/> */}
         <TableContainer style={{ width: "1200px" }} component={Paper}>
           <Table sx={{ minWidth: 500 }} aria-label="customized table">
             <TableHead>
@@ -670,6 +675,7 @@ export default function LaboratoireAdmin() {
             </TableHead>
             <TableBody>
               {Labos.map((labo) => (
+                // <Link to="/Laboratoire/membre">
                 <StyledTableRow
                   style={style}
                   onMouseEnter={mouseEnteredHandle}
@@ -701,10 +707,12 @@ export default function LaboratoireAdmin() {
                     {labo.acronyme}
                   </StyledTableCell>
                 </StyledTableRow>
+                // </Link>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        {/* </Routes> */}
       </div>
       <div className="spacer h-44"></div>
     </div>

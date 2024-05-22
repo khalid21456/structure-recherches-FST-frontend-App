@@ -17,6 +17,7 @@ import EvenementAdmin from "./Components/Admin/AdminComponents/EvenementAdmin";
 import SideBar from "./Components/Admin/SideBar";
 import React, { useState, useEffect } from "react";
 import DoctorantSideBar from "./Components/Doctorant/DoctorantSideBar";
+import { BrowserRouter as Router,Route,Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <footer>
         <Footer />
       </footer>
+      
     </>
   );
 }
