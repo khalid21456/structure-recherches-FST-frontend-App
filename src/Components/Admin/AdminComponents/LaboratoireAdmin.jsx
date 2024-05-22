@@ -38,11 +38,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
-  // { title: "The Godfather", year: 1972 },
+  { title: "The Godfather", year: 1972 },
   { title: "The Godfather: Part II", year: 1974 },
   { title: "The Dark Knight", year: 2008 },
   { title: "12 Angry Men", year: 1957 },
   { title: "Schindler's List", year: 1993 },
+  { title: "Pulp Fiction", year: 1994 },
 ];
 const Root = styled("div")(
   ({ theme }) => `
@@ -230,8 +231,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function EquipeAdmin() {
-  const [equipes, setEquipes] = useState([]);
+export default function LaboratoireAdmin() {
+  const [Labos, setLabos] = useState([]);
   const [equipeAdded, addEquipe] = useState({
     nomEquipe: "",
     responsable: {},
@@ -300,19 +301,19 @@ export default function EquipeAdmin() {
   }, []);
 
   useEffect(() => {
-    const fetchDataEquipes = async () => {
+    const fetchDataLabos = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/FSTBM/Admin/Equipe/getAll"
+          "http://localhost:8080/FSTBM/Admin/Laboratoire/getLabos"
         );
-        setEquipes(response.data);
+        setLabos(response.data);
       } catch (error) {
         console.log(error.response.data.message);
-        setEquipes([]);
+        setLabos([]);
       }
     };
 
-    fetchDataEquipes();
+    fetchDataLabos();
   }, []);
 
   const [idEquipeClicked, setIdEquipeClicked] = useState(0);
@@ -326,12 +327,12 @@ export default function EquipeAdmin() {
       <MembreEquipe ident={event.target.id} />,
       document.getElementById("Equipes")
     );
-    let titleBare = document.getElementById("titleBare");
-    equipes.forEach((elem) => {
-      if (elem.id == event.target.id) {
-        titleBare.textContent = elem.nomEquipe;
-      }
-    });
+    // let titleBare = document.getElementById("titleBare");
+    // equipes.forEach((elem) => {
+    //   if (elem.id == event.target.id) {
+    //     titleBare.textContent = elem.nomEquipe;
+    //   }
+    // });
   }
 
   function goBackToEquipe() {
@@ -339,23 +340,24 @@ export default function EquipeAdmin() {
     // ReactDOM.render(
     //     <AdminAccueil/>,document.getElementById("dashboardContent")
     // )
-    ReactDOM.render(
-      <EquipeAdmin />,
-      document.getElementById("dashboardContent")
-    );
+    // ReactDOM.render(
+    //   <EquipeAdmin />,
+    //   document.getElementById("dashboardContent")
+    // );
   }
 
   function ajouterEquipe() {
     // console.log(responsable);
     // console.log(equipeAdded);
-    console.log(responsable.value);
+    console.log(responsable.value)
     axios
       .post(
         `http://localhost:8080/FSTBM/Admin/Equipe/AjouterEquipe/${responsable.value}`,
         equipeAdded
       )
       .then((response) => {
-        setEquipes(response.data);
+        
+        // setEquipes(response.data);
       })
       .catch((error) => {
         console.log("Error : ", error);
@@ -368,9 +370,10 @@ export default function EquipeAdmin() {
         `http://localhost:8080/FSTBM/Admin/Equipe/addSeulMembre/${idEquipeClicked}`,
         membre
       )
-      .then((response) => {})
-      .catch((error) => {
-        console.log("Error : ", error);
+      .then((response) => {
+
+      }).catch((error)=>{
+        console.log('Error : ',error)
       });
   }
 
@@ -390,7 +393,7 @@ export default function EquipeAdmin() {
             style={{ fontFamily: "Poppins" }}
             id="titleBare"
           >
-            Les Equipes
+            Les Laboratoires
           </p>
         </div>
         <div className="flex">
@@ -421,7 +424,7 @@ export default function EquipeAdmin() {
                         fontSize: "30px",
                       }}
                     >
-                      Créer Une Equipe
+                      Créer Un Laboratoire
                     </h1>
                     <img
                       src={require("../../../pictures/fst.png")}
@@ -435,7 +438,7 @@ export default function EquipeAdmin() {
                       <div className="w-full flex justify-between">
                         <div>
                           <label className="text-black font-bold">
-                            Nom de l'équipe
+                            Nom de laboratoire
                           </label>
                           <br />
                           <TextField
@@ -662,36 +665,36 @@ export default function EquipeAdmin() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {equipes.map((equipe) => (
+              {Labos.map((labo) => (
                 <StyledTableRow
                   style={style}
-                  // onMouseEnter={handleMouseEnter}
-                  // onMouseLeave={handleMouseLeave}
-                  key={equipe.id}
-                  // className="rowEquipe"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  key={labo.id}
+                  className="rowEquipe"
                   onClick={renderMembreEquipe}
                 >
                   <StyledTableCell
                     style={{ fontFamily: "Poppins" }}
                     component="th"
                     scope="row"
-                    id={equipe.id}
+                    id={labo.id}
                   >
-                    {equipe.nomEquipe}
+                    {labo.nomLaboratoire}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ fontFamily: "Poppins" }}
                     align="left"
-                    id={equipe.id}
+                    id={labo.id}
                   >
-                    {equipe.responsable.prenom} {equipe.responsable.nom}
+                    {labo.responsable.prenom} {labo.responsable.nom}
                   </StyledTableCell>
                   <StyledTableCell
                     style={{ fontFamily: "Poppins" }}
                     align="left"
-                    id={equipe.id}
+                    id={labo.id}
                   >
-                    {equipe.acronyme}
+                    {labo.acronyme}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

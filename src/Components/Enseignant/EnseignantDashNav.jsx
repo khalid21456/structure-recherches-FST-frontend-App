@@ -25,6 +25,8 @@ import EnseignantAccueil from "./EnseignantComponents/EnseignantAccueil";
 import EnseignantPublication from "./EnseignantComponents/EnseignantPublication";
 import EnseignantEvenement from "./EnseignantComponents/EnseignantEvenement";
 import ListEnseignantPublications from "./EnseignantComponents/ListEnseignantPublications";
+import { useState } from "react";
+import App from "../../App";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -61,7 +63,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
-export default function DashboardNav() {
+export default function DashboardNav({ loginData }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [expanded, setExpanded] = React.useState("panel1");
 
@@ -74,9 +76,28 @@ export default function DashboardNav() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  function Deconnecter() {
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  }
+
+  function handleMenuItemClick(setting) {
+    if (setting === "Déconnecter") {
+      Deconnecter();
+    } else {
+      handleCloseUserMenu();
+    }
+  }
+  const imagePath = `http://localhost:8080/FSTBM/readImages/Profile/${loginData.profile}`;
   return (
     <div className="ml-80">
-      <div className="flex justify-between h-full navDash bg-sky-200 border rounded-lg shadow-md mt-3 mr-16 ml-2">
+      <div
+        className="flex justify-between h-full navDash bg-sky-200 border rounded-lg shadow-md mt-3 mr-16 ml-2"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #1931e3, #0061f4, #0083f6, #00a0ef, #5fb9e5)",
+        }}
+      >
         <div>
           <h1
             style={{ fontFamily: "Noto Sans" }}
@@ -118,8 +139,9 @@ export default function DashboardNav() {
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
-                    alt="Youssef"
-                    src={require("./../../profiles/Mr-ElMourabit.png")}
+                    alt={loginData.nom}
+                    // src={require("./../../profiles/Mr-ElMourabit.png")}
+                    src={imagePath}
                   />
                 </IconButton>
               </Tooltip>
@@ -144,7 +166,7 @@ export default function DashboardNav() {
                 {settings.map((setting) => (
                   <MenuItem
                     key={setting}
-                    onClick={handleCloseUserMenu}
+                    onClick={() => handleMenuItemClick(setting)}
                     sx={{ my: 0 }}
                   >
                     <Typography textAlign="center">{setting}</Typography>

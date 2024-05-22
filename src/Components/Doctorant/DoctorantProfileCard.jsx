@@ -1,10 +1,12 @@
 import React from "react";
 import "./../../style/Doctorant.css";
-export default function DoctorantProfileCard() {
+export default function DoctorantProfileCard({ loginData }) {
+  const imagePath = `http://localhost:8080/FSTBM/readImages/Profile/${loginData.profile}`;
   return (
-    <div className="EnseiCard w-full h-32 flex">
+    <div className="DoctCard w-full h-32 flex">
       <img
-        src={require("../../profiles/Mr-Nachaoui.jpg")}
+        // src={require("../../profiles/Mr-Nachaoui.jpg")}
+        src={imagePath}
         className="w-16 mt-8 ml-4 h-16 rounded-full"
       />
       <div>
@@ -12,7 +14,7 @@ export default function DoctorantProfileCard() {
           style={{ fontFamily: "Poppins", fontSize: "18px" }}
           className=" mt-10 ml-5 text-white"
         >
-          Nachaoui Mourad
+          {loginData.prenom} {loginData.nom}
         </h1>
         <div className="flex ">
           <div

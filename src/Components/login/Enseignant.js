@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import EnseignantSideBar from "../Enseignant/EnseignantSideBar";
 import EnseignantDashNav from "./../Enseignant/EnseignantDashNav.jsx";
 
-export default function Enseignant() {
+export default function Enseignant({ loginData }) {
   console.log("Enseignant.js");
   return (
     <>
       <section className="flex">
         <aside>
-          <EnseignantSideBar />
+          <EnseignantSideBar loginData={loginData} />
         </aside>
         <main>
-          <EnseignantDashNav />
+          <EnseignantDashNav loginData={loginData} />
         </main>
       </section>
     </>

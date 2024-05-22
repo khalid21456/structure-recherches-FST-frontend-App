@@ -4,14 +4,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import EnseignantPublication from "./EnseignantPublication";
 import PublicationDetails from "./PublicationDetails";
-export default function ListEnseignantPublications({ enseignant }) {
+export default function ListEnseignantPublications({ loginData }) {
   const [publications, setPublications] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchDataPublications = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/FSTBM/Enseignant/publicationsByEnseignant/${enseignant.id}`
+          `http://localhost:8080/FSTBM/Enseignant/publicationsByEnseignant/${loginData.id}`
         );
         setPublications(response.data);
         console.log(response.data);
@@ -24,7 +24,7 @@ export default function ListEnseignantPublications({ enseignant }) {
   }, []);
   const renderAddPublication = () => {
     ReactDOM.render(
-      <EnseignantPublication enseignant={enseignant} />,
+      <EnseignantPublication loginData={loginData} />,
       document.getElementById("EnseignantContent")
     );
   };
@@ -88,11 +88,8 @@ export default function ListEnseignantPublications({ enseignant }) {
           Publier
         </button>
         {publications.map((publication) => {
-          {
-            /* const imagePath = require(`E:/pfe/structure-recherches-FST-backend-App/src/main/resources/uploads/Publications/${publication.imagePath}`); */
-          }
-
           const imagePath = `http://localhost:8080/FSTBM/readImages/Publication/${publication.imagePath}`;
+          const imagePathProfile = `http://localhost:8080/FSTBM/readImages/Profile/${loginData.profile}`;
           return (
             <div className="w-full mt-3 h-64 bg-white rounded-md shadow-md flex">
               <div className="w-1/4">
@@ -108,7 +105,8 @@ export default function ListEnseignantPublications({ enseignant }) {
                     <div>
                       <img
                         className="w-14 h-14 rounded-full"
-                        src={require("../../../profiles/Mr-ElMourabit.png")}
+                        // src={require("../../../profiles/Mr-ElMourabit.png")}
+                        src={imagePathProfile}
                       />
                     </div>
                     <div>
@@ -120,7 +118,7 @@ export default function ListEnseignantPublications({ enseignant }) {
                         }}
                         className="ml-3 h-fit"
                       >
-                        Youssef El Mourabit
+                        {loginData.prenom} {loginData.nom}
                       </label>
                       <p className="w-fit ml-3 text-slate-400">
                         Publier le {formatDate(publication.datePub, "/")}

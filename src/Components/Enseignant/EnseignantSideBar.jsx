@@ -8,28 +8,28 @@ import EnseignantPublication from "./EnseignantComponents/EnseignantPublication"
 import EnseignantRecherche from "./EnseignantComponents/EnseignantRecherche";
 import ListEnseignantPublications from "./EnseignantComponents/ListEnseignantPublications";
 
-export default function EnseignantSideBar() {
+export default function EnseignantSideBar({ loginData }) {
   const renderEnseignantAccueil = () => {
     ReactDOM.render(
-      <EnseignantAccueil />,
+      <EnseignantAccueil loginData={loginData} />,
       document.getElementById("EnseignantContent")
     );
   };
   const renderEnseignantRecherche = () => {
     ReactDOM.render(
-      <EnseignantRecherche />,
+      <EnseignantRecherche loginData={loginData} />,
       document.getElementById("EnseignantContent")
     );
   };
   const renderEnseignantEvenement = () => {
     ReactDOM.render(
-      <EnseignantEvenement />,
+      <EnseignantEvenement loginData={loginData} />,
       document.getElementById("EnseignantContent")
     );
   };
   const renderEnseignantPublication = () => {
     ReactDOM.render(
-      <ListEnseignantPublications />,
+      <ListEnseignantPublications loginData={loginData} />,
       document.getElementById("EnseignantContent")
     );
   };
@@ -37,7 +37,7 @@ export default function EnseignantSideBar() {
   return (
     <div className="enseiSideBar-Container w-80 h-full shadow-lg hover:border-r-4 hover:border-r-orange-500 fixed">
       <div className="flex justify-center">
-        <EnseignantProfileCard />
+        <EnseignantProfileCard loginData={loginData} />
       </div>
       <div className="text-white text-2xl h-16 border-b-2 border-b-orange-500">
         <h1 style={{ fontFamily: "Poppins" }} className="pt-4 pl-8">

@@ -1,28 +1,60 @@
 import "./../../../style/EnseignantDashboard.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
-export default function EnseignantAccueil({ enseignant }) {
-  const [publicationsCounter, setPublicationsCounter] = useState();
+import { useEffect, useState, useContext } from "react";
+
+export default function EnseignantAccueil({ loginData }) {
+  const [publicationsCounter, setPublicationsCounter] = useState(null);
   const [recherchesCounter, setRecherchesCounter] = useState();
+  // useEffect(() => {
+  //   const fetchDataCountPublications = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:8080/FSTBM/Enseignant/countPublication/${enseignantData.id}`
+  //       );
+  //       setPublicationsCounter(response.data);
+  //     } catch (error) {
+  //       console.log(error.response.data.message);
+  //       setPublicationsCounter([]);
+  //     }
+  //   };
+
+  //   fetchDataCountPublications();
+  // }, []);
   useEffect(() => {
     const fetchDataCountPublications = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/FSTBM/Enseignant/countPublication/${enseignant.id}`
+          `http://localhost:8080/FSTBM/Enseignant/countPublication/${loginData.id}`
         );
-        setPublicationsCounter(response.data);
+        if (response && response.data) {
+          setPublicationsCounter(response.data);
+        } else {
+          console.error("No data received from the response");
+          setPublicationsCounter(0);
+        }
       } catch (error) {
-        console.log(error.response.data.message);
-        setPublicationsCounter([]);
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          console.log(error.response.data.message);
+        } else {
+          console.error("Error fetching data: ", error.message);
+        }
+        setPublicationsCounter(0);
       }
     };
 
     fetchDataCountPublications();
   }, []);
+  if (publicationsCounter === null) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="px-8" style={{ height: "1800px" }}>
       <div className="mt-8 grid lg:grid-cols-3 gap-16 sm:grid-cols-2">
-        <div className="cardStatistcs rounded overflow-hidden shadow-md relative hover:shadow-lg w-72 h-52 grid grid-cols-1 place-items-center">
+        <div className="cardStatistcsEnsei rounded overflow-hidden shadow-md relative hover:shadow-lg w-72 h-52 grid grid-cols-1 place-items-center">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +76,7 @@ export default function EnseignantAccueil({ enseignant }) {
           </div>
         </div>
 
-        <div className="cardStatistcs rounded overflow-hidden shadow-md relative hover:shadow-lg w-72 h-52 grid grid-cols-1 place-items-center">
+        <div className="cardStatistcsEnsei rounded overflow-hidden shadow-md relative hover:shadow-lg w-72 h-52 grid grid-cols-1 place-items-center">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +96,7 @@ export default function EnseignantAccueil({ enseignant }) {
           </div>
         </div>
 
-        <div className="cardStatistcs rounded overflow-hidden shadow-md relative hover:shadow-lg w-72 h-52 grid grid-cols-1 place-items-center">
+        <div className="cardStatistcsEnsei rounded overflow-hidden shadow-md relative hover:shadow-lg w-72 h-52 grid grid-cols-1 place-items-center">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"

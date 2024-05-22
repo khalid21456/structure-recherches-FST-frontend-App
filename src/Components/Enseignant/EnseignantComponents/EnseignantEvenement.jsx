@@ -192,7 +192,7 @@ export default function EnseignantEvenement() {
           className="text-white font-bold pl-8 py-4 text-xl"
           style={{
             backgroundImage:
-              "linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
+              "linear-gradient(to right, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
           }}
         >
           Demande d'organiser un evenement
@@ -323,7 +323,7 @@ export default function EnseignantEvenement() {
             <Button
               variant="contained"
               style={{
-                backgroundColor: "#574476",
+                backgroundColor: "#061b9a",
                 padding: "12px 45px",
                 marginRight: "20px",
                 fontSize: "17px",

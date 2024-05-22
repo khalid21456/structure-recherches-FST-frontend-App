@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-export default function AddPublication() {
+export default function AddPublication({ loginData }) {
   const titre = useRef();
   const image = useRef();
   const contenu = useRef();
@@ -12,7 +12,7 @@ export default function AddPublication() {
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("unknown.jpg");
   const [files, setFiles] = useState(null);
-  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Doctorant/PublierDoc/${1}`;
+  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Doctorant/PublierDoc/${loginData.id}`;
   const addpublication = (publication) => {
     return axios.post(REST_API_BASE_URL, publication);
   };
@@ -173,7 +173,7 @@ export default function AddPublication() {
           // style={{ backgroundColor: "#25476A" }}
           style={{
             backgroundImage:
-              "linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
+              "linear-gradient(to right, #ff6500, #ff7e00, #ff9600, #ffac00, #ffc100)",
           }}
         >
           Publier une publication
@@ -279,7 +279,7 @@ export default function AddPublication() {
             <Button
               variant="contained"
               style={{
-                backgroundColor: "#2026f1",
+                backgroundColor: "#FF6500",
                 padding: "12px 45px",
                 marginRight: "20px",
                 fontSize: "17px",
@@ -292,7 +292,7 @@ export default function AddPublication() {
             <Button
               variant="outlined"
               style={{
-                borderColor: "#2026f1",
+                borderColor: "#FF6500",
                 color: "#2d0560",
                 padding: "12px 45px",
                 fontSize: "17px",

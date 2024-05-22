@@ -22,6 +22,8 @@ import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./../../style/Doctorant.css";
 import DoctorantPublicationsList from "./DoctorantComponent/DoctorantPublicationsList";
+import { dark } from "@mui/material/styles/createPalette";
+import App from "../../App";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -58,7 +60,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
-export default function DoctorantDashNav() {
+export default function DoctorantDashNav({ loginData }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [expanded, setExpanded] = React.useState("panel1");
 
@@ -71,15 +73,34 @@ export default function DoctorantDashNav() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  function Deconnecter() {
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  }
+
+  function handleMenuItemClick(setting) {
+    if (setting === "Déconnecter") {
+      Deconnecter();
+    } else {
+      handleCloseUserMenu();
+    }
+  }
+  const imagePath = `http://localhost:8080/FSTBM/readImages/Profile/${loginData.profile}`;
   return (
     <div className="ml-80">
-      <div className="flex justify-between h-full navDash bg-sky-200 border rounded-lg shadow-md mt-3 mr-16 ml-2">
+      <div
+        className="flex justify-between h-full navDash border rounded-lg shadow-md mt-3 mr-16 ml-2"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #f4592b, #f58032, #f4a146, #f3be62, #f4d984)",
+        }}
+      >
         <div>
           <h1
             style={{ fontFamily: "Noto Sans" }}
             className="text-2xl font-bold mt-6 ml-10"
           >
-            Dashboard<span style={{ color: "#FF5722" }}>/Enseignant</span>
+            Dashboard<span style={{ color: "white" }}>/Doctorant</span>
           </h1>
         </div>
         <div className="flex items-center">
@@ -114,10 +135,7 @@ export default function DoctorantDashNav() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt="Youssef"
-                    src={require("./../../profiles/Mr-Nachaoui.jpg")}
-                  />
+                  <Avatar alt={loginData.nom} src={imagePath} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -141,7 +159,7 @@ export default function DoctorantDashNav() {
                 {settings.map((setting) => (
                   <MenuItem
                     key={setting}
-                    onClick={handleCloseUserMenu}
+                    onClick={() => handleMenuItemClick(setting)}
                     sx={{ my: 0 }}
                   >
                     <Typography textAlign="center">{setting}</Typography>
@@ -153,11 +171,14 @@ export default function DoctorantDashNav() {
         </div>
       </div>
       <div
-        id="EnseignantContent"
-        className="flex justify-between border rounded-lg shadow-md mt-3 mr-16 ml-2 mb-3 bg-sky-100"
-        style={{ width: "1060px", height: "1500px" }}
+        id="DoctorantContent"
+        className="flex justify-between border rounded-lg shadow-md mt-3 mr-16 ml-2 mb-3"
+        style={{
+          width: "1060px",
+          height: "1500px",
+        }}
       >
-        <DoctorantPublicationsList />
+        <DoctorantPublicationsList loginData={loginData} />
       </div>
     </div>
   );

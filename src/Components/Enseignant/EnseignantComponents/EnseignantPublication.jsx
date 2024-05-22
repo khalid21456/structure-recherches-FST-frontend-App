@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-export default function EnseignantPublication({ enseignant }) {
+export default function EnseignantPublication({ loginData }) {
   const titre = useRef();
   const image = useRef();
   const contenu = useRef();
@@ -11,7 +11,7 @@ export default function EnseignantPublication({ enseignant }) {
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("unknown.jpg");
   const [files, setFiles] = useState(null);
-  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${enseignant.id}`;
+  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/publierEns/${loginData.id}`;
   const addpublication = (publication) => {
     return axios.post(REST_API_BASE_URL, publication);
   };
@@ -170,7 +170,7 @@ export default function EnseignantPublication({ enseignant }) {
           // style={{ backgroundColor: "#25476A" }}
           style={{
             backgroundImage:
-              "linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
+              "linear-gradient(to right, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
           }}
         >
           Publier une publication
@@ -278,7 +278,7 @@ export default function EnseignantPublication({ enseignant }) {
             <Button
               variant="contained"
               style={{
-                backgroundColor: "#574476",
+                backgroundColor: "#061b9a",
                 padding: "12px 45px",
                 marginRight: "20px",
                 fontSize: "17px",

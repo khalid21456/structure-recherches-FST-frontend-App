@@ -1,10 +1,10 @@
-.EnseiCard {
+.DoctCard {
     /* background-color: #25476A; */
-    background-image: linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1);
+    background-image: linear-gradient(to top, #c40c0c, #d43908, #e45605, #f27004, #ff8a08);
 }
-.enseiSideBar-Container {
+.doctSideBar-Container {
     /* background-color: #574476; */
-    background-image: linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1);
+    background-image: linear-gradient(to bottom, #c40c0c, #d43908, #e45605, #f27004, #ff8a08);
     height: 848px;
 }
 .EnseignantDashboard-container {
@@ -15,7 +15,7 @@
 }
 .cardStatistcs {
   /* background-color: #574476; */
-  background-image: linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1);
+  background-image: linear-gradient(to bottom, #c40c0c, #d43908, #e45605, #f27004, #ff8a08);
 }
 .enseignantAccueil {
   width: 1100px;

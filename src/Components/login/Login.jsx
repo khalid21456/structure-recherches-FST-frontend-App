@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import Enseignant from "./Enseignant";
 import Doctorant from "./Doctorant";
@@ -8,8 +8,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [enseignant, setEnseignant] = useState({});
-  const [doctorant, setDoctorant] = useState({});
+
   console.log(email);
   console.log(password);
   console.log(role);
@@ -25,31 +24,28 @@ export default function Login() {
 
   const submitLogin = async () => {
     try {
+      let response;
       if (role === "Enseignant") {
-        const response = await axios.get(
+        response = await axios.get(
           `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
         );
-        const enseignant = response.data;
-        // if (enseignant) {
-        //   ReactDOM.render(<Enseignant />, document.getElementById("root"));
-        // }
+        if (response && response.data) {
+          ReactDOM.render(
+            <Enseignant loginData={response.data} />,
+            document.getElementById("root")
+          );
+        }
       } else if (role === "Doctorant") {
-        const response = await axios.get(
+        response = await axios.get(
           `http://localhost:8080/FSTBM/Login/ConnectDoc/${email}/${password}`
         );
-        const doctorant = response.data;
-        // if (doctorant) {
-        //   ReactDOM.render(<Doctorant />, document.getElementById("root"));
-        // }
-      }
-      //  else if (role === "Admin") {
-      //   const response = await axios.get(`http://localhost:8080/FSTBM/Login/ConnectAdmin/${email}/${password}`);
-      //   const admin = response.data;
-      //   if (admin) {
-      //     ReactDOM.render(<Admin admin={admin} />, document.getElementById("root"));
-      //   }
-      // }
-      else {
+        if (response && response.data) {
+          ReactDOM.render(
+            <Doctorant loginData={response.data} />,
+            document.getElementById("root")
+          );
+        }
+      } else {
         console.error("Invalid role selected");
       }
     } catch (error) {

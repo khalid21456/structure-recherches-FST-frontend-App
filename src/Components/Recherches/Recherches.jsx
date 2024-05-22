@@ -1,8 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 import "../../style/Recherche.css";
 import ThemeCard from "./ThemeCard";
-import themes from "../../data/Themes";
 import axios from "axios";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 window.addEventListener("scroll", () => {
   let image = document.querySelectorAll(".trans");
@@ -32,14 +38,32 @@ window.addEventListener("scroll", () => {
 
 export default function Recherche() {
   const myRef = useRef();
-  const [Themes, setThemes] = useState([]);
 
-  let minHeight = 1700;
-  let heightAdded = Themes.length * 250;
+  const myRef2 = useRef();
+  const myRef3 = useRef();
+  const [Themes, setThemes] = useState([]);
+  const [Laboratoires, setLaboratoires] = useState([]);
+  const [Equipes, setEquipes] = useState([]);
+
+  let minHeight = 2200;
+  let minHeightLabo = 150;
+  let minHeightEquipe = 150;
+  let heightAdded =
+    Themes.length * 250 + Laboratoires.length * 40 + Equipes.length * 40;
   let newHeight = minHeight + heightAdded;
   if (myRef.current) {
     myRef.current.style.height = newHeight + "px";
   }
+
+  if (myRef2.current) {
+    myRef2.current.style.height =
+      minHeightLabo + Laboratoires.length * 40 + "px";
+  }
+
+  if (myRef3.current) {
+    myRef3.current.style.height = minHeightLabo + Equipes.length * 40 + "px";
+  }
+
   useEffect(() => {
     console.log("khalid");
     const fetchDataThemes = async () => {
@@ -57,15 +81,49 @@ export default function Recherche() {
     fetchDataThemes();
   }, []);
 
+  useEffect(() => {
+    console.log("khalid");
+    const fetchDataLaboratoires = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/FSTBM/Admin/Laboratoire/getLabos"
+        );
+        setLaboratoires(response.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+        setLaboratoires([]);
+      }
+    };
+
+    fetchDataLaboratoires();
+  }, []);
+
+  useEffect(() => {
+    console.log("khalid");
+    const fetchDataEquipes = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/FSTBM/Admin/Equipe/getAll"
+        );
+        setEquipes(response.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+        setEquipes([]);
+      }
+    };
+
+    fetchDataEquipes();
+  }, []);
+
   return (
     <div className="Recherche-container" ref={myRef}>
       <div className="presentRecherche">
         <div className="pt-40 pl-24">
           <h1
-            className="Recherche-title text-8xl text-white cursor-default hover:transition-colors w-fit"
+            className="Recherche-title text-7xl text-white cursor-default hover:transition-colors w-fit"
             style={{ fontFamily: "Platypi" }}
           >
-            Recherches
+            Structures de recherches
           </h1>
           <div className="w-40 h-3 bg-yellow-400 mt-5"></div>
           <div className=" text-white pt-4">
@@ -125,6 +183,119 @@ export default function Recherche() {
           </div>
         </div>
       </div>
+      <div ref={myRef2} className="h-44" id="Labos">
+        <div className="flex mt-20 ml-52 max-xl:ml-32">
+          <div
+            style={{ borderLeftWidth: "14px" }}
+            className="h-15 border-l-yellow-400"
+          ></div>
+          <h1
+            style={{ fontFamily: "Roboto" }}
+            className=" text-5xl pl-5 cursor-default"
+          >
+            Les laboratoires
+          </h1>
+        </div>
+        <div id="tableauLabos" className="flex justify-center mt-5">
+          <TableContainer style={{ width: "1200px" }} component={Paper}>
+            <Table sx={{ minWidth: 300 }} aria-label="simple table">
+              <TableHead>
+                <TableRow
+                  style={{ backgroundColor: "#F6F5F2", color: "white" }}
+                >
+                  <TableCell>
+                    <lable style={{ fontSize: "20px" }} className="font-bold">
+                      Intitulé
+                    </lable>
+                  </TableCell>
+                  <TableCell align="left">
+                    <lable style={{ fontSize: "20px" }} className="font-bold">
+                      Responsable
+                    </lable>
+                  </TableCell>
+                  <TableCell align="left">
+                    <lable style={{ fontSize: "20px" }} className="font-bold">
+                      Acronyme
+                    </lable>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Laboratoires.map((labo) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {labo.nomLaboratoire}
+                    </TableCell>
+                    <TableCell align="left">
+                      {labo.responsable.prenom} {labo.responsable.nom}
+                    </TableCell>
+                    <TableCell align="left">{labo.acronyme}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+      </div>
+      <div ref={myRef3} className="h-44" id="Labos">
+        <div className="flex mt-20 ml-52 max-xl:ml-32">
+          <div
+            style={{ borderLeftWidth: "14px" }}
+            className="h-15 border-l-yellow-400"
+          ></div>
+          <h1
+            style={{ fontFamily: "Roboto" }}
+            className=" text-5xl pl-5 cursor-default"
+          >
+            Les Equipes
+          </h1>
+        </div>
+        <div id="tableauLabos" className="flex justify-center mt-5">
+          <TableContainer style={{ width: "1200px" }} component={Paper}>
+            <Table sx={{ minWidth: 300 }} aria-label="simple table">
+              <TableHead>
+                <TableRow
+                  style={{ backgroundColor: "#F6F5F2", color: "white" }}
+                >
+                  <TableCell>
+                    <lable style={{ fontSize: "20px" }} className="font-bold">
+                      Intitulé
+                    </lable>
+                  </TableCell>
+                  <TableCell align="left">
+                    <lable style={{ fontSize: "20px" }} className="font-bold">
+                      Responsable
+                    </lable>
+                  </TableCell>
+                  <TableCell align="left">
+                    <lable style={{ fontSize: "20px" }} className="font-bold">
+                      Acronyme
+                    </lable>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Equipes.map((equipe) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {equipe.nomEquipe}
+                    </TableCell>
+                    <TableCell align="left">
+                      {equipe.responsable.prenom} {equipe.responsable.nom}
+                    </TableCell>
+                    <TableCell align="left">{equipe.acronyme}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+      </div>
+
       <div className="headerA flex mt-20 ml-52 max-xl:ml-32">
         <div
           style={{ borderLeftWidth: "14px" }}

@@ -25,12 +25,14 @@ export default function Navbar() {
     let navs = document.getElementsByTagName("li");
     for (let i = 0; i <= 4; i++) {
       navs[i].className = buttonStyle;
+      navs[i].style.color = "black";
     }
   }
 
   function setStyleButton(event) {
     removeStyleButton();
     event.target.className = clickedButtonStyle;
+    event.target.style.color = "blue";
   }
 
   function showAccueil(event) {
@@ -63,15 +65,32 @@ export default function Navbar() {
     setStyleButton(event);
   }
 
-  window.addEventListener("scroll", () => {
+  // window.addEventListener("scroll", () => {
+  //   let nav = document.getElementsByClassName("nav")[0];
+  //   var navTop = nav.getBoundingClientRect().top;
+  //   if (navTop > -50) {
+  //     nav.classList.add("navbar0");
+  //     nav.classList.remove("navbar");
+  //   } else if (navTop < -50) {
+  //     nav.classList.remove("navbar0");
+  //     nav.classList.add("navbar");
+  //   }
+  // });
+  window.addEventListener("load", () => {
     let nav = document.getElementsByClassName("nav")[0];
-    var navTop = nav.getBoundingClientRect().top;
-    if (navTop > -50) {
-      nav.classList.add("navbar0");
-      nav.classList.remove("navbar");
-    } else if (navTop < -50) {
-      nav.classList.remove("navbar0");
-      nav.classList.add("navbar");
+    if (nav) {
+      window.addEventListener("scroll", () => {
+        var navTop = nav.getBoundingClientRect().top;
+        if (navTop > -50) {
+          nav.classList.add("navbar0");
+          nav.classList.remove("navbar");
+        } else if (navTop < -50) {
+          nav.classList.remove("navbar0");
+          nav.classList.add("navbar");
+        }
+      });
+    } else {
+      console.error("Element with class 'nav' not found.");
     }
   });
 
@@ -90,32 +109,37 @@ export default function Navbar() {
         <ul className="flex justify-between text-xl mr-5 h-14 font-thin">
           <li
             onClick={showAccueil}
-            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md  hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            style={{ color: "black" }}
           >
             Accueil
           </li>
           <li
             onClick={showPublications}
-            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            style={{ color: "black" }}
           >
             Publications
           </li>
           <li
             onClick={showRecherche}
-            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md  hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
             id="searchs"
+            style={{ color: "black" }}
           >
             Recherches
           </li>
           <li
             onClick={showDepartement}
-            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md  hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            style={{ color: "black" }}
           >
             Départements
           </li>
           <li
             onClick={showPropos}
-            className="pt-3 rounded-md text-black hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            className="pt-3 rounded-md hover:text-blue-600 hover:transition-colors hover:border-b-yellow-400 hover:border-b-2 pr-5 pl-5 cursor-pointer"
+            style={{ color: "black" }}
           >
             Propos
           </li>

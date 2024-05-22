@@ -1,19 +1,35 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import DoctorantProfileCard from "./DoctorantProfileCard";
+import DoctorantPublicationList from "./DoctorantComponent/DoctorantPublicationsList";
+import DoctorantAccueil from "./DoctorantComponent/DoctorantAccueil";
 import "./../../style/Doctorant.css";
-export default function DoctorantSideBar() {
+export default function DoctorantSideBar({ loginData }) {
+  const renderDoctorantAccueil = () => {
+    ReactDOM.render(
+      <DoctorantAccueil loginData={loginData} />,
+      document.getElementById("DoctorantContent")
+    );
+  };
+  const renderDoctorantPublication = () => {
+    ReactDOM.render(
+      <DoctorantPublicationList loginData={loginData} />,
+      document.getElementById("DoctorantContent")
+    );
+  };
   return (
-    <div className="enseiSideBar-Container w-80 h-full shadow-lg hover:border-r-4 hover:border-r-orange-500 fixed">
+    <div className="doctSideBar-Container w-80 h-full shadow-lg hover:border-r-4 hover:border-r-blue-500 fixed">
       <div className="flex justify-center">
-        <DoctorantProfileCard />
+        <DoctorantProfileCard loginData={loginData} />
       </div>
-      <div className="text-white text-2xl h-16 border-b-2 border-b-orange-500">
+      <div className="text-white text-2xl h-16 border-b-2 border-b-blue-500">
         <h1 style={{ fontFamily: "Poppins" }} className="pt-4 pl-8">
           General
         </h1>
       </div>
       <nav className="mt-10">
         <button
+          onClick={renderDoctorantAccueil}
           className="w-full"
           //  onClick={renderEnseignantAccueil}
         >
@@ -34,6 +50,7 @@ export default function DoctorantSideBar() {
           </div>
         </button>
         <button
+          onClick={renderDoctorantPublication}
           className="w-full"
           //  onClick={renderEnseignantPublication}
         >

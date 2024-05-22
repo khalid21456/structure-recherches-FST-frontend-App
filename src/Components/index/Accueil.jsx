@@ -8,7 +8,8 @@ import Box from "@mui/material/Box";
 import AccueilSlider from "./AccueilSlider";
 import AccueilMarquee from "./AccueilMarquee";
 import AccueilGalerie from "./AccueilGalerie";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -43,8 +44,71 @@ function a11yProps(index) {
 }
 
 export default function Accueil() {
+  const [enseignantCounter, setEnseignantCounter] = useState(null);
+  const [doctorantCounter, setDoctorantCounter] = useState(null);
   const [value, setValue] = React.useState(0);
+  useEffect(() => {
+    const fetchDataCountPublications = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/FSTBM/Enseignant/AllEnseignant`
+        );
+        if (response && response.data) {
+          setEnseignantCounter(response.data);
+        } else {
+          console.error("No data received from the response");
+          setEnseignantCounter(0);
+        }
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          console.log(error.response.data.message);
+        } else {
+          console.error("Error fetching data: ", error.message);
+        }
+        setEnseignantCounter(0);
+      }
+    };
 
+    fetchDataCountPublications();
+  }, []);
+  useEffect(() => {
+    const fetchDataCountPublications = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/FSTBM/Doctorant/AllDoctorant`
+        );
+        if (response && response.data) {
+          setDoctorantCounter(response.data);
+        } else {
+          console.error("No data received from the response");
+          setDoctorantCounter(0);
+        }
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          console.log(error.response.data.message);
+        } else {
+          console.error("Error fetching data: ", error.message);
+        }
+        setDoctorantCounter(0);
+      }
+    };
+
+    fetchDataCountPublications();
+  }, []);
+  if (enseignantCounter === null) {
+    return <div>Loading...</div>;
+  }
+  if (doctorantCounter === null) {
+    return <div>Loading...</div>;
+  }
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -312,7 +376,7 @@ export default function Accueil() {
                         ></path>
                       </svg>
                       <h2 class="title-font font-medium text-3xl text-white">
-                        30
+                        {enseignantCounter}
                       </h2>
                       <p class="leading-relaxed text-white">Enseignants</p>
                     </div>
@@ -330,7 +394,7 @@ export default function Accueil() {
                         ></path>
                       </svg>
                       <h2 class="title-font font-medium text-3xl text-white">
-                        20
+                        {doctorantCounter}
                       </h2>
                       <p class="leading-relaxed text-white">Doctorants</p>
                     </div>
