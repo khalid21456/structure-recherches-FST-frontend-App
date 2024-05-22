@@ -34,8 +34,9 @@ export default function EnseignantAdmin(props) {
     email: "",
     // labo: "",
     // dateNaissance: "",
+    tele: "",
     dateNaissance: "",
-    profile:"",
+    profile: "",
   });
   const [EnseignantAjouter, showEnseignant] = useState("");
   function AnnulerValues() {
@@ -49,8 +50,6 @@ export default function EnseignantAdmin(props) {
       profile: "",
     });
   }
-
-
 
   useEffect(() => {
     const fetchDataEnseignant = async () => {
@@ -92,13 +91,13 @@ export default function EnseignantAdmin(props) {
     document.getElementById("nom-error").style.visibility = "hidden";
     document.getElementById("prenom-error").style.visibility = "hidden";
     document.getElementById("email-error").style.visibility = "hidden";
-    document.getElementById("labo-error").style.visibility = "hidden";
+    document.getElementById("tele-error").style.visibility = "hidden";
     if (enseignantAdded.email == "") {
       document.getElementById("email-error").style.visibility = "visible";
     }
-    // if (enseignantAdded.labo == "") {
-    //   document.getElementById("labo-error").style.visibility = "visible";
-    // }
+    if (enseignantAdded.tele == "") {
+      document.getElementById("tele-error").style.visibility = "visible";
+    }
     if (enseignantAdded.nom == "") {
       document.getElementById("nom-error").style.visibility = "visible";
     }
@@ -108,17 +107,15 @@ export default function EnseignantAdmin(props) {
     if (
       enseignantAdded.prenom != "" &&
       enseignantAdded.nom != "" &&
-      // enseignantAdded.labo != "" &&
+      enseignantAdded.tele != "" &&
       enseignantAdded.email != ""
     ) {
-
-      if(imageEnseignantName() == "") {
+      if (imageEnseignantName() == "") {
         enseignantAdded.profile = "userUnknown.png";
       } else {
         enseignantAdded.profile = imageEnseignantName();
       }
 
-      
       axios
         .post(
           "http://localhost:8080/FSTBM/Admin/Enseignant/AjouterEnseignant",
@@ -135,7 +132,7 @@ export default function EnseignantAdmin(props) {
       document.getElementById("nom-error").style.visibility = "hidden";
       document.getElementById("prenom-error").style.visibility = "hidden";
       document.getElementById("email-error").style.visibility = "hidden";
-      document.getElementById("labo-error").style.visibility = "hidden";
+      document.getElementById("tele-error").style.visibility = "hidden";
       console.log(document.getElementById("alert"));
       document.getElementById("alert").style.display = "";
       window.scrollTo({
@@ -221,7 +218,7 @@ export default function EnseignantAdmin(props) {
                         style={{ backgroundColor: "#2d0560", color: "white" }}
                         align="left"
                       >
-                        Laboratoire
+                        Contact
                       </TableCell>
                       <TableCell
                         style={{ backgroundColor: "#2d0560", color: "white" }}
@@ -245,7 +242,7 @@ export default function EnseignantAdmin(props) {
                         <TableCell align="left">
                           {enseignant.dateEmbauche.substring(0, 10)}
                         </TableCell>
-                        <TableCell align="left">{enseignant.labo}</TableCell>
+                        <TableCell align="left">{enseignant.tele}</TableCell>
                         <TableCell align="left">
                           <div className="flex">
                             <div style={{ color: "green" }} id={enseignant.id}>
@@ -313,6 +310,8 @@ export default function EnseignantAdmin(props) {
                       ...enseignantAdded,
                       nom: e.target.value,
                     });
+                    document.getElementById("nom-error").style.visibility = "hidden";
+                   
                   }}
                   className="EnseignantField w-72"
                   value={enseignantAdded.nom}
@@ -343,6 +342,7 @@ export default function EnseignantAdmin(props) {
                       ...enseignantAdded,
                       prenom: e.target.value,
                     });
+                    document.getElementById("prenom-error").style.visibility = "hidden";
                   }}
                   className="EnseignantField w-72"
                   value={enseignantAdded.prenom}
@@ -373,6 +373,7 @@ export default function EnseignantAdmin(props) {
                       ...enseignantAdded,
                       email: e.target.value,
                     });
+                    document.getElementById("email-error").style.visibility = "hidden";
                   }}
                   className="EnseignantField w-72"
                   value={enseignantAdded.email}
@@ -397,7 +398,7 @@ export default function EnseignantAdmin(props) {
                     fontSize: "17px",
                   }}
                 >
-                  Laboratoire
+                  Contact
                 </label>
                 <br />
                 <TextField
@@ -407,15 +408,16 @@ export default function EnseignantAdmin(props) {
                   onChange={(e) => {
                     setAddedEnseignant({
                       ...enseignantAdded,
-                      labo: e.target.value,
+                      tele: e.target.value,
                     });
+                    document.getElementById("tele-error").style.visibility = "hidden";
                   }}
-                  value={enseignantAdded.labo}
+                  value={enseignantAdded.tele}
                 />
                 <br />
                 <label
                   style={{ color: "red", visibility: "hidden" }}
-                  id="labo-error"
+                  id="tele-error"
                 >
                   *Ce champ est obligatoitre !
                 </label>
@@ -440,6 +442,7 @@ export default function EnseignantAdmin(props) {
                       ...enseignantAdded,
                       address: e.target.value,
                     });
+                    
                   }}
                 />
                 <br />

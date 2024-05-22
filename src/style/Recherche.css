@@ -39,3 +39,15 @@
 .Theme-Recherches-Container {
     height: 1000px;
 }
+
+.image-back {
+    height: 600px;
+    background-image: url("../pictures/departement-communication.jpg");
+    background-size: cover;
+}
+
+.image-back-labo {
+  height: 600px;
+  background-image: url("../pictures/laboBackground.jpg");
+  background-size: cover;
+}
