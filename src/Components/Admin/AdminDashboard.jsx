@@ -12,6 +12,7 @@ import EquipeAdmin from "./AdminComponents/EquipeAdmin";
 import LaboratoireAdmin from "./AdminComponents/LaboratoireAdmin";
 import RechercheAdmin from "./AdminComponents/RechercheAdmin";
 import ModifierTheme from "./AdminComponents/ModifierTheme"
+import ProfileAdmin from "./ProfileAdmin";
 
 export default function AdminDashboard() {
   return (
@@ -27,6 +28,7 @@ export default function AdminDashboard() {
             <Route path="/Admin/Equipe" element={<EquipeAdmin />} />
             <Route path="/Admin/Laboratoire" element={<LaboratoireAdmin />} />
             <Route path="/Admin/Recherche/ModifierTheme" element={<ModifierTheme/>}/> 
+            <Route path="/Admin/ProfileAdmin" element={<ProfileAdmin/>}/>
           </Routes>
         </div>
       </div>

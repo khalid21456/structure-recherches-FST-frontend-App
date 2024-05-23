@@ -51,3 +51,11 @@
   background-image: url("../pictures/laboBackground.jpg");
   background-size: cover;
 }
+
+.membre-equipe {
+  height:500px;
+}
+
+.equipe-page-container {
+  height: 2500px;
+}

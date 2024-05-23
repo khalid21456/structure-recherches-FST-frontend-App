@@ -90,7 +90,7 @@ export default function DashboardNav({ loginData }) {
   }
   const imagePath = `http://localhost:8080/FSTBM/readImages/Profile/${loginData.profile}`;
   return (
-    <div className="ml-80">
+    <div className="ml-80 media-width-nav">
       <div
         className="flex justify-between h-full navDash bg-sky-200 border rounded-lg shadow-md mt-3 mr-16 ml-2"
         style={{

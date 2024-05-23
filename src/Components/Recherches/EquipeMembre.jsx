@@ -28,6 +28,7 @@ export default function EquipeMembre(props) {
                 <TableRow
                  
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  key={memb.id}
                 >
                   <TableCell component="th" scope="row">
                     {memb.prenom} {memb.nom} 
