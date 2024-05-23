@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import axios from "axios";
 import EvenementDetail from "./EvenementDetail";
 import { render } from "@testing-library/react";
+import BareEnd from "../BareEnd";
 
 function renderEvenementDetail() {
   ReactDom.render(
@@ -29,6 +30,9 @@ export default function EvenementAdmin() {
           Les demandes
         </p>
         <div></div>
+      </div>
+      <div className="h-10">
+
       </div>
       <div className="events w-full flex justify-center">
         <div className="w-9/12">
@@ -229,7 +233,10 @@ export default function EvenementAdmin() {
             </div>
           </div>
         </div>
+        
       </div>
+      <div className="h-20"></div> 
+      {/* <BareEnd/> */}
     </>
   );
 }

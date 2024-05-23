@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
 import App from "../../App";
 import ProfileAdmin from "./ProfileAdmin";
+import { Link } from "react-router-dom";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -62,13 +63,14 @@ export default function DashboardNav() {
 
   function Deconnecter() {
     const root = document.getElementById("root");
-    ReactDOM.render(<App/>,root);
+    ReactDOM.render(<App />, root);
   }
 
   function renderProfileAdmin() {
     ReactDOM.render(
-      <ProfileAdmin/>,document.getElementById("dashboardContent")
-    )
+      <ProfileAdmin />,
+      document.getElementById("dashboardContent")
+    );
   }
 
   return (
@@ -135,22 +137,25 @@ export default function DashboardNav() {
                   <AccordionDetails>
                     <Typography>
                       <ul style={{ fontFamily: "Poppins", fontSize: "15px" }}>
-                        <li onClick={renderProfileAdmin} className="cursor-pointer pl-3 pb-3 pt-4 transition-colors hover:bg-indigo-950 hover:text-white">
-                          Mon Profile
-                        </li>
+                        <Link to="/Admin/ProfileAdmin">
+                          <li
+                            // onClick={renderProfileAdmin}
+                            className="cursor-pointer pl-3 pb-3 pt-4 transition-colors hover:bg-indigo-950 hover:text-white"
+                          >
+                            Mon Profile
+                          </li>
+                        </Link>
                         <li className="pt-4 pl-3 pb-3 cursor-pointer transition-colors hover:bg-indigo-950 hover:text-white">
                           Paramètres
                         </li>
                         <li className="pt-4 pl-3 pb-3 cursor-pointer transition-colors hover:bg-indigo-950 hover:text-white">
                           Aide
                         </li>
-                        <li onClick={Deconnecter} className="pt-4 pl-3 pb-3 cursor-pointer transition-colors hover:bg-indigo-950 hover:text-red-400">
-                          <label
-                            className="cursor-pointer"
-                            
-                          >
-                            Déconnecter
-                          </label>{" "}
+                        <li
+                          onClick={Deconnecter}
+                          className="pt-4 pl-3 pb-3 cursor-pointer transition-colors hover:bg-indigo-950 hover:text-red-400"
+                        >
+                          <label className="cursor-pointer">Déconnecter</label>{" "}
                           <LogoutIcon />
                         </li>
                       </ul>
