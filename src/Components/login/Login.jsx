@@ -34,6 +34,7 @@ export default function Login() {
             <Enseignant loginData={response.data} />,
             document.getElementById("root")
           );
+          console.log(response.data);
         }
       } else if (role === "Doctorant") {
         response = await axios.get(

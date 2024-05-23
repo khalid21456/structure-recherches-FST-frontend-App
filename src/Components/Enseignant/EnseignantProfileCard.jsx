@@ -19,6 +19,7 @@ export default function AdminProfileCard({ loginData }) {
         src={imagePath}
         className="w-16 mt-8 ml-4 h-16 rounded-full"
       />
+      {console.log(imagePath)}
       <div>
         <h1
           style={{ fontFamily: "Poppins", fontSize: "18px" }}
