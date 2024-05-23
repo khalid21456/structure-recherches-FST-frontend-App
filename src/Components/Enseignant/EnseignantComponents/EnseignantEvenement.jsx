@@ -5,7 +5,6 @@ export default function EnseignantEvenement() {
   const titre = useRef();
   const dateDebut = useRef();
   const datefin = useRef();
-  const contenu = useRef();
   const image = useRef();
   const [errors, setErrors] = useState({});
   const [isFormSent, setIsFormSent] = useState(false);
@@ -23,7 +22,6 @@ export default function EnseignantEvenement() {
     const titreValue = titre.current.value;
     const dateDebutValue = dateDebut.current.value;
     const dateFinValue = datefin.current.value;
-    const contenuValue = contenu.current.value;
     const imageValue = image.current.files[0];
     let isFormValide = true;
     if (titreValue.trim() === "") {
@@ -62,28 +60,6 @@ export default function EnseignantEvenement() {
       });
       // isFormValide = false;
     }
-    if (contenuValue.trim() === "") {
-      setErrors((prevState) => {
-        return {
-          ...prevState,
-          ...{ contenu: "Le contenu de publication est vide" },
-        };
-      });
-      isFormValide = false;
-    } else if (contenuValue.length <= 500) {
-      setErrors((prevState) => {
-        return {
-          ...prevState,
-          ...{
-            contenu:
-              "Le contenu de publication il faut depasser 500 character (" +
-              contenuValue.length +
-              "/500)",
-          },
-        };
-      });
-      isFormValide = false;
-    }
     setIsFormValid(isFormValide);
     return isFormValide;
   };
@@ -91,7 +67,6 @@ export default function EnseignantEvenement() {
     titre.current.value = "";
     dateDebut.current.value = "";
     datefin.current.value = "";
-    contenu.current.value = "";
     image.current.value = "";
   };
   const handlChange = (e) => {
@@ -106,7 +81,6 @@ export default function EnseignantEvenement() {
         titre: titre.current.value,
         dateDebut: dateDebut.current.value,
         dateFin: datefin.current.value,
-        eventContent: contenu.current.value,
         imagePath: imagefileName,
         permession: 0,
       };
@@ -246,23 +220,6 @@ export default function EnseignantEvenement() {
                 onChange={handlChange}
               />
               {displayError("dateF")}
-            </div>
-            <div className="mb-4">
-              <label
-                className="block mb-1 font-semibold"
-                style={{ fontSize: "21px", color: "#25476A" }}
-              >
-                Contenu
-              </label>
-              <textarea
-                cols="105"
-                rows="10"
-                id="contenu"
-                className="px-4 py-1 w-[882px] bg-transparent border-2 border-gray-500 rounded-sm hover:border-2 hover:border-sky-400"
-                ref={contenu}
-                onChange={handlChange}
-              ></textarea>
-              {displayError("contenu")}
             </div>
             <div className="mb-4 col-span-2">
               <label

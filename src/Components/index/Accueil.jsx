@@ -8,8 +8,11 @@ import Box from "@mui/material/Box";
 import AccueilSlider from "./AccueilSlider";
 import AccueilMarquee from "./AccueilMarquee";
 import AccueilGalerie from "./AccueilGalerie";
+import "./../../style/Accueil.css";
 import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import axios from "axios";
+import EvenementDetails from "./EvenementDetails";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -46,6 +49,7 @@ function a11yProps(index) {
 export default function Accueil() {
   const [enseignantCounter, setEnseignantCounter] = useState(null);
   const [doctorantCounter, setDoctorantCounter] = useState(null);
+  const [latestEvents, setLatestEvents] = useState(null);
   const [value, setValue] = React.useState(0);
   useEffect(() => {
     const fetchDataCountPublications = async () => {
@@ -103,6 +107,21 @@ export default function Accueil() {
 
     fetchDataCountPublications();
   }, []);
+  useEffect(() => {
+    const fetchDataLatestEvents = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/FSTBM/Enseignant/FindTop3Events`
+        );
+        setLatestEvents(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+        setLatestEvents([]);
+      }
+    };
+    fetchDataLatestEvents();
+  }, []);
   if (enseignantCounter === null) {
     return <div>Loading...</div>;
   }
@@ -112,7 +131,19 @@ export default function Accueil() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const formatDate = (dateString, delimiter = "/") => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}${delimiter}${month}${delimiter}${year}`;
+  };
+  const renderEvenementDetails = (latestEvent) => {
+    ReactDOM.render(
+      <EvenementDetails latestEvent={latestEvent} />,
+      document.getElementById("main")
+    );
+  };
   return (
     <div className="Accueil-Container h-auto mb-[860px]">
       <div className="pb-4 bg-gray-100">
@@ -157,6 +188,64 @@ export default function Accueil() {
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
+              <div className="event">
+                <div className="bg-white rounded-md overflow-hidden shadow-md">
+                  {latestEvents.slice(0, 3).map((latestEvent) => {
+                    const maxWords = 4;
+                    const words = latestEvent.titre.split(" ");
+                    const truncatedTitle =
+                      words.length > maxWords
+                        ? words.slice(0, maxWords).join(" ") + " ..."
+                        : latestEvent.titre;
+                    const imagePath = `http://localhost:8080/FSTBM/readImages/Evenements/${latestEvent.imagePath}`;
+                    return (
+                      <ul className="border-b-1 border-gray-200 my-2 shadow-md">
+                        <li className="bg-gray-100 h-24">
+                          <button
+                            className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative eventCard"
+                            onClick={() => renderEvenementDetails(latestEvent)}
+                          >
+                            <div>
+                              <img
+                                className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
+                                src={imagePath}
+                                title="Brain"
+                              />
+                            </div>
+                            <div>
+                              <span
+                                className="text-gray-950 hover:text-blue-700 font-bold h-full top-9 ml-20 left-44 absolute"
+                                style={{ fontSize: "20px" }}
+                              >
+                                {truncatedTitle}
+                              </span>
+                            </div>
+                            <div>
+                              <span
+                                className="mr-3 text-gray-700 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute"
+                                style={{ fontSize: "16px" }}
+                              >
+                                {formatDate(latestEvent.dateDebut, "/")} -{" "}
+                                {formatDate(latestEvent.dateFin, "/")}
+                              </span>
+                            </div>
+                          </button>
+                        </li>
+                      </ul>
+                    );
+                  })}
+                </div>
+                <div className="mt-6 left-1.5">
+                  <Button
+                    className="hover:text-yellow-400 hover:bg-blue-500"
+                    variant="contained"
+                  >
+                    Voire +{" "}
+                  </Button>
+                </div>
+              </div>
+            </CustomTabPanel>
+            {/* <CustomTabPanel value={value} index={0}>
               <div className="event">
                 <div className="bg-white rounded-md overflow-hidden shadow-md">
                   <ul className="border-b-1 border-gray-400">
@@ -240,7 +329,7 @@ export default function Accueil() {
                   </Button>
                 </div>
               </div>
-            </CustomTabPanel>
+            </CustomTabPanel> */}
             <CustomTabPanel value={value} index={1}>
               <div className="event">
                 <div className="bg-white rounded-md overflow-hidden shadow-md">
