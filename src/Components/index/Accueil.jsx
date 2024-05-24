@@ -111,7 +111,7 @@ export default function Accueil() {
     const fetchDataLatestEvents = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/FSTBM/Enseignant/FindTop3Events`
+          `http://localhost:8080/FSTBM/Enseignant/LatestEvent`
         );
         setLatestEvents(response.data);
         console.log(response.data);
@@ -190,8 +190,8 @@ export default function Accueil() {
             <CustomTabPanel value={value} index={0}>
               <div className="event">
                 <div className="bg-white rounded-md overflow-hidden shadow-md">
-                  {latestEvents.slice(0, 3).map((latestEvent) => {
-                    const maxWords = 4;
+                  {latestEvents.map((latestEvent) => {
+                    const maxWords = 7;
                     const words = latestEvent.titre.split(" ");
                     const truncatedTitle =
                       words.length > maxWords
@@ -202,7 +202,7 @@ export default function Accueil() {
                       <ul className="border-b-1 border-gray-200 my-2 shadow-md">
                         <li className="bg-gray-100 h-24">
                           <button
-                            className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative eventCard"
+                            className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-blue-100"
                             onClick={() => renderEvenementDetails(latestEvent)}
                           >
                             <div>
@@ -245,91 +245,7 @@ export default function Accueil() {
                 </div>
               </div>
             </CustomTabPanel>
-            {/* <CustomTabPanel value={value} index={0}>
-              <div className="event">
-                <div className="bg-white rounded-md overflow-hidden shadow-md">
-                  <ul className="border-b-1 border-gray-400">
-                    <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
-                        <div>
-                          <img
-                            className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
-                            src={require("../../pictures/brain.jpg")}
-                            title="Brain"
-                          />
-                        </div>
-                        <div>
-                          <span className="text-xl text-blue-400 hover:text-blue-700 font-bold h-full top-9 ml-20 left-44 absolute">
-                            La recherche scientifique sur l'examen d'hypothèses{" "}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
-                            Avril 24, 2024
-                          </span>
-                        </div>
-                      </button>
-                    </li>
-                  </ul>
-                  <hr />
-                  <ul className="border-b-1 border-gray-400">
-                    <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
-                        <div>
-                          <img
-                            className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
-                            src={require("../../pictures/brain.jpg")}
-                            title="Brain"
-                          />
-                        </div>
-                        <div>
-                          <span className="text-xl text-blue-500 hover:text-blue-700 font-bold h-full top-9 ml-20 left-44 absolute">
-                            La recherche scientifique sur l'examen d'hypothèses{" "}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
-                            Avril 24, 2024
-                          </span>
-                        </div>
-                      </button>
-                    </li>
-                  </ul>
-                  <hr />
-                  <ul className="border-b-1 border-gray-400">
-                    <li className="bg-gray-100 h-24">
-                      <button className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-gray-500">
-                        <div>
-                          <img
-                            className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
-                            src={require("../../pictures/brain.jpg")}
-                            title="Brain"
-                          />
-                        </div>
-                        <div>
-                          <span className="text-xl text-blue-500 hover:text-blue-700 font-bold h-full top-9 ml-20 left-44 absolute">
-                            La recherche scientifique sur l'examen d'hypothèses{" "}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="mr-3 text-sm text-gray-300 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute">
-                            Avril 24, 2024
-                          </span>
-                        </div>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <div className="mt-6 left-1.5">
-                  <Button
-                    className="hover:text-yellow-400 hover:bg-blue-500"
-                    variant="contained"
-                  >
-                    Voire +{" "}
-                  </Button>
-                </div>
-              </div>
-            </CustomTabPanel> */}
+
             <CustomTabPanel value={value} index={1}>
               <div className="event">
                 <div className="bg-white rounded-md overflow-hidden shadow-md">
