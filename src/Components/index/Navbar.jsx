@@ -145,7 +145,8 @@ export default function Navbar() {
           </li>
           <li
             onClick={ConnecterShow}
-            className="pt-3 text-white bg-blue-600 cursor-pointer hover:transition-colors hover:bg-blue-500 rounded pl-5 pr-5 ml-5"
+            // className="pt-3 text-white bg-blue-600 cursor-pointer hover:transition-colors hover:bg-blue-500 rounded pl-5 pr-5 ml-5"
+            className="pt-3 cursor-pointer hover:transition-colors rounded-3xl pl-5 pr-5 ml-5 border-2 border-blue-700 text-blue-800 font-semibold hover:bg-blue-700 hover:text-white hover:font-semibold"
           >
             <button>Connecter</button>
           </li>

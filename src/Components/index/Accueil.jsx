@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import EvenementDetails from "./EvenementDetails";
+import Recherche from "../Recherches/Recherches";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -49,6 +50,7 @@ function a11yProps(index) {
 export default function Accueil() {
   const [enseignantCounter, setEnseignantCounter] = useState(null);
   const [doctorantCounter, setDoctorantCounter] = useState(null);
+  const [eventsCounter, setEventsCounter] = useState(null);
   const [latestEvents, setLatestEvents] = useState(null);
   const [value, setValue] = React.useState(0);
   useEffect(() => {
@@ -79,6 +81,36 @@ export default function Accueil() {
 
     fetchDataCountPublications();
   }, []);
+
+  useEffect(() => {
+    const fetchDataCountEvents = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/FSTBM/Enseignant/countEvents`
+        );
+        if (response && response.data) {
+          setEventsCounter(response.data);
+        } else {
+          console.error("No data received from the response");
+          setEventsCounter(0);
+        }
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          console.log(error.response.data.message);
+        } else {
+          console.error("Error fetching data: ", error.message);
+        }
+        setEventsCounter(0);
+      }
+    };
+
+    fetchDataCountEvents();
+  }, []);
+
   useEffect(() => {
     const fetchDataCountPublications = async () => {
       try {
@@ -144,12 +176,45 @@ export default function Accueil() {
       document.getElementById("main")
     );
   };
+  function showRecherche(event) {
+    let main = document.getElementById("main");
+    ReactDOM.render(<Recherche />, main);
+  }
   return (
     <div className="Accueil-Container h-auto mb-[860px]">
-      <div className="pb-4 bg-gray-100">
+      {/* <div className="pb-4 bg-gray-100">
         <AccueilSlider />
         <div className="mx-14 bg-yellow-400 mt-5">
           <AccueilMarquee />
+        </div>
+      </div> */}
+      <div className="bg-white flex justify-around">
+        <div className="mt-28 pl-2">
+          <h1
+            className="text-6xl mb-2 text-blue-600 ml-5"
+            style={{ fontFamily: "Reddit Mono, monospace" }}
+          >
+            Les structures de recherche
+          </h1>
+          <div className="w-32 h-3 bg-yellow-400 mb-8 ml-5"></div>
+          <span className="text-2xl text-gray-500 ml-5">
+            Faculté des Sciences et Techniques Beni-Mellal
+          </span>
+          <div className="mt-6 ml-5">
+            <button
+              style={{ fontSize: "19px" }}
+              onClick={showRecherche}
+              className="px-5 py-3 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-3xl"
+            >
+              Structures
+            </button>
+          </div>
+        </div>
+        <div className="">
+          <img
+            src={require("./../../pictures/illustration.jpg")}
+            style={{ height: "650px", width: "700px" }}
+          />
         </div>
       </div>
       <div className="actualites bg-blue-100 pb-20">
@@ -435,7 +500,7 @@ export default function Accueil() {
                         ></path>
                       </svg>
                       <h2 class="title-font font-medium text-3xl text-white">
-                        7
+                        {eventsCounter}
                       </h2>
                       <p class="leading-relaxed text-white">Evenements</p>
                     </div>

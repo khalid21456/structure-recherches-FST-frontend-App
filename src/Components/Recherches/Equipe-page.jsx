@@ -121,17 +121,16 @@ export default function EquipePage(props) {
       <div className="publication-equipe">
         <div className="">
           {publications.map((publication) => (
-           <>
-            <div>mioazjdla</div>
-            <PublicationCard
-              
-              lien={publication.link[2]["@href"]}
-              namePub={publication["prism:publicationName"]}
-              title={publication["dc:title"]}
-              creator={publication["dc:creator"]}
-              datePub={publication["prism:coverDisplayDate"]}
-            />
-            </> 
+            <>
+              <div>mioazjdla</div>
+              <PublicationCard
+                lien={publication.link[2]["@href"]}
+                namePub={publication["prism:publicationName"]}
+                title={publication["dc:title"]}
+                creator={publication["dc:creator"]}
+                datePub={publication["prism:coverDisplayDate"]}
+              />
+            </>
           ))}
         </div>
       </div>
