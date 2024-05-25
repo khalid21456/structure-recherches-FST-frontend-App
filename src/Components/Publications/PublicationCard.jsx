@@ -3,30 +3,10 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 
 export default function PublicationCard(props) {
-  //   const [publications, setPublications] = useState([]);
-
-  //   useEffect(() => {
-  //     const fetchPublications = async () => {
-  //       try {
-  //         const allPublications = [];
-  //         for (const member of props.equipe) {
-  //           const response = await axios.get(
-  //             `http://localhost:8080/FSTBM/scopus/publications?author=${encodeURIComponent(
-  //               member.nom
-  //             )}`
-  //           );
-  //           const memberPublications = response.data["search-results"]?.entry || [];
-  //           allPublications.push(...memberPublications);
-  //         }
-  //         setPublications(allPublications);
-  //         console.log(publications)
-  //       } catch (error) {
-  //         console.error("There was an error fetching the publications!", error);
-  //       }
-  //     };
-
-  //     fetchPublications();
-  //   }, []);
+ 
+  if(props.creator == null) {
+    return <div>Loading</div>
+  }
 
   return (
     <div className="ml-[290px]">
