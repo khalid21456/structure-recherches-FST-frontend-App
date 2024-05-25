@@ -103,7 +103,8 @@ export default function Navbar() {
             style={{ fontFamily: "Roboto" }}
             className="title max-xl:text-xl text-2xl font-bold mt-4 ml-5 cursor-default"
           >
-            Faculté des Sciences et Techniques
+            {/* Faculté des Sciences et Techniques */}
+            Université Sultan Moulay Slimane
           </h1>
         </div>
         <ul className="flex justify-between text-xl mr-5 h-14 font-thin">

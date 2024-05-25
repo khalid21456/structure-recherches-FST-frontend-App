@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import LaboMembre from "./LaboMembre";
 import EquipeMembre from "./EquipeMembre";
@@ -26,14 +26,14 @@ export default function EquipePage(props) {
         );
         setEquipe(response.data);
         equipe.membres.forEach((element) => {
-          Authors.push(element.nom);
+          Authors.push(element.nom); 
         });
         setAuthors(Authors);
-        console.log(authors);
+        // console.log(authors);
 
         const responsePubs = await axios.post(
           "http://localhost:8080/FSTBM/scopus/publications/byAuthors",
-          authors,
+          authors, 
           {
             headers: {
               "Content-type": "application/json",
@@ -42,7 +42,7 @@ export default function EquipePage(props) {
         );
         setPublications(responsePubs.data);
 
-        console.log(responsePubs.data);
+        // console.log(responsePubs.data);
       } catch (error) {
         // console.log(error.response.data.message);
         setEquipe({});
@@ -52,8 +52,28 @@ export default function EquipePage(props) {
     fetchDataEquipe();
   }, []);
 
+  const pubsRef = useRef();
+  const refMembres = useRef();  
+  const myRef = useRef();
+  let minHeight = 2200;
+  let heightMembres = equipe.membres.length * 40;
+  let heightPubs = publications.length * 270;  
+  let heightAdded = heightMembres + heightPubs; 
+  let newHeight = minHeight + heightAdded;
+  if (myRef.current) {
+    myRef.current.style.height = newHeight + "px"
+  }
+  if(pubsRef.current) {
+    pubsRef.current.style.height = heightPubs+"px"
+  }
+  if(refMembres.current) {
+    refMembres.current.style.height = heightMembres+"px"
+  }
+
+
+
   return (
-    <div className="equipe-page-container bg-gray-100">
+    <div ref={myRef} className="equipe-page-container bg-gray-100">
       <div className="image-back">
         <div className="pt-40 pl-24">
           <h1
@@ -103,13 +123,14 @@ export default function EquipePage(props) {
             Membres
           </h1>
         </div>
-
-        <EquipeMembre membres={equipe.membres} />
+        <div>
+          <EquipeMembre membres={equipe.membres} />
+        </div>
       </div>
-      <div style={{ marginLeft: "290px" }} className="flex mt-20 ml-52">
+      <div style={{ marginLeft: "290px" }} className="flex mt-36 ml-52">
         <div
           style={{ borderLeftWidth: "14px" }}
-          className="h-15 border-l-yellow-400"
+          className="h-15 border-l-yellow-400"  
         ></div>
         <h1
           style={{ fontFamily: "Roboto" }}
@@ -119,18 +140,17 @@ export default function EquipePage(props) {
         </h1>
       </div>
       <div className="publication-equipe">
-        <div className="">
+        <div ref={pubsRef} className="">
           {publications.map((publication) => (
-            <>
-              <div>mioazjdla</div>
-              <PublicationCard
-                lien={publication.link[2]["@href"]}
-                namePub={publication["prism:publicationName"]}
-                title={publication["dc:title"]}
-                creator={publication["dc:creator"]}
-                datePub={publication["prism:coverDisplayDate"]}
-              />
-            </>
+
+            <PublicationCard
+              lien={publication.link[2]["@href"]}
+              namePub={publication["prism:publicationName"]}
+              title={publication["dc:title"]}   
+              creator={publication["dc:creator"]}
+              datePub={publication["prism:coverDisplayDate"]}
+              desc={publication["subtypeDescription"]}
+            />
           ))}
         </div>
       </div>
