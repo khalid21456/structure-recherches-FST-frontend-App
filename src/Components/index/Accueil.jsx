@@ -188,7 +188,7 @@ export default function Accueil() {
           <AccueilMarquee />
         </div>
       </div> */}
-      <div className="bg-white flex justify-around">
+      <div className="bg-white flex justify-around shadow-xl">
         <div className="mt-28 pl-2">
           <h1
             className="text-6xl mb-2 text-blue-600 ml-5"
