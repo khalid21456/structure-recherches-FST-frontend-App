@@ -188,11 +188,17 @@ export default function Accueil() {
           <AccueilMarquee />
         </div>
       </div> */}
+<<<<<<< HEAD
       <div className="bg-white flex justify-around shadow-xl">
         <div className="mt-28 pl-2">
+=======
+      <div className="bg-white flex justify-around h-[700px]">
+        <div className="mt-32 pl-2">
+>>>>>>> c79c25724a9642e40b4c5c4c385608018fa1f464
           <h1
-            className="text-6xl mb-2 text-blue-600 ml-5"
-            style={{ fontFamily: "Reddit Mono, monospace" }}
+            className="text-7xl mb-2 text-blue-600 ml-5 max-xl:text-[50px]"
+            // style={{ fontFamily: "Reddit Mono, monospace" }}
+            style={{ fontFamily: "Arimo",fontWeight:"bold" }}
           >
             Les structures de recherche
           </h1>
@@ -200,13 +206,20 @@ export default function Accueil() {
           <span className="text-2xl text-gray-500 ml-5">
             Faculté des Sciences et Techniques Beni-Mellal
           </span>
-          <div className="mt-6 ml-5">
+          <div className="mt-6 ml-5 flex">
             <button
               style={{ fontSize: "19px" }}
               onClick={showRecherche}
-              className="px-5 py-3 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-3xl"
+              className="px-5 mr-7 py-3 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-3xl"
             >
               Structures
+            </button>
+            <button
+              style={{ fontSize: "19px" }}
+              // onClick={showRecherche}
+              className="px-5 py-3 border border-blue-600 bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-semibold rounded-3xl"
+            >
+              Connecter
             </button>
           </div>
         </div>

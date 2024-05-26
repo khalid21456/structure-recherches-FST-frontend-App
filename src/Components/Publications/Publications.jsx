@@ -7,7 +7,6 @@ export default function Publications() {
 
     return(
         <div className="Publications-container">
-            <PublicationCard/>
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom"
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,10 +7,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import ProfileRech from "./ProfileRech";
 
 export default function EquipeMembre(props) {
 
 
+  function renderProfile(event) {
+    ReactDOM.render(
+      <ProfileRech ident={event.target.parentElement.id} />,document.getElementById("main")
+    )
+  }
 
   return (
     <div className="w-2/3 " style={{ marginLeft: "290px" }}>
@@ -26,9 +33,10 @@ export default function EquipeMembre(props) {
             <TableBody>
               {props.membres.map((memb) => (
                 <TableRow
-                 
+                  onClick={renderProfile}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   key={memb.id}
+                  id={memb.nom}
                 >
                   <TableCell component="th" scope="row">
                     {memb.prenom} {memb.nom} 

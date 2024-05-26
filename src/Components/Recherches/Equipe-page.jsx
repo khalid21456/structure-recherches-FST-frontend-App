@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import LaboMembre from "./LaboMembre";
 import EquipeMembre from "./EquipeMembre";
 import PublicationCard from "../Publications/PublicationCard";
 import { Public } from "@mui/icons-material";
-
+import swr from "swr"
 export default function EquipePage(props) {
   const [equipe, setEquipe] = useState({
     nomEquipe: "",
@@ -13,47 +13,84 @@ export default function EquipePage(props) {
     membres: [],
   });
 
+
   const [authors, setAuthors] = useState([]);
   const Authors = [];
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const [publications, setPublications] = useState([]);
 
+  // const fetchPubs = async () => { 
+  //   return fetch("http://localhost:8080/FSTBM/scopus/publications?author=Afraites") 
+  //           .then((res) => res.json()) 
+  //           .then((d) => setPublications(d)) 
+  //   }
+    
+
+
   useEffect(() => {
     const fetchDataEquipe = async () => {
+      setLoading(true);
+      setError(null);
       try {
         const response = await axios.get(
           `http://localhost:8080/FSTBM/Admin/Equipe/getById/${props.ident}`
         );
         setEquipe(response.data);
-        equipe.membres.forEach((element) => {
-          Authors.push(element.nom);
-        });
-        setAuthors(Authors);
-        console.log(authors);
-
-        const responsePubs = await axios.post(
-          "http://localhost:8080/FSTBM/scopus/publications/byAuthors",
-          authors,
-          {
-            headers: {
-              "Content-type": "application/json",
-            },
-          }
-        );
-        setPublications(responsePubs.data);
-
-        console.log(responsePubs.data);
+       
+        fetch("http://localhost:8080/FSTBM/scopus/publications?author=Afraites")
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data);
+            setPublications(data);
+          });
       } catch (error) {
-        // console.log(error.response.data.message);
+        setError('There was an error fetching the publications. Please try again later.');
         setEquipe({});
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchDataEquipe();
   }, []);
 
+  
+
+
+
+  const pubsRef = useRef();
+  const refMembres = useRef();
+  const myRef = useRef();
+  let minHeight = 2200;
+  let heightMembres = equipe.membres.length * 40;
+  let heightPubs = publications.length * 260;
+  let heightAdded = heightMembres + heightPubs;
+  let newHeight = minHeight + heightAdded;
+
+
+  // if (publications.length == 0) {
+  //   return <div>Loading...</div>;
+  // }
+
+  if (error) {
+    return <div>{error}</div>;
+  } 
+  if (myRef.current) {
+    myRef.current.style.height = newHeight + "px";
+  }
+  if (pubsRef.current) {
+    pubsRef.current.style.height = heightPubs + "px";
+  }
+  if (refMembres.current) {
+    refMembres.current.style.height = heightMembres + "px";
+  }
+
   return (
-    <div className="equipe-page-container bg-gray-100">
+    <div ref={myRef} className="equipe-page-container bg-gray-100 h-auto">
       <div className="image-back">
         <div className="pt-40 pl-24">
           <h1
@@ -103,10 +140,11 @@ export default function EquipePage(props) {
             Membres
           </h1>
         </div>
-
-        <EquipeMembre membres={equipe.membres} />
+        <div>
+          <EquipeMembre membres={equipe.membres} />
+        </div>
       </div>
-      <div style={{ marginLeft: "290px" }} className="flex mt-20 ml-52">
+      <div style={{ marginLeft: "290px" }} className="flex mt-36 ml-52">
         <div
           style={{ borderLeftWidth: "14px" }}
           className="h-15 border-l-yellow-400"
@@ -117,22 +155,27 @@ export default function EquipePage(props) {
         >
           Publications
         </h1>
+        {/* <button
+          onClick={renderPublication}
+          className="ml-10 border bg-white hover:bg-yellow-300 transition-colors rounded-lg px-6 "
+        >
+          Afficher le publications
+        </button> */}
       </div>
-      <div className="publication-equipe">
-        <div className="">
-          {publications.map((publication) => (
-            <>
-              <div>mioazjdla</div>
-              <PublicationCard
-                lien={publication.link[2]["@href"]}
-                namePub={publication["prism:publicationName"]}
-                title={publication["dc:title"]}
-                creator={publication["dc:creator"]}
-                datePub={publication["prism:coverDisplayDate"]}
-              />
-            </>
+        <div ref={pubsRef} className="">
+        {/* <div className=""> */}
+          {publications.map((publication,index) => (
+            <PublicationCard
+              key={index}
+              lien={publication.link[2]["@href"]}
+              namePub={publication["prism:publicationName"]}
+              title={publication["dc:title"]}
+              creator={publication["dc:creator"]}
+              datePub={publication["prism:coverDisplayDate"]}
+              desc={publication["subtypeDescription"]}
+            />
           ))}
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );
