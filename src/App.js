@@ -31,7 +31,7 @@ function App() {
           <Accueil />
         </main>
       </section>
-      <footer>
+      <footer className="footer">
         <Footer />
       </footer>
       

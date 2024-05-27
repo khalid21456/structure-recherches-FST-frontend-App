@@ -14,7 +14,7 @@ export default function EquipeMembre(props) {
 
   function renderProfile(event) {
     ReactDOM.render(
-      <ProfileRech ident={event.target.parentElement.children[0].textContent} nom={event.target.parentElement.id} />,document.getElementById("main")
+      <ProfileRech nomMembre={event.target.parentElement.children[0].textContent} ident={event.target.parentElement.id} />,document.getElementById("main")
     )
   }
 
@@ -46,12 +46,12 @@ export default function EquipeMembre(props) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   key={memb.id}
                   className={memb.id}
-                  id={memb.nom}
+                  id={memb.id}
                   onMouseEnter={mouseEnteredHandle}
                   onMouseLeave={mouseLeavedHandle}
                   style={{cursor:"pointer"}}
                 >
-                  <div className="hidden">{memb.id}</div>
+                  <div className="hidden">{memb.nom},{memb.prenom.charAt(0)}</div>
                   <TableCell component="th" scope="row">
                     {memb.prenom} {memb.nom} 
                   </TableCell>

@@ -9,9 +9,9 @@ export default function PublicationCard(props) {
   }
 
   return (
-    <div>
+    <div className="w-[1170px]">
     {/* <div className="ml-[290px]"> */}
-      <div className="pubCard mt-7 w-4/5 h-[250px] bg-white rounded-md shadow-md">
+      <div className="pubCard mt-7 w-full h-[250px] bg-white rounded-md shadow-md">
         <p className="pl-5 pt-3">{props.desc}</p>
         <div className="w-11/12 ml-5 mt-5">
           <h1 style={{ fontFamily: "Platypi" }} className="text-2xl">

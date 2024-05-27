@@ -125,8 +125,9 @@ export default function Recherche() {
       // behavior: "smooth",
     });
     ReactDOM.render(
-      <EquipePage ident={event.target.parentElement.id}/>,document.getElementById("main")
+      <EquipePage nomRespo={event.target.parentElement.children[0].textContent} ident={event.target.parentElement.id}/>,document.getElementById("main")
     )
+    // console.log(event.target.parentElement.children[0].textContent);
   }
 
   function renderLaboPage(event) {
@@ -328,6 +329,7 @@ export default function Recherche() {
                     onMouseLeave={mouseLeavedHandle}
                     key={equipe.id}
                   >
+                    <div className="hidden">{equipe.responsable.nom},{equipe.responsable.prenom.charAt(0)}</div>
                     <TableCell component="th" scope="row">
                       {equipe.nomEquipe}
                     </TableCell>
