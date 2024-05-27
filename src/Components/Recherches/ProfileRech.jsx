@@ -13,7 +13,9 @@ export default function ProfileRech(props) {
         // );
         // setEnseignant(response.data);
         // console.log(enseignant)
-        fetch("http://localhost:8080/FSTBM/scopus/publications?author=Bouarich,A")
+        fetch(
+          "http://localhost:8080/FSTBM/scopus/publications?author=Bouarich,A"
+        )
           .then((res) => {
             return res.json();
           })
@@ -30,21 +32,18 @@ export default function ProfileRech(props) {
   }, []);
 
   return (
-        <div className="">
-            
-            {
-                
-            publications.map((publication,index) => (
-            <PublicationCard
-              key={index}
-              lien={publication.link[2]["@href"]}
-              namePub={publication["prism:publicationName"]}
-              title={publication["dc:title"]}
-              creator={publication["dc:creator"]}
-              datePub={publication["prism:coverDisplayDate"]}
-              desc={publication["subtypeDescription"]}
-            />
-          ))}
-        </div>
-  )
+    <div className="">
+      {publications.map((publication, index) => (
+        <PublicationCard
+          key={index}
+          lien={publication.link[2]["@href"]}
+          namePub={publication["prism:publicationName"]}
+          title={publication["dc:title"]}
+          creator={publication["dc:creator"]}
+          datePub={publication["prism:coverDisplayDate"]}
+          desc={publication["subtypeDescription"]}
+        />
+      ))}
+    </div>
+  );
 }
