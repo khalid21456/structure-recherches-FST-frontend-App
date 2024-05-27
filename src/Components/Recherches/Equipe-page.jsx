@@ -4,7 +4,7 @@ import LaboMembre from "./LaboMembre";
 import EquipeMembre from "./EquipeMembre";
 import PublicationCard from "../Publications/PublicationCard";
 import { Public } from "@mui/icons-material";
-import swr from "swr"
+// import swr from "swr";
 export default function EquipePage(props) {
   const [equipe, setEquipe] = useState({
     nomEquipe: "",
@@ -13,7 +13,6 @@ export default function EquipePage(props) {
     membres: [],
   });
 
-
   const [authors, setAuthors] = useState([]);
   const Authors = [];
   const [loading, setLoading] = useState(false);
@@ -21,13 +20,11 @@ export default function EquipePage(props) {
 
   const [publications, setPublications] = useState([]);
 
-  // const fetchPubs = async () => { 
-  //   return fetch("http://localhost:8080/FSTBM/scopus/publications?author=Afraites") 
-  //           .then((res) => res.json()) 
-  //           .then((d) => setPublications(d)) 
+  // const fetchPubs = async () => {
+  //   return fetch("http://localhost:8080/FSTBM/scopus/publications?author=Afraites")
+  //           .then((res) => res.json())
+  //           .then((d) => setPublications(d))
   //   }
-    
-
 
   useEffect(() => {
     const fetchDataEquipe = async () => {
@@ -38,7 +35,7 @@ export default function EquipePage(props) {
           `http://localhost:8080/FSTBM/Admin/Equipe/getById/${props.ident}`
         );
         setEquipe(response.data);
-       
+
         fetch("http://localhost:8080/FSTBM/scopus/publications?author=Afraites")
           .then((res) => {
             return res.json();
@@ -48,7 +45,9 @@ export default function EquipePage(props) {
             setPublications(data);
           });
       } catch (error) {
-        setError('There was an error fetching the publications. Please try again later.');
+        setError(
+          "There was an error fetching the publications. Please try again later."
+        );
         setEquipe({});
       } finally {
         setLoading(false);
@@ -57,10 +56,6 @@ export default function EquipePage(props) {
 
     fetchDataEquipe();
   }, []);
-
-  
-
-
 
   const pubsRef = useRef();
   const refMembres = useRef();
@@ -71,14 +66,13 @@ export default function EquipePage(props) {
   let heightAdded = heightMembres + heightPubs;
   let newHeight = minHeight + heightAdded;
 
-
   // if (publications.length == 0) {
   //   return <div>Loading...</div>;
   // }
 
   if (error) {
     return <div>{error}</div>;
-  } 
+  }
   if (myRef.current) {
     myRef.current.style.height = newHeight + "px";
   }
@@ -162,19 +156,19 @@ export default function EquipePage(props) {
           Afficher le publications
         </button> */}
       </div>
-        <div ref={pubsRef} className="">
+      <div ref={pubsRef} className="">
         {/* <div className=""> */}
-          {publications.map((publication,index) => (
-            <PublicationCard
-              key={index}
-              lien={publication.link[2]["@href"]}
-              namePub={publication["prism:publicationName"]}
-              title={publication["dc:title"]}
-              creator={publication["dc:creator"]}
-              datePub={publication["prism:coverDisplayDate"]}
-              desc={publication["subtypeDescription"]}
-            />
-          ))}
+        {publications.map((publication, index) => (
+          <PublicationCard
+            key={index}
+            lien={publication.link[2]["@href"]}
+            namePub={publication["prism:publicationName"]}
+            title={publication["dc:title"]}
+            creator={publication["dc:creator"]}
+            datePub={publication["prism:coverDisplayDate"]}
+            desc={publication["subtypeDescription"]}
+          />
+        ))}
         {/* </div> */}
       </div>
     </div>

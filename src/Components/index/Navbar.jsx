@@ -7,6 +7,7 @@ import Recherche from "../Recherches/Recherches";
 import Publications from "../Publications/Publications";
 import "../../style/Publication.css";
 import themes from "../../data/Themes";
+import LoginForm from "../login/LoginForm";
 
 export default function Navbar() {
   let buttonStyle =
@@ -15,10 +16,15 @@ export default function Navbar() {
     "pt-3 rounded-md text-blue-600  pr-5 pl-5 cursor-pointer";
 
   let rechercheHeightStrikeBool = true;
+  // function ConnecterShow() {
+  //   let root = document.getElementById("root");
+  //   ReactDOM.render(<LoginForm />, root);
+  //   // removeStyleButton();
+  // }
   function ConnecterShow() {
     let main = document.getElementById("main");
-    ReactDOM.render(<Login />, main);
-    removeStyleButton();
+    ReactDOM.render(<LoginForm />, main);
+    // removeStyleButton();
   }
 
   function removeStyleButton() {
@@ -147,7 +153,7 @@ export default function Navbar() {
           <li
             onClick={ConnecterShow}
             // className="pt-3 text-white bg-blue-600 cursor-pointer hover:transition-colors hover:bg-blue-500 rounded pl-5 pr-5 ml-5"
-            className="pt-3 cursor-pointer hover:transition-colors rounded-3xl pl-5 pr-5 ml-5 border-2 border-blue-700 text-blue-800 font-semibold hover:bg-blue-700 hover:text-white hover:font-semibold"
+            className="pt-3 cursor-pointer hover:transition-colors rounded-3xl pl-5 pr-5 ml-5 border border-blue-700 text-blue-800 font-semibold hover:bg-blue-700 hover:text-white hover:font-semibold"
           >
             <button>Connecter</button>
           </li>

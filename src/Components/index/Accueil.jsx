@@ -160,6 +160,9 @@ export default function Accueil() {
   if (doctorantCounter === null) {
     return <div>Loading...</div>;
   }
+  if (eventsCounter === null) {
+    return <div>Loading...</div>;
+  }
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -182,45 +185,37 @@ export default function Accueil() {
   }
   return (
     <div className="Accueil-Container h-auto mb-[860px]">
-      {/* <div className="pb-4 bg-gray-100">
-        <AccueilSlider />
-        <div className="mx-14 bg-yellow-400 mt-5">
-          <AccueilMarquee />
-        </div>
-      </div> */}
-<<<<<<< HEAD
       <div className="bg-white flex justify-around shadow-xl">
         <div className="mt-28 pl-2">
-=======
-      <div className="bg-white flex justify-around h-[700px]">
-        <div className="mt-32 pl-2">
->>>>>>> c79c25724a9642e40b4c5c4c385608018fa1f464
-          <h1
-            className="text-7xl mb-2 text-blue-600 ml-5 max-xl:text-[50px]"
-            // style={{ fontFamily: "Reddit Mono, monospace" }}
-            style={{ fontFamily: "Arimo",fontWeight:"bold" }}
-          >
-            Les structures de recherche
-          </h1>
-          <div className="w-32 h-3 bg-yellow-400 mb-8 ml-5"></div>
-          <span className="text-2xl text-gray-500 ml-5">
-            Faculté des Sciences et Techniques Beni-Mellal
-          </span>
-          <div className="mt-6 ml-5 flex">
-            <button
-              style={{ fontSize: "19px" }}
-              onClick={showRecherche}
-              className="px-5 mr-7 py-3 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-3xl"
+          {/* <div className="bg-white flex justify-around h-[700px]"> */}
+          <div className="mt-32 pl-2">
+            <h1
+              className="text-7xl mb-2 text-blue-600 ml-5 max-xl:text-[50px]"
+              // style={{ fontFamily: "Reddit Mono, monospace" }}
+              style={{ fontFamily: "Arimo", fontWeight: "bold" }}
             >
-              Structures
-            </button>
-            <button
-              style={{ fontSize: "19px" }}
-              // onClick={showRecherche}
-              className="px-5 py-3 border border-blue-600 bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-semibold rounded-3xl"
-            >
-              Connecter
-            </button>
+              Les structures de recherche
+            </h1>
+            <div className="w-32 h-3 bg-yellow-400 mb-8 ml-5"></div>
+            <span className="text-2xl text-gray-500 ml-5">
+              Faculté des Sciences et Techniques Beni-Mellal
+            </span>
+            <div className="mt-6 ml-5 flex">
+              <button
+                style={{ fontSize: "19px" }}
+                onClick={showRecherche}
+                className="px-5 mr-7 py-3 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-3xl"
+              >
+                Structures
+              </button>
+              <button
+                style={{ fontSize: "19px" }}
+                // onClick={showRecherche}
+                className="px-5 py-3 border border-blue-600 bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-semibold rounded-3xl"
+              >
+                Connecter
+              </button>
+            </div>
           </div>
         </div>
         <div className="">
@@ -229,6 +224,7 @@ export default function Accueil() {
             style={{ height: "650px", width: "700px" }}
           />
         </div>
+        {/* </div> */}
       </div>
       <div className="actualites bg-blue-100 pb-20">
         <div className="pt-20 pl-24 pb-10">
@@ -268,50 +264,53 @@ export default function Accueil() {
             <CustomTabPanel value={value} index={0}>
               <div className="event">
                 <div className="bg-white rounded-md overflow-hidden shadow-md">
-                  {latestEvents.map((latestEvent) => {
-                    const maxWords = 7;
-                    const words = latestEvent.titre.split(" ");
-                    const truncatedTitle =
-                      words.length > maxWords
-                        ? words.slice(0, maxWords).join(" ") + " ..."
-                        : latestEvent.titre;
-                    const imagePath = `http://localhost:8080/FSTBM/readImages/Evenements/${latestEvent.imagePath}`;
-                    return (
-                      <ul className="border-b-1 border-gray-200 my-2 shadow-md">
-                        <li className="bg-gray-100 h-24">
-                          <button
-                            className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-blue-100"
-                            onClick={() => renderEvenementDetails(latestEvent)}
-                          >
-                            <div>
-                              <img
-                                className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
-                                src={imagePath}
-                                title="Brain"
-                              />
-                            </div>
-                            <div>
-                              <span
-                                className="text-gray-950 hover:text-blue-700 font-bold h-full top-9 ml-20 left-44 absolute"
-                                style={{ fontSize: "20px" }}
-                              >
-                                {truncatedTitle}
-                              </span>
-                            </div>
-                            <div>
-                              <span
-                                className="mr-3 text-gray-700 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute"
-                                style={{ fontSize: "16px" }}
-                              >
-                                {formatDate(latestEvent.dateDebut, "/")} -{" "}
-                                {formatDate(latestEvent.dateFin, "/")}
-                              </span>
-                            </div>
-                          </button>
-                        </li>
-                      </ul>
-                    );
-                  })}
+                  {latestEvents &&
+                    latestEvents.map((latestEvent) => {
+                      const maxWords = 7;
+                      const words = latestEvent.titre.split(" ");
+                      const truncatedTitle =
+                        words.length > maxWords
+                          ? words.slice(0, maxWords).join(" ") + " ..."
+                          : latestEvent.titre;
+                      const imagePath = `http://localhost:8080/FSTBM/readImages/Evenements/${latestEvent.imagePath}`;
+                      return (
+                        <ul className="border-b-1 border-gray-200 my-2 shadow-md">
+                          <li className="bg-gray-100 h-24">
+                            <button
+                              className="hover:bg-yellow-400 py-6 w-full h-full flex justify-between relative bg-blue-100"
+                              onClick={() =>
+                                renderEvenementDetails(latestEvent)
+                              }
+                            >
+                              <div>
+                                <img
+                                  className="w-1/6 h-full top-0 left-0 absolute object-cove shadow-lg"
+                                  src={imagePath}
+                                  title="Brain"
+                                />
+                              </div>
+                              <div>
+                                <span
+                                  className="text-gray-950 hover:text-blue-700 font-bold h-full top-9 ml-20 left-44 absolute"
+                                  style={{ fontSize: "20px" }}
+                                >
+                                  {truncatedTitle}
+                                </span>
+                              </div>
+                              <div>
+                                <span
+                                  className="mr-3 text-gray-700 hover:text-blue-600 font-semibold h-full top-10 ml-20 right-0 absolute"
+                                  style={{ fontSize: "16px" }}
+                                >
+                                  {formatDate(latestEvent.dateDebut, "/")} -{" "}
+                                  {formatDate(latestEvent.dateFin, "/")}
+                                </span>
+                              </div>
+                            </button>
+                          </li>
+                        </ul>
+                      );
+                    })}
                 </div>
                 <div className="mt-6 left-1.5">
                   <Button
@@ -414,8 +413,8 @@ export default function Accueil() {
       </div>
       {/* Statistics Section */}
       {/* <!--Start Background Animation Body--> */}
-      <div class="area h-2/3">
-        <ul class="circles">
+      <div className="area h-2/3">
+        <ul className="circles">
           <li></li>
           <li></li>
           <li></li>

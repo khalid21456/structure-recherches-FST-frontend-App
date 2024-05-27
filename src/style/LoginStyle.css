@@ -1,0 +1,150 @@
+.mainContainerLogin {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+.wave {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.containerLogin {
+    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 7rem;
+  padding: 0 2rem;
+}
+.img {
+    display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.img img{
+    width: 500px;
+  margin-top: 100px;
+}
+.login-content {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    left: 525px;
+    width: 40%;
+    margin-top: 70px;
+    position: absolute;
+}   
+.formLogin {
+    width: 100%;
+}
+.formLogin h1 {
+    font-size: 2.5rem;
+  text-transform: uppercase;
+  margin: 15px 0;
+  color: #333;
+}
+.input-divLogin {
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 20px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+
+}
+.input-divLogin.focus .i i {
+    color: rgba(4, 12, 248, 0.811);
+}
+.input-divLogin.user {
+    margin-top: 0;
+}
+.input-divLogin.pass {
+    margin-bottom: 4px;
+}
+.i {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input-divLogin > div{
+    position: relative;
+  height: 45px;
+}
+.input-divLogin > div h5 {
+    position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 18px;
+  display: none;
+  transition: .3s;
+}
+.inputLogin {
+    position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0.5rem 0.7rem;
+  font-size: 1.2rem;
+  color: #555;
+}
+.spanLogin {
+    display: block;
+  text-align: right;
+  text-decoration: none;
+  color: #999;
+  font-size: 0.9rem;
+  transition: .3s;
+}
+.spanLogin:hover {
+  color: rgba(9, 9, 210, 0.811);
+  cursor: pointer;
+}
+.btnLogin {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    background-image: linear-gradient(to right, rgba(4, 12, 248, 0.811), rgba(39, 39, 249, 0.811), rgba(116, 116, 250, 0.811));
+}
+
+.btnLogin:hover {
+    background-image: linear-gradient(to right, rgba(3, 8, 167, 0.811), rgba(27, 27, 165, 0.811),rgba(79, 79, 171, 0.811));
+}
+.pageContainer {
+    position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  .logoContainer {
+    position: absolute;
+  top: 20px;
+  left: 20px;
+  }
+  .logo {
+    width: 100px; 
+  }
+  
+  .cardLogin {
+    background: white;
+    padding: 2rem;
+    margin-top: 5rem;
+    margin-left: 11rem;
+    width: 80%; 
+    min-width: 800px; 
+  }
