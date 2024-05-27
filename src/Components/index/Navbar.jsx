@@ -22,10 +22,10 @@ export default function Navbar() {
   //   // removeStyleButton();
   // }
   function ConnecterShow() {
+    removeStyleButton()
     let main = document.getElementById("main");
     document.getElementsByClassName("footer")[0].style.display="none"
     ReactDOM.render(<LoginForm />, main);
-    // removeStyleButton();
   }
 
   function removeStyleButton() {
