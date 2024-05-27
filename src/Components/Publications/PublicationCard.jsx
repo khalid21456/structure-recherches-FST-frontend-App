@@ -9,7 +9,8 @@ export default function PublicationCard(props) {
   }
 
   return (
-    <div className="ml-[290px]">
+    <div>
+    {/* <div className="ml-[290px]"> */}
       <div className="pubCard mt-7 w-4/5 h-[250px] bg-white rounded-md shadow-md">
         <p className="pl-5 pt-3">{props.desc}</p>
         <div className="w-11/12 ml-5 mt-5">

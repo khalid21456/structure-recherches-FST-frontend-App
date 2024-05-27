@@ -60,9 +60,9 @@ export default function Login() {
   // };
   return (
     <div className="mainContainerLogin rounded-md">
-      <img src={require("./../../pictures/wave.png")} className="wave" />
+      <img src={require("./../../pictures/wave.png")} className="waveLogin" />
       <div className="containerLogin">
-        <div className="img">
+        <div className="imgLogin">
           <img
             //  src={require("./../../pictures/scienceph.png")}
             src={scienceSvg}
@@ -81,7 +81,7 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="input-div pass">
+            <div className="input-divLogin pass">
               <div className="i">
                 <LockIcon style={{ color: "#d9d9d9" }} />
               </div>

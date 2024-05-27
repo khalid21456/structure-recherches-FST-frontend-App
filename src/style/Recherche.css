@@ -59,3 +59,9 @@
 .equipe-page-container {
   height: 2200px;
 }
+
+.header-profile {
+  background-image: url("../pictures/profileRech-back.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
