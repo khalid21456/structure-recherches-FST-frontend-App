@@ -24,11 +24,12 @@
   justify-content: flex-end;
   align-items: center;
   margin-top: 70px;
-  margin-right: 40px;
+  /* margin-right: 40px; */
+  width: 600px;
 }
 .imgLogin img{
-    width: 500px;
- 
+    width: 400px;
+    margin-right: 190px;
   
 }
 .login-content {
@@ -37,17 +38,26 @@
     text-align: center;
     left: 525px;
     width: 36%;
-    margin-top: 100px;
-    margin-left: 170px;
+    margin-top: 30px;
+    margin-left: 220px;
     position: absolute;
    
 }   
 .formLogin {
-    width: 100%;
+    width: 80%;
   
 }
+.logoLogin {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Adjust the spacing as needed */
+}
+.logoLogin .logoLogin-img {
+  width: 100px;
+  height: 120px;
+}
 .formLogin h1 {
-    font-size: 2.5rem;
+    font-size: 1rem;
   text-transform: uppercase;
   margin: 15px 0;
   color: #333;

@@ -8,6 +8,7 @@ import "./../../style/LoginStyle.css";
 import scienceSvg from "./../../pictures/science.svg";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
+import logo from "./../../pictures/fst.png";
 export default function Login() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -70,7 +71,11 @@ export default function Login() {
         </div>
         <div className="login-content">
           <form className="formLogin">
-            <h1>Bienvenue</h1>
+            <div className="logoLogin">
+              <img src={logo} alt="Logo" className="logoLogin-img" />
+            </div>
+
+            {/* <h1>Bienvenue</h1> */}
             <div className="input-divLogin user focus">
               <div className="i">
                 <AlternateEmailIcon style={{ color: "#d9d9d9" }} />

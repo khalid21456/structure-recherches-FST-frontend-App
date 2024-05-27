@@ -8,9 +8,9 @@ export default function LoginForm() {
   return (
     <>
       <div className="pageContainer" style={{ height: "700px" }}>
-        <div className="logoContainer">
-          <img src={logo} className="logo" alt="Logo" />
-        </div>
+        {/* <div className="logoContainer">
+          <img src={logo} className="logoLogin" alt="Logo" />
+        </div> */}
         <div className="cardLogin shadow-2xl rounded-2xl">
           <Login />
         </div>
