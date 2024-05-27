@@ -14,9 +14,18 @@ export default function EquipeMembre(props) {
 
   function renderProfile(event) {
     ReactDOM.render(
-      <ProfileRech ident={event.target.parentElement.id} />,document.getElementById("main")
+      <ProfileRech ident={event.target.parentElement.children[0].textContent} nom={event.target.parentElement.id} />,document.getElementById("main")
     )
   }
+
+  function mouseEnteredHandle(event) {
+    event.target.parentElement.style.backgroundColor = "#DDE6ED";
+  }
+
+  function mouseLeavedHandle(event) {
+    event.target.parentElement.style.backgroundColor = "";
+  }
+
 
   return (
     <div className="w-2/3 " style={{ marginLeft: "290px" }}>
@@ -36,14 +45,20 @@ export default function EquipeMembre(props) {
                   onClick={renderProfile}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   key={memb.id}
+                  className={memb.id}
                   id={memb.nom}
+                  onMouseEnter={mouseEnteredHandle}
+                  onMouseLeave={mouseLeavedHandle}
+                  style={{cursor:"pointer"}}
                 >
+                  <div className="hidden">{memb.id}</div>
                   <TableCell component="th" scope="row">
                     {memb.prenom} {memb.nom} 
                   </TableCell>
                   <TableCell align="left">{memb.email}</TableCell>
                   {/* <TableCell align="left">{memb.Laboratoire}</TableCell> */}
                 </TableRow>
+                
               ))}
             </TableBody>
           </Table>

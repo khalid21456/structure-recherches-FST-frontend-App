@@ -259,3 +259,7 @@ body {
 .mainSection {
 	height: 846px;
 }
+
+.departement-logo {
+	clip-path: inset(0 0 30px 0)
+}

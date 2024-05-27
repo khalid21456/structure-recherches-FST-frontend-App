@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import EventIcon from "@mui/icons-material/Event";
 import ShareIcon from "@mui/icons-material/Share";
+import "../../../index.css"
 
 export default function AdminAccueil(props) {
   const [enseignantCount, setEnseignantsCount] = useState();
-  const [doctorantsCount, setDoctorantsCount] = useState();
+  const [equipesCount, setEquipesCount] = useState();
+  const [labosCount,setLabosCount] = useState();
 
     useEffect(() => {
       const fetchDataCountEnseignant = async () => {
@@ -24,20 +26,36 @@ export default function AdminAccueil(props) {
   
     }, []); 
 
-
-    useEffect(()=>{
-      const fetchDataCountDoctorant = async () => {
+    useEffect(() => {
+      const fetchDataCountLaboratoires = async () => {
         try {
-          const response = await axios.get("http://localhost:8080/FSTBM/Admin/Doctorant/countDoctorants");
-          setDoctorantsCount(response.data); 
+          const response = await axios.get("http://localhost:8080/FSTBM/Admin/Laboratoire/countLabos");
+          setLabosCount(response.data); 
           
         } catch (error) {
           console.log(error.response.data.message); 
-          setDoctorantsCount([]);
+          setLabosCount([]); 
+        }
+      };
+  
+      fetchDataCountLaboratoires(); // Call the fetchData function when the component is mounted
+  
+    }, []); 
+
+
+    useEffect(()=>{
+      const fetchDataCountEquipes = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/FSTBM/Admin/Equipe/countEquipes");
+          setEquipesCount(response.data); 
+          
+        } catch (error) {
+          console.log(error.response.data.message); 
+          setEquipesCount([]);
         }
       
       };
-      fetchDataCountDoctorant();
+      fetchDataCountEquipes();
   }, [])
 
 
@@ -65,62 +83,63 @@ export default function AdminAccueil(props) {
           </div>
         </div>
         <div className="w-1/5 h-56 shadow-md flex justify-center mb-2 bg-white rounded-lg">
-          <div className="mt-5">
+          <div className="mt-2">
             <img
-              className="w-24 ml-2"
-              src={require("../../../icons/master-icon.png")}
+              className="departement-logo w-32 ml-2"
+              src={require("../../../pictures/departement-logo.jpg")}
+              // style={{clipPath:`${inset("0 0 50px 0")}`}}
             />
             <div
               style={{ fontFamily: "Poppins" }}
-              className="text-center text-3xl mt-4"
+              className="text-center text-3xl"
             >
-              {doctorantsCount}
+              9
             </div>
             <h4
               style={{ fontFamily: "Roboto", fontSize: "20px" }}
               className="text-center text-gray-300"
             >
-              Doctorants
+              Départements
             </h4>
           </div>
         </div>
         <div className="w-1/5 h-56 shadow-md mb-2 flex justify-center bg-white rounded-lg">
           <div className="mt-5">
             <img
-              className="w-28 ml-2"
-              src={require("../../../icons/event-icon.jpg")}
+              className="w-24 ml-2"
+              src={require("../../../pictures/team-3d-render-icon-illustration-png.png")}
             />
             <div
               style={{ fontFamily: "Poppins" }}
-              className="text-center text-3xl"
+              className="text-center text-3xl mt-4"
             >
-              23
+              {equipesCount}
             </div>
             <h4
               style={{ fontFamily: "Roboto", fontSize: "20px" }}
               className="text-center text-gray-300"
             >
-              Evenements
+              Equipes
             </h4>
           </div>
         </div>
         <div className="w-1/5 h-56 shadow-md flex justify-center mb-2 bg-white rounded-lg">
           <div className="mt-5">
             <img
-              className="w-32 ml-2"
-              src={require("../../../icons/pub-icon.jpg")}
+              className="w-28 ml-2"
+              src={require("../../../pictures/labo-logo.png")}
             />
             <div
               style={{ fontFamily: "Poppins" }}
-              className="text-center text-3xl mt-4"
+              className="text-center text-3xl "
             >
-              896
+              {labosCount}
             </div>
             <h4
               style={{ fontFamily: "Roboto", fontSize: "20px" }}
               className="text-center text-gray-300"
             >
-              Publications
+              Laboratoires
             </h4>
           </div>
         </div>
@@ -140,6 +159,21 @@ export default function AdminAccueil(props) {
               Les Enseignants
             </div>
           </div>
+          <div className="">
+            <div className="Doctorants-show border bg-white rounded-lg shadow-md mt-7">
+              <div
+                style={{
+                  fontFamily: "Poppins",
+                  fontSize: "25px",
+                  backgroundColor: "#2d0560",
+                  color: "white",
+                }}
+                className="h-20 border-b pt-5 pl-7"
+              >
+                Les Equipes
+              </div>
+            </div>
+          </div>
           <div className="expand-overflow">
             <div className="Doctorants-show border bg-white rounded-lg shadow-md mt-7">
               <div
@@ -151,7 +185,7 @@ export default function AdminAccueil(props) {
                 }}
                 className="h-20 border-b pt-5 pl-7"
               >
-                Les Doctorants
+                Les Laboratoires
               </div>
             </div>
           </div>

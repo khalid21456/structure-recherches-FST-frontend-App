@@ -25,6 +25,8 @@ export default function EquipePage(props) {
   //           .then((res) => res.json())
   //           .then((d) => setPublications(d))
   //   }
+    
+
 
   useEffect(() => {
     const fetchDataEquipe = async () => {
@@ -35,7 +37,7 @@ export default function EquipePage(props) {
           `http://localhost:8080/FSTBM/Admin/Equipe/getById/${props.ident}`
         );
         setEquipe(response.data);
-
+       
         fetch("http://localhost:8080/FSTBM/scopus/publications?author=Afraites")
           .then((res) => {
             return res.json();
@@ -56,6 +58,10 @@ export default function EquipePage(props) {
 
     fetchDataEquipe();
   }, []);
+
+  
+
+
 
   const pubsRef = useRef();
   const refMembres = useRef();

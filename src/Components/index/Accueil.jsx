@@ -185,37 +185,35 @@ export default function Accueil() {
   }
   return (
     <div className="Accueil-Container h-auto mb-[860px]">
-      <div className="bg-white flex justify-around shadow-xl">
-        <div className="mt-28 pl-2">
-          {/* <div className="bg-white flex justify-around h-[700px]"> */}
-          <div className="mt-32 pl-2">
-            <h1
-              className="text-7xl mb-2 text-blue-600 ml-5 max-xl:text-[50px]"
-              // style={{ fontFamily: "Reddit Mono, monospace" }}
-              style={{ fontFamily: "Arimo", fontWeight: "bold" }}
+
+      <div className="bg-white flex justify-around h-[700px]">
+        <div className="mt-32 pl-2">
+          <h1
+            className="text-7xl mb-2 text-blue-600 ml-5 max-xl:text-[50px]"
+            // style={{ fontFamily: "Reddit Mono, monospace" }}
+            style={{ fontFamily: "Arimo",fontWeight:"bold" }}
+          >
+            Les structures de recherches
+          </h1>
+          <div className="w-32 h-3 bg-yellow-400 mb-8 ml-5"></div>
+          <span className="text-2xl text-gray-500 ml-5">
+            Faculté des Sciences et Techniques Beni-Mellal
+          </span>
+          <div className="mt-6 ml-5 flex">
+            <button
+              style={{ fontSize: "19px" }}
+              onClick={showRecherche}
+              className="px-5 mr-7 py-3 bg-blue-600 transition-colors hover:bg-blue-800 text-white font-semibold rounded-3xl"
             >
-              Les structures de recherche
-            </h1>
-            <div className="w-32 h-3 bg-yellow-400 mb-8 ml-5"></div>
-            <span className="text-2xl text-gray-500 ml-5">
-              Faculté des Sciences et Techniques Beni-Mellal
-            </span>
-            <div className="mt-6 ml-5 flex">
-              <button
-                style={{ fontSize: "19px" }}
-                onClick={showRecherche}
-                className="px-5 mr-7 py-3 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-3xl"
-              >
-                Structures
-              </button>
-              <button
-                style={{ fontSize: "19px" }}
-                // onClick={showRecherche}
-                className="px-5 py-3 border border-blue-600 bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-semibold rounded-3xl"
-              >
-                Connecter
-              </button>
-            </div>
+              Structures
+            </button>
+            <button
+              style={{ fontSize: "19px" }}
+              // onClick={showRecherche}
+              className="px-5 py-3 border transition-colors border-blue-600 bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-semibold rounded-3xl"
+            >
+              Connecter
+            </button>
           </div>
         </div>
         <div className="">
@@ -317,7 +315,7 @@ export default function Accueil() {
                     className="hover:text-yellow-400 hover:bg-blue-500"
                     variant="contained"
                   >
-                    Voire +{" "}
+                    Voir +{" "}
                   </Button>
                 </div>
               </div>

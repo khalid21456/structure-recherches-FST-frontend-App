@@ -6,7 +6,7 @@ export default function EvenementDetails({ latestEvent }) {
     <div className="mb-4 mt-7">
       <div className="mb-4 ml-16 mr-3">
         <h1 className="text-3xl">{latestEvent.titre}</h1>
-        <div className="w-32 h-2 bg-yellow-400 mt-2"></div>
+        <div className="w-32 h-2  bg-yellow-400 mt-2"></div>
       </div>
       <div className="flex justify-center items-center mx-20">
         <img
