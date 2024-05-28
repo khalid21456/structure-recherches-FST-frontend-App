@@ -4,11 +4,17 @@ import axios from "axios";
 import EventIcon from "@mui/icons-material/Event";
 import ShareIcon from "@mui/icons-material/Share";
 import "../../../index.css"
+import EquipeMembre from "../../Recherches/EquipeMembre";
+import ListEquipe from "./AccueilComponents/ListEquipes";
+import ListLaboratoires from "./AccueilComponents/ListLaboratoires";
+import EnseignantList from "./AccueilComponents/EnseignantList"
+
 
 export default function AdminAccueil(props) {
   const [enseignantCount, setEnseignantsCount] = useState();
   const [equipesCount, setEquipesCount] = useState();
   const [labosCount,setLabosCount] = useState();
+
 
     useEffect(() => {
       const fetchDataCountEnseignant = async () => {
@@ -57,6 +63,8 @@ export default function AdminAccueil(props) {
       };
       fetchDataCountEquipes();
   }, [])
+
+
 
 
   return (
@@ -122,6 +130,7 @@ export default function AdminAccueil(props) {
               Equipes
             </h4>
           </div>
+          
         </div>
         <div className="w-1/5 h-56 shadow-md flex justify-center mb-2 bg-white rounded-lg">
           <div className="mt-5">
@@ -146,7 +155,7 @@ export default function AdminAccueil(props) {
       </div>
       <div className=" mt-10 flex justify-center">
         <div>
-          <div className="Enseignants-show border bg-white rounded-lg shadow-md">
+          <div className="Enseignants-show border overflow-auto bg-white rounded-lg shadow-md">
             <div
               style={{
                 fontFamily: "Poppins",
@@ -158,9 +167,12 @@ export default function AdminAccueil(props) {
             >
               Les Enseignants
             </div>
+            <div className="flex justify-center">
+              <EnseignantList/>
+            </div>
           </div>
           <div className="">
-            <div className="Doctorants-show border bg-white rounded-lg shadow-md mt-7">
+            <div className="Doctorants-show border overflow-auto bg-white rounded-lg shadow-md mt-7">
               <div
                 style={{
                   fontFamily: "Poppins",
@@ -172,10 +184,14 @@ export default function AdminAccueil(props) {
               >
                 Les Equipes
               </div>
+              <div className="flex justify-center ">
+                <ListEquipe/>
+              </div>
             </div>
+           
           </div>
-          <div className="expand-overflow">
-            <div className="Doctorants-show border bg-white rounded-lg shadow-md mt-7">
+          <div className="">
+            <div className="Doctorants-show border overflow-auto bg-white rounded-lg shadow-md mt-7">
               <div
                 style={{
                   fontFamily: "Poppins",
@@ -187,9 +203,15 @@ export default function AdminAccueil(props) {
               >
                 Les Laboratoires
               </div>
+              <div className="flex justify-center ">
+                <ListLaboratoires/>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className="spacer h-40">
+
       </div>
     </div>
   );

@@ -74,7 +74,7 @@ export default function ProfileRech(props) {
       <div className="header-profile w-full h-[250px] bg-green-500">
         <div className="absolute top-60  left-20">
           <img
-            src={image}
+            src={require("../../pictures/userUnknown.jpg")}
             // src={require("../../profiles/Mr-Mouain.jpg")}
             className="w-52 h-52 border-4  rounded-full"
           />
