@@ -50,7 +50,7 @@
 .logoLogin {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px; /* Adjust the spacing as needed */
+  margin-bottom: 20px; 
 }
 .logoLogin .logoLogin-img {
   width: 100px;
@@ -63,6 +63,7 @@
   color: #333;
 }
 .input-divLogin {
+  position: relative;
     display: grid;
     grid-template-columns: 7% 93%;
     margin: 20px 0;
@@ -70,8 +71,33 @@
     border-bottom: 2px solid #d9d9d9;
 
 }
-.input-divLogin.focus .i i {
+.input-divLogin:after, .input-divLogin:before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: rgba(4, 12, 248, 0.811);
+}
+.input-divLogin:after {
+  right: 50%;
+}
+.input-divLogin:before {
+  left: 50%;
+}
+.input-divLogin.withoutFocus .i  {
+  color: #d9d9d9;
+}
+.input-divLogin.focus .i  {
     color: rgba(4, 12, 248, 0.811);
+}
+.input-divLogin.focus div h5 {
+  top: 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+.input-divLogin.focus:after, .input-divLogin.focus:before {
+  width: 50%;
 }
 .input-divLogin.user {
     margin-top: 0;
@@ -95,7 +121,7 @@
   transform: translateY(-50%);
   color: #999;
   font-size: 18px;
-  display: none;
+  /* display: none; */
   transition: .3s;
 }
 .inputLogin {
@@ -135,10 +161,14 @@
     color: white;
     font-weight: bold;
     background-image: linear-gradient(to right, rgba(4, 12, 248, 0.811), rgba(39, 39, 249, 0.811), rgba(116, 116, 250, 0.811));
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: background-position 0.5s ease-out;
 }
 
 .btnLogin:hover {
-    background-image: linear-gradient(to right, rgba(3, 8, 167, 0.811), rgba(27, 27, 165, 0.811),rgba(79, 79, 171, 0.811));
+    /* background-image: linear-gradient(to left, rgba(4, 12, 248, 0.811), rgba(39, 39, 249, 0.811), rgba(116, 116, 250, 0.811)); */
+    background-position: left bottom;
 }
 .pageContainer {
     position: relative;
@@ -160,7 +190,7 @@
   .cardLogin {
     background: white;
     padding: 2rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
     margin-left: 11rem;
     width: 80%; 
     min-width: 800px; 

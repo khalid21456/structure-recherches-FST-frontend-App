@@ -22,9 +22,9 @@ export default function Navbar() {
   //   // removeStyleButton();
   // }
   function ConnecterShow() {
-    removeStyleButton()
+    removeStyleButton();
     let main = document.getElementById("main");
-    document.getElementsByClassName("footer")[0].style.display="none"
+    document.getElementsByClassName("footer")[0].style.display = "none";
     ReactDOM.render(<LoginForm />, main);
   }
 
@@ -46,39 +46,35 @@ export default function Navbar() {
     let main = document.getElementById("main");
     setStyleButton(event);
     ReactDOM.render(<Accueil />, main);
-    document.getElementsByClassName("footer")[0].style.display=""
+    document.getElementsByClassName("footer")[0].style.display = "";
   }
 
   function showPublications(event) {
     let main = document.getElementById("main");
     setStyleButton(event);
     ReactDOM.render(<Publications />, main);
-    document.getElementsByClassName("footer")[0].style.display=""
-
+    document.getElementsByClassName("footer")[0].style.display = "";
   }
 
   function showRecherche(event) {
     let main = document.getElementById("main");
     ReactDOM.render(<Recherche />, main);
     setStyleButton(event);
-    document.getElementsByClassName("footer")[0].style.display=""
-
+    document.getElementsByClassName("footer")[0].style.display = "";
   }
 
   function showDepartement(event) {
     let main = document.getElementById("main");
     ReactDOM.render(<Departement />, main);
     setStyleButton(event);
-    document.getElementsByClassName("footer")[0].style.display=""
-
+    document.getElementsByClassName("footer")[0].style.display = "";
   }
 
   function showPropos(event) {
     let main = document.getElementById("main");
     // render Recherche Component
     setStyleButton(event);
-    document.getElementsByClassName("footer")[0].style.display=""
-
+    document.getElementsByClassName("footer")[0].style.display = "";
   }
 
   // window.addEventListener("scroll", () => {

@@ -10,55 +10,60 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
 import logo from "./../../pictures/fst.png";
 export default function Login() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // console.log(email);
-  // console.log(password);
-  // const handlEmail = (e) => {
-  //   setEmail(e.target.value);
-  // };
-  // const handlPassword = (e) => {
-  //   setPassword(e.target.value);
-  // };
+  console.log(email);
+  console.log(password);
+  const handlEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlPassword = (e) => {
+    setPassword(e.target.value);
+  };
 
-  // const submitLogin = async () => {
-  //   try {
-  //     let response = await axios.get(
-  //       `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
-  //     );
+  const submitLogin = async (e) => {
+    e.preventDefault();
+    try {
+      let response = await axios.get(
+        `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
+      );
 
-  //     if (response && response.data) {
-  //       ReactDOM.render(
-  //         <Enseignant loginData={response.data} />,
-  //         document.getElementById("root")
-  //       );
-  //       console.log(response.data);
-  //     } else {
-  //       throw new Error("Professor not found");
-  //     }
-  //   } catch (error) {
-  //     console.log("Professor not found, searching for student...");
+      if (response && response.data) {
+        ReactDOM.render(
+          <Enseignant loginData={response.data} />,
+          document.getElementById("root")
+        );
+        console.log(response.data);
+      } else {
+        throw new Error("Enseignant not found");
+      }
+    } catch (error) {
+      console.log("Enseignant not found, searching for student...");
 
-  //     try {
-  //       let response = await axios.get(
-  //         `http://localhost:8080/FSTBM/Login/ConnectDoc/${email}/${password}`
-  //       );
+      try {
+        let response = await axios.get(
+          `http://localhost:8080/FSTBM/Login/ConnectDoc/${email}/${password}`
+        );
 
-  //       if (response && response.data) {
-  //         ReactDOM.render(
-  //           <Doctorant loginData={response.data} />,
-  //           document.getElementById("root")
-  //         );
-  //         console.log(response.data);
-  //       } else {
-  //         console.error("Student not found");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data", error);
-  //     }
-  //   }
-  // };
+        if (response && response.data) {
+          ReactDOM.render(
+            <Doctorant loginData={response.data} />,
+            document.getElementById("root")
+          );
+          console.log(response.data);
+        } else {
+          console.error("Doctorant not found");
+        }
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    }
+  };
+  const handleClick = (event) => {
+    event.target.closest(".input-divLogin").classList.remove("withoutFocus");
+    event.target.closest(".input-divLogin").classList.add("focus");
+  };
   return (
     <div className="mainContainerLogin rounded-md">
       <img src={require("./../../pictures/wave.png")} className="waveLogin" />
@@ -76,27 +81,39 @@ export default function Login() {
             </div>
 
             {/* <h1>Bienvenue</h1> */}
-            <div className="input-divLogin user focus">
+            <div className="input-divLogin withoutFocus user">
               <div className="i">
-                <AlternateEmailIcon style={{ color: "#d9d9d9" }} />
+                <AlternateEmailIcon />
               </div>
               <div>
                 <h5>Adresse Email</h5>
-                <input type="text" className="inputLogin" />
+                <input
+                  type="text"
+                  className="inputLogin"
+                  onClick={handleClick}
+                  onChange={handlEmail}
+                />
               </div>
             </div>
 
-            <div className="input-divLogin pass">
+            <div className="input-divLogin withoutFocus pass">
               <div className="i">
-                <LockIcon style={{ color: "#d9d9d9" }} />
+                <LockIcon />
               </div>
               <div>
                 <h5>Mot de passe</h5>
-                <input type="password" className="inputLogin" />
+                <input
+                  type="password"
+                  className="inputLogin"
+                  onClick={handleClick}
+                  onChange={handlPassword}
+                />
               </div>
             </div>
             <span className="spanLogin">Oublier mot de passe</span>
-            <button className="btnLogin">Connecter</button>
+            <button className="btnLogin" onClick={submitLogin}>
+              Connecter
+            </button>
           </form>
         </div>
       </div>
