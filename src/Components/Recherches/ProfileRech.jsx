@@ -81,17 +81,20 @@ export default function ProfileRech(props) {
         </div>
       </div>
 
-      <div className="flex"> 
-      <div className="w-[800px] bg-slate-100">
-        <div className="mt-32">
-          <p style={{fontFamily:"Poppins"}} className="text-3xl pl-16">{enseignant.nom} {enseignant.prenom}</p>
+      <div className="flex">
+        <div className="w-[800px] bg-slate-100">
+          <div className="mt-32">
+            <p style={{ fontFamily: "Poppins" }} className="text-3xl pl-16">
+              {enseignant.nom} {enseignant.prenom}
+            </p>
+          </div>
+          <div className="mt-5">
+            <p style={{ fontFamily: "Poppins" }} className=" pl-16">
+              Enseignant à la faculté des sciences et technique Béni Mellal
+            </p>
+          </div>
         </div>
-        <div className="mt-5">
-          <p style={{fontFamily:"Poppins"}} className=" pl-16">Enseignant à la faculté des sciences et technique Béni Mellal</p>
-        </div>
-      </div> 
         <div className="pb-20 pl-20 pr-16 pt-14">
-
           {publications.map((publication, index) => (
             <PublicationCard
               key={index}

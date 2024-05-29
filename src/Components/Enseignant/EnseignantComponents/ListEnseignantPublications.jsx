@@ -4,30 +4,59 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import EnseignantPublication from "./EnseignantPublication";
 import PublicationDetails from "./PublicationDetails";
+import PublicationCard from "./../../Publications/PublicationCard";
 export default function ListEnseignantPublications({ loginData }) {
+  console.log(loginData);
   const [publications, setPublications] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
-    const fetchDataPublications = async () => {
+    // const fetchDataPublications = async () => {
+    //   try {
+    //     const response = await axios.get(
+    //       `http://localhost:8080/FSTBM/Enseignant/publicationsByEnseignant/${loginData.id}`
+    //     );
+    //     setPublications(response.data);
+    //     console.log(response.data);
+    //   } catch (error) {
+    //     setError(error.response ? error.response.data.message : error.message);
+    //     setPublications([]);
+    //   }
+    // };
+    // fetchDataPublications();
+    const fetchPubs = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/FSTBM/Enseignant/publicationsByEnseignant/${loginData.id}`
+        // const response = await axios.get(
+        //   `http://localhost:8080/FSTBM/Admin/Enseignant/getById/${props.ident}`
+        // );
+        // setEnseignant(response.data);
+        // console.log(enseignant)
+        const url = new URL("http://localhost:8080/FSTBM/scopus/publications");
+        url.searchParams.append(
+          "author",
+          loginData.nom + "," + loginData.prenom.charAt(0)
         );
-        setPublications(response.data);
-        console.log(response.data);
+        fetch(url)
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            setPublications(data);
+            console.log(data);
+          });
       } catch (error) {
-        setError(error.response ? error.response.data.message : error.message);
+        console.log(error);
         setPublications([]);
       }
     };
-    fetchDataPublications();
+
+    fetchPubs();
   }, []);
-  const renderAddPublication = () => {
-    ReactDOM.render(
-      <EnseignantPublication loginData={loginData} />,
-      document.getElementById("EnseignantContent")
-    );
-  };
+  // const renderAddPublication = () => {
+  //   ReactDOM.render(
+  //     <EnseignantPublication loginData={loginData} />,
+  //     document.getElementById("EnseignantContent")
+  //   );
+  // };
   const renderPublicationDetails = (publication) => {
     ReactDOM.render(
       <PublicationDetails publication={publication} />,
@@ -80,14 +109,7 @@ export default function ListEnseignantPublications({ loginData }) {
       </div>
 
       <div className="mt-10 mx-8">
-        <button
-          className="px-8 py-3 text-white font-bold hover:bg-violet-800 rounded-md mb-2"
-          style={{ backgroundColor: "#061B9A" }}
-          onClick={renderAddPublication}
-        >
-          Publier
-        </button>
-        {publications.map((publication) => {
+        {/* {publications.map((publication) => {
           const imagePath = `http://localhost:8080/FSTBM/readImages/Publication/${publication.imagePath}`;
           const imagePathProfile = `http://localhost:8080/FSTBM/readImages/Profile/${loginData.profile}`;
           return (
@@ -149,7 +171,19 @@ export default function ListEnseignantPublications({ loginData }) {
               </div>
             </div>
           );
-        })}
+        })} */}
+        {publications.map((publication, index) => (
+          <PublicationCard
+            key={index}
+            lien={publication.link[2]["@href"]}
+            namePub={publication["prism:publicationName"]}
+            title={publication["dc:title"]}
+            creator={publication["dc:creator"]}
+            datePub={publication["prism:coverDisplayDate"]}
+            desc={publication["subtypeDescription"]}
+            style={{ marginLeft: "0px" }}
+          />
+        ))}
       </div>
     </div>
   );
