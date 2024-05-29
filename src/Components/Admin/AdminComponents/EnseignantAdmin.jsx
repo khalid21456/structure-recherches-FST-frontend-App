@@ -308,7 +308,7 @@ export default function EnseignantAdmin(props) {
                   onChange={(e) => {
                     setAddedEnseignant({
                       ...enseignantAdded,
-                      nom: e.target.value,
+                      nom: e.target.value.trim(),
                     });
                     document.getElementById("nom-error").style.visibility = "hidden";
                    
@@ -340,7 +340,7 @@ export default function EnseignantAdmin(props) {
                   onChange={(e) => {
                     setAddedEnseignant({
                       ...enseignantAdded,
-                      prenom: e.target.value,
+                      prenom: e.target.value.trim(),
                     });
                     document.getElementById("prenom-error").style.visibility = "hidden";
                   }}
