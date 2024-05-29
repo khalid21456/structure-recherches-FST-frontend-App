@@ -88,7 +88,7 @@ export default function ListEnseignantPublications({ loginData }) {
     return `${day}${delimiter}${month}${delimiter}${year}`;
   };
   return (
-    <div className="h-[1000px] w-full">
+    <div className="h-auto bg-sky-100 w-full pb-4 rounded-lg shadow-md ">
       <div className="mt-2">
         <h1
           className="flex items-center justify-center text-2xl font-bold"

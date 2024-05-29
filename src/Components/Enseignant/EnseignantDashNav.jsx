@@ -179,8 +179,8 @@ export default function DashboardNav({ loginData }) {
       </div>
       <div
         id="EnseignantContent"
-        className="flex justify-between border rounded-lg shadow-md mt-3 mr-16 ml-2 mb-3 bg-sky-100"
-        style={{ width: "1060px", height: "1500px" }}
+        className="flex justify-between rounded-lg mt-3 mr-16 ml-2 mb-3 w-[1060px] h-auto"
+        // style={{ width: "1060px", height: "1500px" }}
       >
         <EnseignantAccueil />
       </div>
