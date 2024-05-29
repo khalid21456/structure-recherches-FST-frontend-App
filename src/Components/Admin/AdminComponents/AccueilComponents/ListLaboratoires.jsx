@@ -57,7 +57,6 @@ export default function ListLaboratoires(props) {
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     id={labo.id}
-                    style={{cursor:"pointer"}}
                     key={labo.id}
                   >
                     <div className="hidden">{labo.responsable.nom},{labo.responsable.prenom.charAt(0)}</div>

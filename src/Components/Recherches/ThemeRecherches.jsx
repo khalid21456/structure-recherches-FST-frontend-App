@@ -24,13 +24,7 @@ export default function ThemeRecherches(props) {
 
     return (
         <div className="Theme-Recherches-Container">
-            <div className="text-5xl">
-                Les Recherches de ce thème
-            </div>
-            <div className="text-5xl">
-                Les chercheurs
-            </div>
-           <img className="w-40 h-40" src={image} alt="Example"/> 
+          
         </div>
     )
 }

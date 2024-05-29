@@ -232,7 +232,7 @@ export default function Recherche() {
           </h1>
         </div>
         <div id="tableauLabos" className="flex justify-center mt-8">
-          <TableContainer style={{ width: "1200px" }} component={Paper}>
+          <TableContainer style={{ width: "1327px" }} component={Paper}>
             <Table sx={{ minWidth: 300 }} aria-label="simple table">
               <TableHead>
                 <TableRow
@@ -282,7 +282,7 @@ export default function Recherche() {
         </div>
       </div>
       <div ref={myRef3} className="h-44" id="Labos">
-        <div className="flex mt-32 ml-52 max-xl:ml-32">
+        <div className="flex mt-48 ml-52 max-xl:ml-32">
           <div
             style={{ borderLeftWidth: "14px" }}
             className="h-15 border-l-yellow-400"
@@ -295,7 +295,7 @@ export default function Recherche() {
           </h1>
         </div>
         <div id="tableauLabos" className="flex justify-center mt-8">
-          <TableContainer style={{ width: "1200px" }} component={Paper}>
+          <TableContainer style={{ width: "1327px" }} component={Paper}>
             <Table sx={{ minWidth: 300 }} aria-label="simple table">
               <TableHead>
                 <TableRow

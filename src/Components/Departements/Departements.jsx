@@ -25,7 +25,7 @@ export default function Departement() {
       <div className="presentDepartement">
         <div className="pt-40 pl-24">
           <h1
-            className="departement-title text-8xl text-white cursor-default hover:transition-colors w-fit"
+            className="departement-title text-[80px] text-white cursor-default hover:transition-colors w-fit"
             style={{ fontFamily: "Platypi" }}
           >
             Départements
@@ -45,17 +45,19 @@ export default function Departement() {
         </div>
       </div>
       <div className="Presentation">
-        <div className="presentation-Title flex mt-20">
-          <div
-            style={{ borderLeftWidth: "14px" }}
-            className="h-15 border-l-yellow-400"
-          ></div>
-          <h1
-            style={{ fontFamily: "Roboto" }}
-            className="text-5xl pl-5 cursor-default"
-          >
-            Présentation
-          </h1>
+        <div className="presentation-Title mt-20 ml-20">
+          <div className="flex pl-1 max-xl:pl-5">
+            <div
+              style={{ borderLeftWidth: "14px" }}
+              className="h-15 border-l-yellow-400"
+            ></div>
+            <h1
+              style={{ fontFamily: "Roboto" }}
+              className="text-5xl pl-5 cursor-default"
+            >
+              Présentation
+            </h1>
+          </div>
         </div>
         <div className="flex justify-center">
           <p
@@ -119,19 +121,24 @@ export default function Departement() {
         className="Departements bg-gray-50 mt-14"
         style={{ height: "1300px" }}
       >
-        <div className="departement-header flex pt-14 ml-52">
-          <div
-            style={{ borderLeftWidth: "14px" }}
-            className="h-15 border-l-yellow-400"
-          ></div>
-          <h1
-            style={{ fontFamily: "Roboto" }}
-            className="text-5xl pl-5 cursor-default"
-          >
-            Départements
-          </h1>
+        <div className="departement-header pt-14 ml-52">
+          <div className="flex pl-1 max-xl:pl-32">
+            <div
+              style={{ borderLeftWidth: "14px" }}
+              className="h-15 border-l-yellow-400"
+            ></div>
+            <h1
+              style={{ fontFamily: "Roboto" }}
+              className="text-5xl pl-5 cursor-default"
+            >
+              Départements
+            </h1>
+          </div>
         </div>
-        <div className="Departements-content max-xl:ml-32 mt-16 ml-72 " style={{ width: "1280px" }}>
+        <div
+          className="Departements-content max-xl:ml-32 mt-16 ml-72 "
+          style={{ width: "1280px" }}
+        >
           <Grid container rowSpacing={4}>
             {departementData.map((departement) => {
               return (

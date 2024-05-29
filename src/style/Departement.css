@@ -35,16 +35,16 @@
     margin-left:290px;
 }
 
-@media (min-width: 1280px) {
+@media (max-width: 1280px) {
     .departement-header {
-        margin-left:130px ;
+        margin-left:0px ;
     }
 
     .departement-title {
-        font-size:80px;
+        font-size:75px;
     }
 
     .presentation-Title {
-        margin-left: 143px;
+        margin-left: 120px;
     }
 }

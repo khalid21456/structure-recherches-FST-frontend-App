@@ -191,7 +191,7 @@ export default function AdminAccueil(props) {
            
           </div>
           <div className="">
-            <div className="Doctorants-show border overflow-auto bg-white rounded-lg shadow-md mt-7">
+            <div className="laboratoire-show border overflow-auto bg-white rounded-lg shadow-md mt-7">
               <div
                 style={{
                   fontFamily: "Poppins",

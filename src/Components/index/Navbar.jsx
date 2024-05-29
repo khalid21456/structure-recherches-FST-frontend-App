@@ -74,7 +74,7 @@ export default function Navbar() {
     let main = document.getElementById("main");
     // render Recherche Component
     setStyleButton(event);
-    document.getElementsByClassName("footer")[0].style.display = "";
+    document.getElementsByClassName("footer")[0].style.display = "none";
   }
 
   // window.addEventListener("scroll", () => {

@@ -57,7 +57,6 @@ export default function ListEquipe(props) {
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     id={equipe.id}
-                    style={{cursor:"pointer"}}
                     key={equipe.id}
                   >
                     <div className="hidden">{equipe.responsable.nom},{equipe.responsable.prenom.charAt(0)}</div>

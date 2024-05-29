@@ -293,6 +293,7 @@ export default function LaboratoireAdmin() {
           "http://localhost:8080/FSTBM/Admin/Enseignant/getNames"
         );
         setCandidats(response.data);
+        console.log(candidats)
       } catch (error) {
         console.log(error.response.data.message);
         setCandidats([]);
