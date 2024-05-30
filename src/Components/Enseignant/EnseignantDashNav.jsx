@@ -27,6 +27,7 @@ import EnseignantEvenement from "./EnseignantComponents/EnseignantEvenement";
 import ListEnseignantPublications from "./EnseignantComponents/ListEnseignantPublications";
 import { useState } from "react";
 import App from "../../App";
+import { Modal } from "@mui/material";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -63,7 +64,24 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
+const styleModal = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 900,
+  height: 550,
+  bgcolor: "background.paper",
+  boxShadow: 2,
+  p: 4,
+};
 export default function DashboardNav({ loginData }) {
+  const [helpHover, setHelpHover] = useState(false);
+  const [notificationsHover, setNotificationsHover] = useState(false);
+  const [mailHover, setMailHover] = useState(false);
+  const [openAddEquipe, setOpenAddEquipe] = React.useState(false);
+  const handleOpenAddEquipe = () => setOpenAddEquipe(true);
+  const handleCloseAddEquipe = () => setOpenAddEquipe(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [expanded, setExpanded] = React.useState("panel1");
 
@@ -114,7 +132,15 @@ export default function DashboardNav({ loginData }) {
                 style={{ fontSize: "20", cursor: "pointer" }}
                 badgeContent={2}
               >
-                <MailIcon style={{ fontSize: 25, color: "#2d0560" }} />
+                <MailIcon
+                  style={{
+                    fontSize: 25,
+                    color: "#2d0560",
+                    color: mailHover ? "white" : "#2d0560",
+                  }}
+                  onMouseEnter={() => setMailHover(true)}
+                  onMouseLeave={() => setMailHover(false)}
+                />
               </Badge>
             </div>
             <div className="ml-4">
@@ -124,13 +150,58 @@ export default function DashboardNav({ loginData }) {
                 badgeContent={2}
               >
                 <NotificationsRoundedIcon
-                  style={{ fontSize: 27, color: "#2d0560" }}
+                  style={{
+                    fontSize: 27,
+                    color: "#2d0560",
+                    color: notificationsHover ? "white" : "#2d0560",
+                  }}
+                  onMouseEnter={() => setNotificationsHover(true)}
+                  onMouseLeave={() => setNotificationsHover(false)}
+                  onClick={handleOpenAddEquipe}
                 />
               </Badge>
             </div>
+            {/* Start Add Notification Modal */}
+            <Modal
+              open={openAddEquipe}
+              onClose={handleCloseAddEquipe}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={styleModal}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  <div className="flex justify-between border-b-2 border-orange-500 pb-2">
+                    <h1
+                      style={{
+                        paddingTop: "15px",
+                        fontFamily: "Poppins",
+                        color: "#FF5722",
+                        fontSize: "25px",
+                      }}
+                    >
+                      Les notifications
+                    </h1>
+                    <img
+                      src={require("./../../pictures/fst.png")}
+                      className=" h-[70px]"
+                    />
+                  </div>
+                </Typography>
+              </Box>
+            </Modal>
+
+            {/* End Add Notification Modal */}
+
             <div className="ml-4">
               <HelpRoundedIcon
-                style={{ fontSize: 27, color: "#2d0560", cursor: "pointer" }}
+                style={{
+                  fontSize: 27,
+                  color: "#2d0560",
+                  cursor: "pointer",
+                  color: helpHover ? "white" : "#2d0560",
+                }}
+                onMouseEnter={() => setHelpHover(true)}
+                onMouseLeave={() => setHelpHover(false)}
               />
             </div>
           </div>
