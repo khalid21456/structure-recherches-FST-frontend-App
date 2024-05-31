@@ -4,15 +4,21 @@ import LaboMembre from "./LaboMembre";
 import EquipeMembre from "./EquipeMembre";
 import PublicationCard from "../Publications/PublicationCard";
 import { Public } from "@mui/icons-material";
-// import swr from "swr";
+import "../../style/Recherche.css"
+import DoctorantEquipe from "./Doctorant-equipe";
+import { useAsyncError } from "react-router-dom";
+
+
+
 export default function EquipePage(props) {
   const [equipe, setEquipe] = useState({
+    id: null,
     nomEquipe: "",
     responsable: {},
     acronyme: "",
     membres: [],
   });
-
+  const [idEquipe,setIdEquipe] = useState();
   const [authors, setAuthors] = useState([]);
   const Authors = [];
   const [loading, setLoading] = useState(false);
@@ -35,6 +41,7 @@ export default function EquipePage(props) {
           `http://localhost:8080/FSTBM/Admin/Equipe/getById/${props.ident}`
         );
         setEquipe(response.data);
+        setIdEquipe(response.data.id)
         const url = new URL("http://localhost:8080/FSTBM/scopus/publications");
         url.searchParams.append("author", props.nomRespo);
         fetch(url)
@@ -58,13 +65,28 @@ export default function EquipePage(props) {
     fetchDataEquipe();
   }, []);
 
+
+  const [countDoctorant,setCountDoctorant] = useState();
+  useEffect(()=>{
+    let doctorants = [];
+    equipe.membres.forEach((membre)=> {
+      doctorants.push(membre.doctorants)
+    })
+    setCountDoctorant(doctorants.length)
+  })
+
   const pubsRef = useRef();
   const refMembres = useRef();
+  const refDoctorants = useRef();
   const myRef = useRef();
   let minHeight = 2200;
-  let heightMembres = equipe.membres.length * 40;
+  let minHeightMembre = 300;
+  let minHeightDoctorants = 300;
+
+  let heightMembres = equipe.membres.length * 100;
+  let heightDoctorants = countDoctorant * 100;
   let heightPubs = publications.length * 260;
-  let heightAdded = heightMembres + heightPubs;
+  let heightAdded = heightMembres + heightPubs + heightDoctorants;
   let newHeight = minHeight + heightAdded;
 
   // if (publications.length == 0) {
@@ -81,7 +103,10 @@ export default function EquipePage(props) {
     pubsRef.current.style.height = heightPubs + "px";
   }
   if (refMembres.current) {
-    refMembres.current.style.height = heightMembres + "px";
+    refMembres.current.style.height = (heightMembres+minHeightMembre) + "px";
+  }
+  if (refDoctorants.current) {
+    refMembres.current.style.height = (heightDoctorants+minHeightDoctorants) + "px";
   }
 
   return (
@@ -97,7 +122,7 @@ export default function EquipePage(props) {
           <div className="w-40 h-3 bg-yellow-400 mt-5"></div>
         </div>
       </div>
-      <div className="membre-equipe max-xl:mr-14">
+      <div className="membre-equipe max-xl:mr-14" ref={refMembres}>
         <div style={{ marginLeft: "290px" }} className="flex mt-20 ml-52">
           <div
             style={{ borderLeftWidth: "14px" }}
@@ -135,11 +160,28 @@ export default function EquipePage(props) {
             Membres
           </h1>
         </div>
-        <div>
+        <div id="test2">
           <EquipeMembre membres={equipe.membres} />
         </div>
       </div>
-      <div style={{ marginLeft: "290px" }} className="flex mt-36 ml-52">
+      <div className="doctorant-equipe max-xl:mr-14" ref={refDoctorants}>
+        <div style={{ marginLeft: "290px" }} className="flex mt-8 ml-52">
+          <div
+            style={{ borderLeftWidth: "14px" }}
+            className="h-15 border-l-yellow-400"
+          ></div>
+          <h1
+            style={{ fontFamily: "Roboto" }}
+            className="text-4xl pl-5 cursor-default"
+          >
+            Doctorants
+          </h1>
+        </div>
+        <div>
+          <DoctorantEquipe identEquipe={props.ident}/>
+        </div>
+      </div>
+      <div style={{ marginLeft: "290px" }} className="flex mt-52 ml-52">
         <div
           style={{ borderLeftWidth: "14px" }}
           className="h-15 border-l-yellow-400"
@@ -150,15 +192,9 @@ export default function EquipePage(props) {
         >
           Publications
         </h1>
-        {/* <button
-          onClick={renderPublication}
-          className="ml-10 border bg-white hover:bg-yellow-300 transition-colors rounded-lg px-6 "
-        >
-          Afficher le publications
-        </button> */}
       </div>
       <div ref={pubsRef} className="flex justify-center">
-        <div className="">
+        <div className="w-[1165px]">
           {publications.map((publication, index) => (
             <PublicationCard
               key={index}

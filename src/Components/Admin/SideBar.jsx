@@ -101,7 +101,7 @@ export default function SideBar({ loginData }) {
             </button>
           </Link>
         </div>
-        <div className="btn hidden">
+        <div className="btn">
           <Link to="/Admin/Doctorant">
             <button
               className="flex mt-1 pt-3 pb-3 pl-7 w-full"
@@ -141,7 +141,7 @@ export default function SideBar({ loginData }) {
             </button>
           </Link>
         </div>
-        <div className="btn">
+        <div className="btn hidden">
           <Link to="/Admin/Event">
             <button
               className="flex mt-1 pt-3 pb-3 pl-7 w-full"

@@ -228,7 +228,7 @@ export default function Recherche() {
             style={{ fontFamily: "Roboto" }}
             className=" text-5xl pl-5 cursor-default"
           >
-            Les laboratoires
+            Laboratoires
           </h1>
         </div>
         <div id="tableauLabos" className="flex justify-center mt-8">
@@ -291,7 +291,7 @@ export default function Recherche() {
             style={{ fontFamily: "Roboto" }}
             className=" text-5xl pl-5 cursor-default"
           >
-            Les Equipes
+            Equipes
           </h1>
         </div>
         <div id="tableauLabos" className="flex justify-center mt-8">

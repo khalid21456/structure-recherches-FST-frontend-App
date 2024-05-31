@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import { Autocomplete, Button } from "@mui/material";
@@ -19,6 +19,9 @@ import "../../../style/AdminDashboard.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Tooltip from "@mui/material/Tooltip";
 import PersonIcon from "@mui/icons-material/Person";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from '@mui/material/Alert';
+
 
 export default function DoctorantAdmin(props) {
   const [doctorants, setDoctorants] = useState([]);
@@ -38,8 +41,6 @@ export default function DoctorantAdmin(props) {
   const [files, setFiles] = useState(null);
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("userUnknown.png");
-
-
 
   useEffect(() => {
     const fetchDataThese = async () => {
@@ -103,44 +104,25 @@ export default function DoctorantAdmin(props) {
   }
 
   function AjouterDoctorant() {
-
-    setImageUpload(null);
-
-      const formData = new FormData();
-      formData.append("file", imageUpload);
-      try {
-        const response = axios.post(
-          "http://localhost:8080/FSTBM/images/uploads/Profile",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        console.log("Image uploaded successfully:", response.data);
-        setImagefileName(response.data)
-      } catch (error) {
-        console.error("Error uploading image:", error);
-      }
-
-      doctorantAdded.profile = imagefileName;
-
-      axios
+    axios
       .post(
-        `http://localhost:8080/FSTBM/Admin/Doctorant/AjouterDoctorant/${encadrantAdded.label}/${TheseAdded.label}`,
+        `http://localhost:8080/FSTBM/Admin/Doctorant/AjouterDoctorant/${encadrantAdded.value}`,
         doctorantAdded
       )
-      .then((response)=>{
-        setDoctorants(response.data)
-      }).catch((error)=>{
-        console.error("Error: "+error);
+      .then((response) => {
+        setDoctorants(response.data);
+      })
+      .catch((error) => {
+        console.error("Error: " + error);
       });
 
     // console.log(encadrantAdded);
     // console.log(TheseAdded);
     // console.log(doctorantAdded);
   }
+
+  // const [open, setOpen] = React.useState(false);
+
 
   return (
     <div>
@@ -194,12 +176,6 @@ export default function DoctorantAdmin(props) {
                       <TableCell
                         style={{ backgroundColor: "#2d0560", color: "white" }}
                         align="left"
-                      >
-                        Thèse
-                      </TableCell>
-                      <TableCell
-                        style={{ backgroundColor: "#2d0560", color: "white" }}
-                        align="left"
                       ></TableCell>
                     </TableRow>
                   </TableHead>
@@ -219,11 +195,8 @@ export default function DoctorantAdmin(props) {
                         </TableCell>
                         <TableCell align="left">{doctorant.email}</TableCell>
 
-                        <TableCell align="left" style={{width:"200px"}}>
+                        <TableCell align="left" style={{ width: "200px" }}>
                           {doctorant.encadrant.nom} {doctorant.encadrant.prenom}
-                        </TableCell>
-                        <TableCell align="left">
-                          {doctorant.these.titre}
                         </TableCell>
                         <TableCell align="left">
                           <div className="flex">
@@ -394,8 +367,8 @@ export default function DoctorantAdmin(props) {
             </div>
           </div>
           <div className="inputs flex justify-center">
-            <div className="w-11/12 mt-5 flex justify-around">
-              <div className="mt-6">
+            <div className="w-full mt-5 flex justify-around">
+              <div className="mt-6 w-fit">
                 <label
                   style={{
                     fontFamily: "Roboto",
@@ -414,74 +387,11 @@ export default function DoctorantAdmin(props) {
                     setThese(newValue);
                   }}
                   options={theses}
-                  sx={{ width: 580 }}
+                  sx={{ width: 1075 }}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </div>
-              <div>
-                <label
-                  style={{
-                    fontFamily: "Roboto",
-                    fontWeight: "bold",
-                    fontSize: "17px",
-                  }}
-                >
-                  Image
-                </label>
-                <br />
-                <div
-                style={{
-                  height: "100px",
-                  width: "400px",
-                  borderColor: "#1475cf",
-                }}
-                className="cursor-pointer border-2 border-dashed  rounded-lg"
-
-                onClick={() => document.querySelector("#image").click()}
-              >
-                <input
-                  type="file"
-                  id="image"
-                  className="px-4 py-1"
-                  ref={image}
-                  onChange={(event) => {
-                    // handlChange(event);
-                    // const files = event.target.files;
-                    setFiles(event.target.files);
-                    if (files && files.length > 0) {
-                     setImagefileName(files[0].name);
-                      // setImageUpload(URL.createObjectURL(files[0]));
-                      setImageUpload(event.target.files[0]);
-                    }
-                  }}
-                  hidden
-                />
-                {imageUpload ? (
-                  <img
-                    src={URL.createObjectURL(files[0])}
-                    alt={imagefileName}
-                    style={{
-                      width: "400px",
-                      height: "100px",
-                      objectFit: "none",
-                    }}
-                    className="rounded-lg"
-                  />
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 512"
-                    style={{ height: "100px", width: "100px", marginLeft:"140px"}}
-                  >
-                    <path
-                      d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
-                      fill="#1475cf"
-                    />
-                  </svg>
-                )}
-                </div>
-                </div>
-              </div>
+            </div>
           </div>
           <div className="btnAjouterDoctorant">
             <div className="flex justify-center w-11/12 mt-10">
@@ -508,6 +418,7 @@ export default function DoctorantAdmin(props) {
                 >
                   Annuler
                 </Button>
+    
               </div>
             </div>
           </div>

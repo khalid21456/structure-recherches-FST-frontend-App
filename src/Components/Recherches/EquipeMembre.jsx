@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import ReactDOM from "react-dom"
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -27,9 +27,19 @@ export default function EquipeMembre(props) {
   }
 
 
+  const refM = useRef();
+
+  let heightMembres = props.membres.length * 100;
+
+  if (refM.current) {
+    refM.current.style.marginBottom = heightMembres + "px";
+  }
+
+  
+
   return (
-    <div className="w-2/3 " style={{ marginLeft: "290px" }}>
-      <div className="mt-10">
+    <div className="w-2/3" ref={refM} style={{ marginLeft: "290px" }}>
+      <div className="mt-10" >
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>

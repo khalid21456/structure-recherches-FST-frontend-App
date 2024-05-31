@@ -65,3 +65,11 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.membre-equipe {
+  height: 260px
+}
+
+.doctorant-equipe {
+  height: 260px;
+}
