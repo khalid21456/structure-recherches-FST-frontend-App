@@ -2,14 +2,16 @@ import React from "react";
 import ReactDom from "react-dom";
 import axios from "axios";
 
-export default function ProfileAdmin() {
+export default function ProfileAdmin({ loginData }) {
+  const imagePath = `http://localhost:8080/FSTBM/readImages/Profile/${loginData.profile}`;
   return (
     <div>
       <div className="w-full back-profile h-60 ">
         <div className="absolute top-64 left-96">
           <img
             className="w-44 h-44 rounded-full"
-            src={require("../../profiles/Mr-Afraites.jpg")}
+            // src={require("../../profiles/Mr-Afraites.jpg")}
+            src={imagePath}
           />
         </div>
       </div>
@@ -23,7 +25,7 @@ export default function ProfileAdmin() {
               style={{ fontFamily: "Poppins", fontSize: "30px" }}
               className=""
             >
-              Lekbir Afraites
+              {loginData.prenom} {loginData.nom}
             </h1>
             <h1 style={{ fontFamily: "Roboto" }} className="mt-2">
               Enseignant à La FST Béni Mellal

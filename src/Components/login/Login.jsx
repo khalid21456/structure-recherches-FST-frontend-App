@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Enseignant from "./Enseignant";
 import Doctorant from "./Doctorant";
@@ -9,11 +9,11 @@ import scienceSvg from "./../../pictures/science.svg";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
 import logo from "./../../pictures/fst.png";
-import { Typography } from "@mui/material";
+import { Alert, Snackbar, Typography } from "@mui/material";
 import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import Button from "@mui/material/Button";
+import Admin from "./Admin";
 const styleModal = {
   position: "absolute",
   top: "50%",
@@ -28,9 +28,23 @@ const styleModal = {
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
   const [openAddEquipe, setOpenAddEquipe] = React.useState(false);
   const handleOpenAddEquipe = () => setOpenAddEquipe(true);
   const handleCloseAddEquipe = () => setOpenAddEquipe(false);
+  const [openSnackBar, setOpenSnackBar] = React.useState(false);
+
+  const handleSnackBarClick = () => {
+    setOpenSnackBar(true);
+  };
+  const handleSnackBarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackBar(false);
+  };
 
   console.log(email);
   console.log(password);
@@ -40,9 +54,29 @@ export default function Login() {
   const handlPassword = (e) => {
     setPassword(e.target.value);
   };
+  const validateForm = () => {
+    const errors = {};
+    const emailRegex = /^[a-z]+[a-z0-9]*\.?[a-z0-9]*@[a-z]{3,}\.[a-z]{2,}$/;
+    if (email.trim() === "") {
+      errors.email = "Adresse e-mail est nécessaire!";
+    } else if (!emailRegex.test(email)) {
+      errors.email = "Ce n'est pas un format d'e-mail valide!";
+    }
+    if (password.trim() === "") {
+      errors.password = "Mot de passe est nécessaire!";
+    } else if (password.length !== 10) {
+      errors.password = "Le mot de passe doit contenir 10 caractères";
+    }
+    return errors;
+  };
 
   const submitLogin = async (e) => {
     e.preventDefault();
+    setFormErrors(validateForm());
+    setIsSubmit(true);
+    let enseignantFound = false;
+    let doctorantFound = false;
+    let adminFound = false;
     try {
       let response = await axios.get(
         `http://localhost:8080/FSTBM/Login/ConnectEns/${email}/${password}`
@@ -53,6 +87,7 @@ export default function Login() {
           <Enseignant loginData={response.data} />,
           document.getElementById("root")
         );
+        enseignantFound = true;
         console.log(response.data);
       } else {
         throw new Error("Enseignant not found");
@@ -70,6 +105,7 @@ export default function Login() {
             <Doctorant loginData={response.data} />,
             document.getElementById("root")
           );
+          doctorantFound = true;
           console.log(response.data);
         } else {
           console.error("Doctorant not found");
@@ -77,8 +113,38 @@ export default function Login() {
       } catch (error) {
         console.error("Error fetching data", error);
       }
+      try {
+        let response = await axios.get(
+          `http://localhost:8080/FSTBM/Login/ConnectAdmin/${email}/${password}`
+        );
+
+        if (response && response.data) {
+          ReactDOM.render(
+            <Admin loginData={response.data} />,
+            document.getElementById("root")
+          );
+          adminFound = true;
+          console.log(response.data);
+        } else {
+          console.error("Admin not found");
+        }
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    }
+    if (!enseignantFound && !doctorantFound && !adminFound) {
+      handleSnackBarClick();
+      console.log("No users found, showing Snackbar");
     }
   };
+
+  useEffect(() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(email);
+      console.log(password);
+    }
+  }, [formErrors]);
   const handleClick = (event) => {
     event.target.closest(".input-divLogin").classList.remove("withoutFocus");
     event.target.closest(".input-divLogin").classList.add("focus");
@@ -112,10 +178,23 @@ export default function Login() {
                   onClick={handleClick}
                   onChange={handlEmail}
                 />
+                <p
+                  className="text-red-400 text-sm mt-14"
+                  style={{ marginLeft: "-190px" }}
+                >
+                  {formErrors.email}
+                </p>
               </div>
             </div>
-
-            <div className="input-divLogin withoutFocus pass">
+            {/* <div className="w-full">
+              <p
+                className="text-red-400 text-sm"
+                style={{ marginLeft: "-170px" }}
+              >
+                {formErrors.email}
+              </p>
+            </div> */}
+            <div className="input-divLogin withoutFocus pass mt-10">
               <div className="i">
                 <LockIcon />
               </div>
@@ -128,6 +207,14 @@ export default function Login() {
                   onChange={handlPassword}
                 />
               </div>
+            </div>
+            <div className="w-full">
+              <p
+                className="text-red-400 text-sm"
+                style={{ marginLeft: "-175px" }}
+              >
+                {formErrors.password}
+              </p>
             </div>
             <span className="spanLogin" onClick={handleOpenAddEquipe}>
               Oublier mot de passe
@@ -182,6 +269,22 @@ export default function Login() {
               Connecter
             </button>
           </form>
+          <Snackbar
+            open={openSnackBar}
+            autoHideDuration={6000}
+            onClose={handleSnackBarClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            sx={{ marginBottom: "480px" }}
+          >
+            <Alert
+              onClose={handleSnackBarClose}
+              severity="error"
+              variant="filled"
+              sx={{ width: "100%" }}
+            >
+              Adresse e-mail ou mot de passe est incorrect!
+            </Alert>
+          </Snackbar>
         </div>
       </div>
     </div>

@@ -73,11 +73,11 @@ function renderEquipeAdmin() {
   ReactDOM.render(<EquipeAdmin />, document.getElementById("dashboardContent"));
 }
 
-export default function SideBar() {
+export default function SideBar({ loginData }) {
   return (
     <div className="sideBar-Container w-80 h-full shadow-lg ">
       <div className="flex justify-center">
-        <AdminProfileCard />
+        <AdminProfileCard loginData={loginData} />
       </div>
       <div className="text-white text-2xl h-20 border-b-2 border-b-orange-500">
         <h1 style={{ fontFamily: "Poppins" }} className="pt-6 pl-10">

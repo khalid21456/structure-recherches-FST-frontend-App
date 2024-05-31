@@ -11,26 +11,32 @@ import EvenementAdmin from "./AdminComponents/EvenementAdmin";
 import EquipeAdmin from "./AdminComponents/EquipeAdmin";
 import LaboratoireAdmin from "./AdminComponents/LaboratoireAdmin";
 import RechercheAdmin from "./AdminComponents/RechercheAdmin";
-import ModifierTheme from "./AdminComponents/ModifierTheme"
+import ModifierTheme from "./AdminComponents/ModifierTheme";
 import ProfileAdmin from "./ProfileAdmin";
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ loginData }) {
   return (
-      <div className="AdminDashboard-container overflow-auto bg-gray-100">
-        <DashboardNav />
-        <div id="dashboardContent" className="mt-3 ml-3">
-          <Routes>
-            <Route path="/" element={<AdminAccueil />} />
-            <Route path="/Admin/Enseignant" element={<EnseignantAdmin />} />
-            <Route path="/Admin/Doctorant" element={<DoctorantAdmin />} />
-            <Route path="/Admin/Event" element={<EvenementAdmin />} />
-            <Route path="/Admin/Recherche" element={<RechercheAdmin />} />
-            <Route path="/Admin/Equipe" element={<EquipeAdmin />} />
-            <Route path="/Admin/Laboratoire" element={<LaboratoireAdmin />} />
-            <Route path="/Admin/Recherche/ModifierTheme" element={<ModifierTheme/>}/> 
-            <Route path="/Admin/ProfileAdmin" element={<ProfileAdmin/>}/>
-          </Routes>
-        </div>
+    <div className="AdminDashboard-container overflow-auto bg-gray-100">
+      <DashboardNav />
+      <div id="dashboardContent" className="mt-3 ml-3">
+        <Routes>
+          <Route path="/" element={<AdminAccueil />} />
+          <Route path="/Admin/Enseignant" element={<EnseignantAdmin />} />
+          <Route path="/Admin/Doctorant" element={<DoctorantAdmin />} />
+          <Route path="/Admin/Event" element={<EvenementAdmin />} />
+          <Route path="/Admin/Recherche" element={<RechercheAdmin />} />
+          <Route path="/Admin/Equipe" element={<EquipeAdmin />} />
+          <Route path="/Admin/Laboratoire" element={<LaboratoireAdmin />} />
+          <Route
+            path="/Admin/Recherche/ModifierTheme"
+            element={<ModifierTheme />}
+          />
+          <Route
+            path="/Admin/ProfileAdmin"
+            element={<ProfileAdmin loginData={loginData} />}
+          />
+        </Routes>
       </div>
+    </div>
   );
 }
