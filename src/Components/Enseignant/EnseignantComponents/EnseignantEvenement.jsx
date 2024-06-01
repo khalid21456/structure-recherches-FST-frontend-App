@@ -9,6 +9,7 @@ export default function EnseignantEvenement({ loginData }) {
   const dateDebut = useRef();
   const datefin = useRef();
   const siteweb = useRef();
+  const lieu = useRef();
   const image = useRef();
   const [errors, setErrors] = useState({});
   const [isFormSent, setIsFormSent] = useState(false);
@@ -36,6 +37,7 @@ export default function EnseignantEvenement({ loginData }) {
     const dateDebutValue = dateDebut.current.value;
     const dateFinValue = datefin.current.value;
     const sitewebValue = siteweb.current.value;
+    const lieuValue = lieu.current.value;
     const imageValue = image.current.files[0];
     let isFormValide = true;
 
@@ -75,6 +77,15 @@ export default function EnseignantEvenement({ loginData }) {
       });
       isFormValide = false;
     }
+    if (lieuValue.trim() === "") {
+      setErrors((prevState) => {
+        return {
+          ...prevState,
+          ...{ lieu: "L'emplacement d'evenement est vide" },
+        };
+      });
+      isFormValide = false;
+    }
     if (!imageValue) {
       setErrors((prevState) => {
         return {
@@ -106,6 +117,7 @@ export default function EnseignantEvenement({ loginData }) {
         dateDebut: dateDebut.current.value,
         dateFin: datefin.current.value,
         siteweb: siteweb.current.value,
+        lieu: lieu.current.value,
         imagePath: imagefileName,
         permession: 0,
       };
@@ -247,7 +259,7 @@ export default function EnseignantEvenement({ loginData }) {
               />
               {displayError("dateF")}
             </div>
-            <div className="mb-4 col-span-2">
+            <div className="mb-4">
               <label
                 className="block mb-1 font-semibold"
                 style={{ fontSize: "21px", color: "#25476A" }}
@@ -263,6 +275,22 @@ export default function EnseignantEvenement({ loginData }) {
                 onChange={handlChange}
               />
               {displayError("siteWeb")}
+            </div>
+            <div className="mb-4">
+              <label
+                className="block mb-1 font-semibold"
+                style={{ fontSize: "21px", color: "#25476A" }}
+              >
+                Emplacement
+              </label>
+              <input
+                type="text"
+                id="lieu"
+                className="px-4 py-2 rounded-sm bg-transparent border-2 border-gray-500 w-full hover:border-2 hover:border-sky-400"
+                ref={lieu}
+                onChange={handlChange}
+              />
+              {displayError("lieu")}
             </div>
             <div className="mb-4 col-span-2">
               <label
