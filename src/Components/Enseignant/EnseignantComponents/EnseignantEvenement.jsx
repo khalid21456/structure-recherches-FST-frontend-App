@@ -1,5 +1,8 @@
+import React from "react";
 import { Button } from "@mui/material";
 import { useRef, useState } from "react";
+import { Alert, Snackbar, Typography } from "@mui/material";
+import { Modal } from "@mui/material";
 import axios from "axios";
 export default function EnseignantEvenement({ loginData }) {
   const titre = useRef();
@@ -12,8 +15,17 @@ export default function EnseignantEvenement({ loginData }) {
   const [isFormValid, setIsFormValid] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [imagefileName, setImagefileName] = useState("unknown.jpg");
+  const [openSnackBar, setOpenSnackBar] = React.useState(false);
   const [files, setFiles] = useState(null);
-
+  const handleSnackBarClick = () => {
+    setOpenSnackBar(true);
+  };
+  const handleSnackBarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackBar(false);
+  };
   const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/organiser/${loginData.id}`;
   const addEvenement = (evenement) => {
     return axios.post(REST_API_BASE_URL, evenement);
@@ -26,6 +38,7 @@ export default function EnseignantEvenement({ loginData }) {
     const sitewebValue = siteweb.current.value;
     const imageValue = image.current.files[0];
     let isFormValide = true;
+
     if (titreValue.trim() === "") {
       setErrors((prevState) => {
         return {
@@ -117,6 +130,7 @@ export default function EnseignantEvenement({ loginData }) {
       addEvenement(evenement).then((response) => {
         console.log(response.data);
       });
+      handleSnackBarClick();
       setIsFormSent(true);
       resetForm();
     }
@@ -163,7 +177,7 @@ export default function EnseignantEvenement({ loginData }) {
   };
   return (
     <div className="w-full h-auto">
-      {isFormSent ? (
+      {/* {isFormSent ? (
         <div
           className="text-white mx-10 mt-7 ml-14 rounded-md h-16 flex items-center justify-start pl-3"
           style={{ backgroundColor: "#28a745" }}
@@ -172,7 +186,7 @@ export default function EnseignantEvenement({ loginData }) {
         </div>
       ) : (
         ""
-      )}
+      )} */}
       <div className="mx-10 my-7 rounded-lg bg-white">
         <h2
           className="text-white font-bold pl-8 py-4 text-xl"
@@ -331,6 +345,22 @@ export default function EnseignantEvenement({ loginData }) {
             >
               Annuler
             </Button>
+            <Snackbar
+              open={openSnackBar}
+              autoHideDuration={6000}
+              onClose={handleSnackBarClose}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              sx={{ marginBottom: "480px" }}
+            >
+              <Alert
+                onClose={handleSnackBarClose}
+                severity="success"
+                variant="filled"
+                sx={{ width: "100%" }}
+              >
+                Votre evenement est enregistrer!
+              </Alert>
+            </Snackbar>
           </div>
         </form>
       </div>
