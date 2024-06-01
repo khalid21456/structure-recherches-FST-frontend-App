@@ -28,6 +28,7 @@ const styleModal = {
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userLogin, setUserLogin] = useState({});
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [openAddEquipe, setOpenAddEquipe] = React.useState(false);

@@ -14,6 +14,9 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import EvenementDetails from "./EvenementDetails";
 import Recherche from "../Recherches/Recherches";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import PlaceIcon from "@mui/icons-material/Place";
+import LanguageIcon from "@mui/icons-material/Language";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -185,13 +188,12 @@ export default function Accueil() {
   }
   return (
     <div className="Accueil-Container h-auto mb-[860px]">
-
       <div className="bg-white flex justify-around h-[700px]">
         <div className="mt-32 pl-2">
           <h1
             className="text-7xl mb-2 text-blue-600 ml-5 max-xl:text-[50px]"
             // style={{ fontFamily: "Reddit Mono, monospace" }}
-            style={{ fontFamily: "Arimo",fontWeight:"bold" }}
+            style={{ fontFamily: "Arimo", fontWeight: "bold" }}
           >
             Les structures de recherches
           </h1>
@@ -224,14 +226,72 @@ export default function Accueil() {
         </div>
         {/* </div> */}
       </div>
-      <div className="actualites bg-blue-100 pb-20">
-        <div className="pt-20 pl-24 pb-10">
+      <div className="actualites bg-blue-50 pb-20">
+        <div className="pt-20 pl-14 pb-10">
           <h1 className="text-6xl text-black cursor-default hover:text-blue-500 hover:transition-colors w-fit">
-            Actualités
+            Evénements
           </h1>
           <div className="w-40 h-2 bg-yellow-400 mt-5"></div>
         </div>
-        <div className="pl-24">
+        <div className="grid grid-cols-2 gap-4">
+          {latestEvents &&
+            latestEvents.map((latestEvent) => {
+              const maxWords = 5;
+              const words = latestEvent.titre.split(" ");
+              const truncatedTitle =
+                words.length > maxWords
+                  ? words.slice(0, maxWords).join(" ") + " ..."
+                  : latestEvent.titre;
+
+              const imagePath = `http://localhost:8080/FSTBM/readImages/Evenements/${latestEvent.imagePath}`;
+              return (
+                <div className="flex ml-8 rounded-md shadow-md mr-2">
+                  <div
+                    className="cursor-pointer"
+                    style={{ width: "170px", height: "180px" }}
+                    onClick={() => renderEvenementDetails(latestEvent)}
+                  >
+                    <img
+                      className="object-cover"
+                      src={imagePath}
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>
+                  <div className="ml-6">
+                    <h1
+                      className="mt-2 text-blue-700 font-semibold cursor-pointer"
+                      style={{ fontSize: "20px" }}
+                      onClick={() => renderEvenementDetails(latestEvent)}
+                    >
+                      {truncatedTitle}
+                    </h1>
+                    <div className="mt-4">
+                      <CalendarMonthIcon className="text-gray-500"></CalendarMonthIcon>
+                      <span className="ml-1 text-gray-500">
+                        {formatDate(latestEvent.dateDebut, "/")} -{" "}
+                        {formatDate(latestEvent.dateFin, "/")}
+                      </span>
+                    </div>
+                    <div className="mt-4">
+                      <PlaceIcon className="text-gray-500"></PlaceIcon>
+                      <span className="ml-1 text-gray-500">
+                        {latestEvent.lieu}
+                      </span>
+                    </div>
+                    <div className="mt-4">
+                      <LanguageIcon className="text-gray-500"></LanguageIcon>
+                      <a href={latestEvent.siteweb} target="_blank">
+                        <span className="ml-1 text-gray-500 border-b border-gray-500 cursor-pointer hover:text-blue-500 hover:border-blue-500">
+                          Lien d'événements
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+        {/* <div className="pl-24">
           <Box sx={{ width: "100%" }}>
             <Box
               sx={{
@@ -407,7 +467,7 @@ export default function Accueil() {
               </div>
             </CustomTabPanel>
           </Box>
-        </div>
+        </div> */}
       </div>
       {/* Statistics Section */}
       {/* <!--Start Background Animation Body--> */}
@@ -434,7 +494,7 @@ export default function Accueil() {
           <li></li>
           <li></li>
           <div className="pt-20 pl-6">
-            <div className="pl-24">
+            <div className="pl-14">
               <h1 className="text-6xl text-white cursor-default hover:text-blue-500 hover:transition-colors w-fit">
                 Statistiques
               </h1>

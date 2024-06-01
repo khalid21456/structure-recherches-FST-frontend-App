@@ -1,10 +1,11 @@
 import { Button } from "@mui/material";
 import { useRef, useState } from "react";
 import axios from "axios";
-export default function EnseignantEvenement() {
+export default function EnseignantEvenement({ loginData }) {
   const titre = useRef();
   const dateDebut = useRef();
   const datefin = useRef();
+  const siteweb = useRef();
   const image = useRef();
   const [errors, setErrors] = useState({});
   const [isFormSent, setIsFormSent] = useState(false);
@@ -13,7 +14,7 @@ export default function EnseignantEvenement() {
   const [imagefileName, setImagefileName] = useState("unknown.jpg");
   const [files, setFiles] = useState(null);
 
-  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/organiser`;
+  const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/organiser/${loginData.id}`;
   const addEvenement = (evenement) => {
     return axios.post(REST_API_BASE_URL, evenement);
   };
@@ -22,6 +23,7 @@ export default function EnseignantEvenement() {
     const titreValue = titre.current.value;
     const dateDebutValue = dateDebut.current.value;
     const dateFinValue = datefin.current.value;
+    const sitewebValue = siteweb.current.value;
     const imageValue = image.current.files[0];
     let isFormValide = true;
     if (titreValue.trim() === "") {
@@ -47,6 +49,15 @@ export default function EnseignantEvenement() {
         return {
           ...prevState,
           ...{ dateF: "Date fin d'evenement est vide" },
+        };
+      });
+      isFormValide = false;
+    }
+    if (sitewebValue.trim() === "") {
+      setErrors((prevState) => {
+        return {
+          ...prevState,
+          ...{ siteWeb: "Le siteweb d'evenement est vide" },
         };
       });
       isFormValide = false;
@@ -81,6 +92,7 @@ export default function EnseignantEvenement() {
         titre: titre.current.value,
         dateDebut: dateDebut.current.value,
         dateFin: datefin.current.value,
+        siteweb: siteweb.current.value,
         imagePath: imagefileName,
         permession: 0,
       };
@@ -169,7 +181,7 @@ export default function EnseignantEvenement() {
               "linear-gradient(to right, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
           }}
         >
-          Demande d'organiser un evenement
+          Organiser un evenement
         </h2>
         <form className="pb-7">
           <div className="grid grid-cols-2 gap-4 px-12 py-6">
@@ -220,6 +232,23 @@ export default function EnseignantEvenement() {
                 onChange={handlChange}
               />
               {displayError("dateF")}
+            </div>
+            <div className="mb-4 col-span-2">
+              <label
+                className="block mb-1 font-semibold"
+                style={{ fontSize: "21px", color: "#25476A" }}
+              >
+                Siteweb
+              </label>
+              <input
+                type="text"
+                id="siteWeb"
+                className="px-4 py-2 rounded-sm bg-transparent border-2 border-gray-500 w-full hover:border-2 hover:border-sky-400"
+                placeholder="https://exemple.com"
+                ref={siteweb}
+                onChange={handlChange}
+              />
+              {displayError("siteWeb")}
             </div>
             <div className="mb-4 col-span-2">
               <label
