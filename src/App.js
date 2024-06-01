@@ -18,8 +18,10 @@ import SideBar from "./Components/Admin/SideBar";
 import React, { useState, useEffect } from "react";
 import DoctorantSideBar from "./Components/Doctorant/DoctorantSideBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginForm from "./Components/login/LoginForm";
 
-function App() {
+function App({ loginData }) {
+  console.log(loginData);
   return (
     <>
       <nav>

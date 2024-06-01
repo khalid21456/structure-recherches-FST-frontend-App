@@ -28,6 +28,8 @@ import ListEnseignantPublications from "./EnseignantComponents/ListEnseignantPub
 import { useState } from "react";
 import App from "../../App";
 import { Modal } from "@mui/material";
+import LoginForm from "../login/LoginForm";
+import Accueil from "../index/Accueil";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -39,7 +41,7 @@ const Accordion = styled((props) => (
     display: "none",
   },
 }));
-const settings = ["Profile", "Paramètres", "Aide", "Déconnecter"];
+const settings = ["Accueil", "Profile", "Aide", "Déconnecter"];
 
 const AccordionSummary = styled((props) => (
   <MuiAccordionSummary
@@ -95,13 +97,22 @@ export default function DashboardNav({ loginData }) {
     setAnchorElUser(null);
   };
   function Deconnecter() {
+    loginData = {};
+    let root = document.getElementById("root");
+    ReactDOM.render(<App loginData={loginData} />, root);
+    console.log(loginData);
+  }
+  function showAccueil() {
     const root = document.getElementById("root");
-    ReactDOM.render(<App />, root);
+    ReactDOM.render(<App loginData={loginData} />, root);
+    console.log(loginData);
   }
 
   function handleMenuItemClick(setting) {
     if (setting === "Déconnecter") {
       Deconnecter();
+    } else if (setting === "Accueil") {
+      showAccueil();
     } else {
       handleCloseUserMenu();
     }

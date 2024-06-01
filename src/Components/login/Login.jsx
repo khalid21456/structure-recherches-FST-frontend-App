@@ -14,6 +14,8 @@ import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import Admin from "./Admin";
+import App from "../../App";
+import Accueil from "../index/Accueil";
 const styleModal = {
   position: "absolute",
   top: "50%",
@@ -89,7 +91,7 @@ export default function Login() {
           document.getElementById("root")
         );
         enseignantFound = true;
-        console.log(response.data);
+        console.log(userLogin);
       } else {
         throw new Error("Enseignant not found");
       }
@@ -134,8 +136,10 @@ export default function Login() {
       }
     }
     if (!enseignantFound && !doctorantFound && !adminFound) {
-      handleSnackBarClick();
-      console.log("No users found, showing Snackbar");
+      if (email.trim() !== "" && password.trim() !== "") {
+        handleSnackBarClick();
+        console.log("No users found, showing Snackbar");
+      }
     }
   };
 

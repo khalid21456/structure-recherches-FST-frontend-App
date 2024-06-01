@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import Login from "../login/Login";
 import Accueil from "./Accueil";
 import Departement from "../Departements/Departements";
 import Recherche from "../Recherches/Recherches";
 import Publications from "../Publications/Publications";
+import Box from "@mui/material/Box";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 import "../../style/Publication.css";
 import themes from "../../data/Themes";
 import LoginForm from "../login/LoginForm";
+import App from "../../App";
 
 export default function Navbar() {
   let buttonStyle =
@@ -16,11 +24,13 @@ export default function Navbar() {
     "pt-3 rounded-md text-blue-600  pr-5 pl-5 cursor-pointer";
 
   let rechercheHeightStrikeBool = true;
+  const settings = ["Profile", "Dashboard", "Déconnecter"];
   // function ConnecterShow() {
   //   let root = document.getElementById("root");
   //   ReactDOM.render(<LoginForm />, root);
   //   // removeStyleButton();
   // }
+
   function ConnecterShow() {
     removeStyleButton();
     let main = document.getElementById("main");
@@ -163,6 +173,65 @@ export default function Navbar() {
           >
             <button>Connecter</button>
           </li>
+
+          {/* <li
+              // className="pt-3 text-white bg-blue-600 cursor-pointer hover:transition-colors hover:bg-blue-500 rounded pl-5 pr-5 ml-5"
+              className="cursor-pointer hover:transition-colors rounded-full"
+            >
+              <div className="ml-8 mr-5">
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title="Open settings">
+                    <IconButton
+                      onClick={handleOpenUserMenu}
+                      sx={{ p: 0 }}
+                      style={{
+                        border: "2px solid #FF8F00",
+                        borderRadius: "50%",
+                        padding: "4px",
+                      }}
+                    >
+                      <Avatar
+                        // alt={loginData.nom}
+                        src={require("./../../profiles/Mr-ElMourabit.png")}
+                        style={{
+                          width: "45px",
+                          height: "45px",
+                        }}
+                        // src={imagePath}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "57px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                      className: "ml-44 mt-5",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                    className="ml-44"
+                  >
+                    {settings.map((setting) => (
+                      <MenuItem
+                        key={setting}
+                        onClick={() => handleMenuItemClick(setting)}
+                        sx={{ my: 0 }}
+                      >
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              </div>
+            </li> */}
         </ul>
       </div>
     </div>
