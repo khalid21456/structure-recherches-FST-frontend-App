@@ -349,16 +349,30 @@ export default function EnseignantEvenement({ loginData }) {
               open={openSnackBar}
               autoHideDuration={6000}
               onClose={handleSnackBarClose}
-              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-              sx={{ marginBottom: "480px" }}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
+              // sx={{ marginBottom: "550px" }}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
               <Alert
                 onClose={handleSnackBarClose}
                 severity="success"
                 variant="filled"
-                sx={{ width: "100%" }}
+                sx={{
+                  width: "600px",
+                  height: "70px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                Votre evenement est enregistrer!
+                <p className="ml-28" style={{ fontSize: "18px" }}>
+                  {" "}
+                  Votre evenement est enregistrer!
+                </p>
               </Alert>
             </Snackbar>
           </div>
