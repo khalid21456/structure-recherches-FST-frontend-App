@@ -13,6 +13,8 @@ import { Alert, Snackbar, Typography } from "@mui/material";
 import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 import Admin from "./Admin";
 import App from "../../App";
 import Accueil from "../index/Accueil";
@@ -37,7 +39,8 @@ export default function Login() {
   const handleOpenAddEquipe = () => setOpenAddEquipe(true);
   const handleCloseAddEquipe = () => setOpenAddEquipe(false);
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
-
+  const [openBackDrop, setOpenBackDrop] = React.useState(false);
+  const [userComponent, setUserComponent] = useState(null);
   const handleSnackBarClick = () => {
     setOpenSnackBar(true);
   };
@@ -48,6 +51,27 @@ export default function Login() {
 
     setOpenSnackBar(false);
   };
+
+  const handleOpenBackDrop = () => {
+    setOpenBackDrop(true);
+  };
+
+  const handleCloseBackDrop = () => {
+    setOpenBackDrop(false);
+  };
+
+  useEffect(() => {
+    let timer;
+    if (openBackDrop) {
+      timer = setTimeout(() => {
+        setOpenBackDrop(false);
+        if (userComponent) {
+          ReactDOM.render(userComponent, document.getElementById("root"));
+        }
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [openBackDrop, userComponent]);
 
   console.log(email);
   console.log(password);
@@ -86,12 +110,16 @@ export default function Login() {
       );
 
       if (response && response.data) {
-        ReactDOM.render(
-          <Enseignant loginData={response.data} />,
-          document.getElementById("root")
-        );
+        // handleOpenBackDrop();
+        // ReactDOM.render(
+        //   <Enseignant loginData={response.data} />,
+        //   document.getElementById("root")
+        // );
+        // enseignantFound = true;
+        // console.log(userLogin);
         enseignantFound = true;
-        console.log(userLogin);
+        setUserComponent(<Enseignant loginData={response.data} />);
+        handleOpenBackDrop();
       } else {
         throw new Error("Enseignant not found");
       }
@@ -104,12 +132,16 @@ export default function Login() {
         );
 
         if (response && response.data) {
-          ReactDOM.render(
-            <Doctorant loginData={response.data} />,
-            document.getElementById("root")
-          );
+          // handleOpenBackDrop();
+          // ReactDOM.render(
+          //   <Doctorant loginData={response.data} />,
+          //   document.getElementById("root")
+          // );
+          // doctorantFound = true;
+          // console.log(response.data);
           doctorantFound = true;
-          console.log(response.data);
+          setUserComponent(<Doctorant loginData={response.data} />);
+          handleOpenBackDrop();
         } else {
           console.error("Doctorant not found");
         }
@@ -122,12 +154,13 @@ export default function Login() {
         );
 
         if (response && response.data) {
-          ReactDOM.render(
-            <Admin loginData={response.data} />,
-            document.getElementById("root")
-          );
-          adminFound = true;
-          console.log(response.data);
+          // handleOpenBackDrop();
+          // ReactDOM.render(
+          //   <Admin loginData={response.data} />,
+          //   document.getElementById("root")
+          // );
+          // adminFound = true;
+          // console.log(response.data);
         } else {
           console.error("Admin not found");
         }
@@ -290,6 +323,13 @@ export default function Login() {
               Adresse e-mail ou mot de passe est incorrect!
             </Alert>
           </Snackbar>
+          <Backdrop
+            sx={{ color: "blue", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={openBackDrop}
+            onClick={handleCloseBackDrop}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       </div>
     </div>

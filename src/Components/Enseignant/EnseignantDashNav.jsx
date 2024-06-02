@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import Badge from "@mui/material/Badge";
@@ -14,6 +15,8 @@ import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
@@ -86,6 +89,23 @@ export default function DashboardNav({ loginData }) {
   const handleCloseAddEquipe = () => setOpenAddEquipe(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [expanded, setExpanded] = React.useState("panel1");
+  const [openBackDrop, setOpenBackDrop] = React.useState(false);
+  const handleOpenBackDrop = () => {
+    setOpenBackDrop(true);
+  };
+
+  const handleCloseBackDrop = () => {
+    setOpenBackDrop(false);
+  };
+  useEffect(() => {
+    let timer;
+    if (openBackDrop) {
+      timer = setTimeout(() => {
+        setOpenBackDrop(false);
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [openBackDrop]);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -96,12 +116,22 @@ export default function DashboardNav({ loginData }) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  function Deconnecter() {
-    loginData = {};
-    let root = document.getElementById("root");
-    ReactDOM.render(<App loginData={loginData} />, root);
-    console.log(loginData);
-  }
+  // function Deconnecter() {
+  //   handleOpenBackDrop();
+  //   loginData = {};
+  //   let root = document.getElementById("root");
+  //   ReactDOM.render(<App loginData={loginData} />, root);
+  //   console.log(loginData);
+  // }
+  const Deconnecter = () => {
+    handleOpenBackDrop();
+    setTimeout(() => {
+      loginData = {};
+      let root = document.getElementById("root");
+      ReactDOM.render(<App loginData={loginData} />, root);
+      console.log(loginData);
+    }, 2000);
+  };
   function showAccueil() {
     const root = document.getElementById("root");
     ReactDOM.render(<App loginData={loginData} />, root);
@@ -256,6 +286,13 @@ export default function DashboardNav({ loginData }) {
                 ))}
               </Menu>
             </Box>
+            <Backdrop
+              sx={{ color: "blue", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={openBackDrop}
+              onClick={handleCloseBackDrop}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
           </div>
         </div>
       </div>
