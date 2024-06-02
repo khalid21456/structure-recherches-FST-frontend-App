@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import Badge from "@mui/material/Badge";
@@ -12,6 +13,8 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
 import App from "../../App";
@@ -56,16 +59,38 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function DashboardNav() {
   const [expanded, setExpanded] = React.useState("panel1");
+  const [openBackDrop, setOpenBackDrop] = React.useState(false);
+  const handleOpenBackDrop = () => {
+    setOpenBackDrop(true);
+  };
 
+  const handleCloseBackDrop = () => {
+    setOpenBackDrop(false);
+  };
+  useEffect(() => {
+    let timer;
+    if (openBackDrop) {
+      timer = setTimeout(() => {
+        setOpenBackDrop(false);
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [openBackDrop]);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  function Deconnecter() {
-    const root = document.getElementById("root");
-    ReactDOM.render(<App />, root);
-  }
-
+  // function Deconnecter() {
+  //   const root = document.getElementById("root");
+  //   ReactDOM.render(<App />, root);
+  // }
+  const Deconnecter = () => {
+    handleOpenBackDrop();
+    setTimeout(() => {
+      let root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    }, 2000);
+  };
   function renderProfileAdmin() {
     ReactDOM.render(
       <ProfileAdmin />,
@@ -162,6 +187,16 @@ export default function DashboardNav() {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
+                <Backdrop
+                  sx={{
+                    color: "blue",
+                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                  }}
+                  open={openBackDrop}
+                  onClick={handleCloseBackDrop}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
               </div>
             </div>
           </div>

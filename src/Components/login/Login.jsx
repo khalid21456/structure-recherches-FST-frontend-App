@@ -161,6 +161,9 @@ export default function Login() {
           // );
           // adminFound = true;
           // console.log(response.data);
+          adminFound = true;
+          setUserComponent(<Admin loginData={response.data} />);
+          handleOpenBackDrop();
         } else {
           console.error("Admin not found");
         }
