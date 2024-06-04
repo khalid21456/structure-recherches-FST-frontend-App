@@ -32,15 +32,6 @@ export default function DoctorantEquipe(props) {
   }, []);
 
 
-//   const refD = useRef();
-
-//   let heightMembres = doctorants.length * 100;
-
-//   if (refD.current) {
-//     refD.current.style.marginBottom = heightMembres + "px";
-//   }
-
-
   return (
     <div className="w-2/3" style={{ marginLeft: "290px" }}>
       <div className="mt-10" >

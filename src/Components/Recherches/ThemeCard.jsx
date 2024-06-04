@@ -4,17 +4,6 @@ import ThemeRecherches from "./ThemeRecherches";
 import axios from "axios";
 export default function ThemeCard(props) {
 
-    function renderThemeRecherches() {
-        let main = document.getElementById("main")
-        ReactDOM.render(
-            <ThemeRecherches/>,main
-        )
-        window.scroll({
-            top: 0,
-            left: 500,
-            // behavior: "smooth",
-          });
-    }
 
     const [image, setImage] = useState(null);
 
@@ -35,7 +24,7 @@ export default function ThemeCard(props) {
 
     return(
         <div className="flex justify-center researchCard">
-            <div onClick={renderThemeRecherches} className="w-3/5 mt-5 h-52 cursor-pointer hover:scale-105 hover:transition-transform  bg-gray-50 hover:bg-white border rounded-lg shadow-sm">
+            <div className="w-3/5 mt-5 h-52    bg-gray-50 hover:bg-white border rounded-lg shadow-sm">
                 <div className="flex">
                     {/* <div style={{width:"200px"}} className=" border rounded-s-lg"> */}
                         <img style={{width:"200px"}} className="h-52" src={image}/>

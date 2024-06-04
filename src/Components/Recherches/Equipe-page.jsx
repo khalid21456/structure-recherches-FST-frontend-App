@@ -7,6 +7,7 @@ import { Public } from "@mui/icons-material";
 import "../../style/Recherche.css"
 import DoctorantEquipe from "./Doctorant-equipe";
 import { useAsyncError } from "react-router-dom";
+import ThemeCard from "./ThemeCard";
 
 
 
@@ -17,6 +18,7 @@ export default function EquipePage(props) {
     responsable: {},
     acronyme: "",
     membres: [],
+    themes : []
   });
   const [idEquipe,setIdEquipe] = useState();
   const [authors, setAuthors] = useState([]);
@@ -26,11 +28,6 @@ export default function EquipePage(props) {
 
   const [publications, setPublications] = useState([]);
 
-  // const fetchPubs = async () => {
-  //   return fetch("http://localhost:8080/FSTBM/scopus/publications?author=Afraites")
-  //           .then((res) => res.json())
-  //           .then((d) => setPublications(d))
-  //   }
 
   useEffect(() => {
     const fetchDataEquipe = async () => {
@@ -66,6 +63,7 @@ export default function EquipePage(props) {
   }, []);
 
 
+
   const [countDoctorant,setCountDoctorant] = useState();
   useEffect(()=>{
     let doctorants = [];
@@ -77,17 +75,20 @@ export default function EquipePage(props) {
   })
 
   const pubsRef = useRef();
+  const themeRef = useRef();
   const refMembres = useRef();
   const refDoctorants = useRef();
   const myRef = useRef();
   let minHeight = 2200;
   let minHeightMembre = 300;
   let minHeightDoctorants = 300;
+  let minHeightTheme = 100;
 
   let heightMembres = equipe.membres.length * 100;
+  let heightThemes = equipe.themes.length * 300;
   let heightDoctorants = countDoctorant * 100;
   let heightPubs = publications.length * 260;
-  let heightAdded = heightMembres + heightPubs + heightDoctorants;
+  let heightAdded = heightMembres + heightPubs + heightDoctorants + heightThemes;
   let newHeight = minHeight + heightAdded;
 
   // if (publications.length == 0) {
@@ -108,6 +109,9 @@ export default function EquipePage(props) {
   }
   if (refDoctorants.current) {
     refMembres.current.style.height = (heightDoctorants+minHeightDoctorants) + "px";
+  }
+  if (themeRef.current) {
+    themeRef.current.style.height = (minHeightTheme+heightThemes) + "px";
   }
 
   return (
@@ -166,7 +170,7 @@ export default function EquipePage(props) {
         </div>
       </div>
       <div className="doctorant-equipe max-xl:mr-14" ref={refDoctorants}>
-        <div style={{ marginLeft: "290px" }} className="flex mt-8 ml-52">
+        <div style={{ marginLeft: "290px" }} className="flex mt-44 ml-52">
           <div
             style={{ borderLeftWidth: "14px" }}
             className="h-15 border-l-yellow-400"
@@ -182,7 +186,32 @@ export default function EquipePage(props) {
           <DoctorantEquipe identEquipe={props.ident}/>
         </div>
       </div>
-      <div style={{ marginLeft: "290px" }} className="flex mt-52 ml-52">
+      
+      <div style={{ marginLeft: "290px" }} className="flex mt-10 ml-52">
+        <div
+          style={{ borderLeftWidth: "14px" }}
+          className="h-15 border-l-yellow-400"
+        ></div>
+        <h1
+          style={{ fontFamily: "Roboto" }}
+          className="text-4xl pl-5 cursor-default"
+        >
+          Theme de recherches
+        </h1>
+      </div>
+      <div ref={themeRef} className="flex justify-center">
+        <div className="w-[2000px]">
+          {equipe.themes.map((Theme, index) => (
+            <ThemeCard
+              key={index}
+              title={Theme.nomtheme}
+              desc={Theme.contentTheme}
+              image={Theme.imagePath}
+            />
+          ))}
+        </div>
+      </div>
+      <div style={{ marginLeft: "290px" }} className="flex mt-10 ml-52">
         <div
           style={{ borderLeftWidth: "14px" }}
           className="h-15 border-l-yellow-400"

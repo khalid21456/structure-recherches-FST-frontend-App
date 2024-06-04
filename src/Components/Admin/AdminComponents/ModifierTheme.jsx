@@ -54,7 +54,9 @@ export default function AjouterTheme() {
   function AjouterTheme() {
     themeAdded.imagePath = imageThemeName();
     axios
-      .post("http://localhost:8080/FSTBM/Admin/Theme/AjouterTheme", themeAdded)
+      .post(`http://localhost:8080/FSTBM/Admin/Theme/AjouterTheme/${structure.label}`,themeAdded,
+   
+      )
       .then((response) => {
         setThemes(response.data);
       })
