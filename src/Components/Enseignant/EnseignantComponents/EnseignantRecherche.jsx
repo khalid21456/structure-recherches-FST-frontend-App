@@ -1,5 +1,15 @@
 import { Button } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import { useRef, useState } from "react";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
+import Box from "@mui/material/Box";
 export default function EnseignantRecherche() {
+  const [titre, setTitre] = useState("");
+  const handlChange = (e) => {
+    setTitre(e.target.value);
+  };
   return (
     <div className="w-full h-auto">
       <div className="mx-10 my-7 rounded-lg bg-white">
@@ -21,10 +31,11 @@ export default function EnseignantRecherche() {
               >
                 Titre
               </label>
-              <input
-                type="text"
-                id="titre"
-                className="px-4 py-2 w-64 rounded-sm bg-transparent border-2 border-gray-500 w-full hover:border-2 hover:border-sky-400"
+              <TextField
+                onChange={handlChange}
+                id="outlined-basic"
+                className="EnseignantField w-[600px]"
+                // value={enseignantAdded.nom}
               />
             </div>
           </div>

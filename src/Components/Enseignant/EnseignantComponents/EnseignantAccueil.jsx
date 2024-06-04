@@ -1,7 +1,7 @@
 import "./../../../style/EnseignantDashboard.css";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-
+import "./../../../style/EnseignantDashboard.css";
 export default function EnseignantAccueil({ loginData }) {
   const [publicationsCounter, setPublicationsCounter] = useState(null);
   const [recherchesCounter, setRecherchesCounter] = useState();

@@ -1,10 +1,13 @@
 .EnseiCard {
     /* background-color: #25476A; */
-    background-image: linear-gradient(to top, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1);
+    /* background-image: linear-gradient(to top, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1); */
+    background-color: #503C3C;
 }
 .enseiSideBar-Container {
     /* background-color: #574476; */
-    background-image: linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1);
+    /* background-image: linear-gradient(to bottom, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1); */
+    /* background-color: #6C0345; */
+    background-color: #1F1717;
     height: 848px;
 }
 .EnseignantDashboard-container {
@@ -47,21 +50,21 @@
 }
 } */
 /* Default styles for the child elements */
-.icon-path {
-    fill: white;
+/* .icon-path {
+    fill: #FF6500;
     transition: fill 0.3s;
   }
   
   .text-xl {
     color: white;
     transition: color 0.3s;
-  }
+  } */
   
   /* Styles for child elements when parent div is hovered */
-  .div:hover .icon-path {
-    fill: #0c4a6e; /* Change this to the desired hover color for the SVG icon */
-  }
+  /* .div:hover .icon-path {
+    fill: #0c4a6e; 
+  } */
   
-  .div:hover .text-xl {
-    color: #0c4a6e; /* Change this to the desired hover color for the text */
-  }
+  /* .div:hover .text-xl {
+    color: #0c4a6e;
+  } */

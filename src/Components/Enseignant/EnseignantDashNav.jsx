@@ -150,13 +150,7 @@ export default function DashboardNav({ loginData }) {
   const imagePath = `http://localhost:8080/FSTBM/readImages/Profile/${loginData.profile}`;
   return (
     <div className="ml-80 media-width-nav">
-      <div
-        className="flex justify-between h-full navDash bg-sky-200 border rounded-lg shadow-md mt-3 mr-16 ml-2"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #1931e3, #0061f4, #0083f6, #00a0ef, #5fb9e5)",
-        }}
-      >
+      <div className="flex justify-between h-full navDash bg-gray-400 border rounded-lg shadow-md mt-3 mr-16 ml-2">
         <div>
           <h1
             style={{ fontFamily: "Noto Sans" }}

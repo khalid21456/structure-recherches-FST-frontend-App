@@ -1,8 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
 import { Button } from "@mui/material";
 import { useRef, useState } from "react";
 import { Alert, Snackbar, Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import { Modal } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers";
 import axios from "axios";
 export default function EnseignantEvenement({ loginData }) {
   const titre = useRef();
@@ -18,6 +24,23 @@ export default function EnseignantEvenement({ loginData }) {
   const [imagefileName, setImagefileName] = useState("unknown.jpg");
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
   const [files, setFiles] = useState(null);
+  const [dates, setDates] = useState({
+    dateDeb: null,
+    dateFi: null,
+  });
+  //--------------
+
+  const handlDate = (newValue, field) => {
+    console.log(`Field: ${field}, New Value: ${newValue}`); // Debug log
+    setDates((prevDates) => ({
+      ...prevDates,
+      [field]: newValue,
+    }));
+    handlChange();
+  };
+  console.log(dates.dateDeb);
+  console.log(dates.dateFi);
+  //---------------
   const handleSnackBarClick = () => {
     setOpenSnackBar(true);
   };
@@ -104,6 +127,7 @@ export default function EnseignantEvenement({ loginData }) {
     datefin.current.value = "";
     image.current.value = "";
   };
+
   const handlChange = (e) => {
     formValidate();
   };
@@ -203,8 +227,10 @@ export default function EnseignantEvenement({ loginData }) {
         <h2
           className="text-white font-bold pl-8 py-4 text-xl"
           style={{
+            // backgroundColor: "#503C3C",
+
             backgroundImage:
-              "linear-gradient(to right, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
+              "linear-gradient(to right, #3e3232, #4d3e3e, #5d4a4a, #6d5656, #7e6363)",
           }}
         >
           Organiser un evenement

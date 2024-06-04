@@ -13,6 +13,8 @@ import { Alert, Snackbar, Typography } from "@mui/material";
 import { Modal } from "@mui/material";
 import Box from "@mui/material/Box";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore";
+import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import Admin from "./Admin";
@@ -37,10 +39,28 @@ export default function Login() {
   const [isSubmit, setIsSubmit] = useState(false);
   const [openAddEquipe, setOpenAddEquipe] = React.useState(false);
   const handleOpenAddEquipe = () => setOpenAddEquipe(true);
-  const handleCloseAddEquipe = () => setOpenAddEquipe(false);
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
   const [openBackDrop, setOpenBackDrop] = React.useState(false);
   const [userComponent, setUserComponent] = useState(null);
+  const [isSent, setIsSent] = useState(false);
+  const [emailForPassword, setEmailForPassword] = useState("");
+  const handleEmailNewPasswordChange = (event) => {
+    setEmailForPassword(event.target.value);
+  };
+  const handleCloseAddEquipe = () => {
+    setOpenAddEquipe(false);
+    setIsSent(false);
+  };
+  const handleSendClick = () => {
+    try {
+      let response = axios.get(
+        `http://localhost:8080/FSTBM/Login/NewPassword/${emailForPassword}`
+      );
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
+    setIsSent(true);
+  };
   const handleSnackBarClick = () => {
     setOpenSnackBar(true);
   };
@@ -195,10 +215,7 @@ export default function Login() {
       <img src={require("./../../pictures/wave.png")} className="waveLogin" />
       <div className="containerLogin">
         <div className="imgLogin">
-          <img
-            //  src={require("./../../pictures/scienceph.png")}
-            src={scienceSvg}
-          />
+          <img src={scienceSvg} />
         </div>
         <div className="login-content">
           <form className="formLogin">
@@ -227,14 +244,6 @@ export default function Login() {
                 </p>
               </div>
             </div>
-            {/* <div className="w-full">
-              <p
-                className="text-red-400 text-sm"
-                style={{ marginLeft: "-170px" }}
-              >
-                {formErrors.email}
-              </p>
-            </div> */}
             <div className="input-divLogin withoutFocus pass mt-10">
               <div className="i">
                 <LockIcon />
@@ -269,7 +278,11 @@ export default function Login() {
             >
               <Box sx={styleModal}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  <div className="flex flex-col justify-start items-center pb-2">
+                  <div
+                    className={`flex flex-col justify-start items-center pb-2 ${
+                      isSent ? "" : "hidden"
+                    }`}
+                  >
                     <TaskAltIcon
                       style={{
                         fontSize: 80,
@@ -284,7 +297,7 @@ export default function Login() {
                         Votre nouveau mot de passe a été envoyé à votre adresse
                         e-mail.
                       </p>
-                      <span>monaim@gmail.com</span>
+                      <span>{emailForPassword}</span>
                     </div>
                     <div className="flex justify-center mt-16">
                       <button
@@ -298,6 +311,47 @@ export default function Login() {
                       >
                         Ok
                       </button>
+                    </div>
+                  </div>
+                  <div
+                    className={`flex flex-col justify-start items-center pb-2 ${
+                      isSent ? "hidden" : ""
+                    }`}
+                  >
+                    <SettingsBackupRestoreIcon
+                      style={{
+                        fontSize: 80,
+                        color: "blue",
+                      }}
+                    ></SettingsBackupRestoreIcon>
+                    <div className="mt-8 text-center">
+                      <p className="text-gray-600 text-2xl">
+                        Vueillez saisie votre adresse e-mail s'il vous plait!
+                      </p>
+                      <div className="mt-10">
+                        <TextField
+                          id="outlined-basic"
+                          label="Adresse E-mail"
+                          variant="outlined"
+                          style={{
+                            width: "100%",
+                          }}
+                          onChange={handleEmailNewPasswordChange}
+                        />
+                      </div>
+                      <div className="flex justify-center mt-14">
+                        <button
+                          className="w-full rounded-sm py-1 text-white shadow-md"
+                          style={{
+                            backgroundColor: "blue",
+                            paddingTop: "7px",
+                            paddingBottom: "7px",
+                          }}
+                          onClick={handleSendClick}
+                        >
+                          Envoyer
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </Typography>
