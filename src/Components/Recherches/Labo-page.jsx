@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import axios from "axios";
 import LaboMembre from "./LaboMembre";
+import DoctorantLabo from "./Doctorant-labo";
+import PublicationCard from "../Publications/PublicationCard";
 
 export default function LaboPage(props) {
 
     const [labo,setLabo] = useState({nomLaboratoire:"",responsable:{},acronyme:"",membresLabo:[]});
-
+    const [publications,setPublications] = useState([]);
     useEffect(() => {
         const fetchDataLabo = async () => {
           try {
@@ -14,6 +16,16 @@ export default function LaboPage(props) {
             );
             setLabo(response.data);
             console.log(labo)
+            const url = new URL("http://localhost:8080/FSTBM/scopus/publications");
+            url.searchParams.append("author", props.nomRespo);
+            fetch(url)
+              .then((res) => {
+                return res.json();
+              })
+              .then((data) => {
+                console.log(data);
+                setPublications(data);
+              });
           } catch (error) {
             console.log(error.response.data.message);
             setLabo({});
@@ -24,8 +36,51 @@ export default function LaboPage(props) {
       }, []);
 
 
+  const [countDoctorant,setCountDoctorant] = useState();
+  useEffect(()=>{
+    let doctorants = [];
+    labo.membresLabo.forEach((membre)=> {
+      doctorants.push(membre.doctorants)
+    })
+    setCountDoctorant(doctorants.length)
+  })
+
+
+  const pubsRef = useRef();
+  const refMembres = useRef();
+  const refDoctorants = useRef();
+  const myRef = useRef();
+  let minHeight = 2200;
+  let minHeightMembre = 300;
+  let minHeightDoctorants = 300;
+
+  let heightMembres = labo.membresLabo.length * 100;
+  let heightDoctorants = countDoctorant * 100;
+  let heightPubs = publications.length * 260;
+  let heightAdded = heightMembres + heightPubs + heightDoctorants;
+  let newHeight = minHeight + heightAdded;
+
+  // if (publications.length == 0) {
+  //   return <div>Loading...</div>;
+  // }
+
+
+  if (myRef.current) {
+    myRef.current.style.height = newHeight + "px";
+  }
+  if (pubsRef.current) {
+    pubsRef.current.style.height = heightPubs + "px";
+  }
+  if (refMembres.current) {
+    refMembres.current.style.height = (heightMembres+minHeightMembre) + "px";
+  }
+  if (refDoctorants.current) {
+    refMembres.current.style.height = (heightDoctorants+minHeightDoctorants) + "px";
+  }
+
+
   return (
-    <div className="departement-page-container bg-gray-100">
+    <div ref={myRef} className="labo-page-container bg-gray-100">
       <div
         className="image-back-labo"
         
@@ -40,7 +95,7 @@ export default function LaboPage(props) {
           <div className="w-40 h-3 bg-yellow-400 mt-5"></div>
         </div>
       </div>
-      <div className="membres max-xl:mr-14">
+      <div className="membres max-xl:mr-14" ref={refMembres}>
         <div style={{ marginLeft: "290px" }} className="flex mt-20 ml-52">
           <div
             style={{ borderLeftWidth: "14px" }}
@@ -79,6 +134,50 @@ export default function LaboPage(props) {
         
         <LaboMembre membresLabo={labo.membresLabo}/>
 
+      </div>
+      <div className="doctorant-equipe max-xl:mr-14" ref={refDoctorants}>
+        <div style={{ marginLeft: "290px" }} className="flex mt-8 ml-52">
+          <div
+            style={{ borderLeftWidth: "14px" }}
+            className="h-15 border-l-yellow-400"
+          ></div>
+          <h1
+            style={{ fontFamily: "Roboto" }}
+            className="text-4xl pl-5 cursor-default"
+          >
+            Doctorants
+          </h1>
+        </div>
+        <div>
+          <DoctorantLabo identLabo={props.ident}/>
+        </div>
+      </div>
+      <div style={{ marginLeft: "290px",height:"40px" }} className="flex mt-40 ml-52">
+        <div
+          style={{ borderLeftWidth: "14px" }}
+          className="h-15 border-l-yellow-400"
+        ></div>
+        <h1
+          style={{ fontFamily: "Roboto" }}
+          className="text-4xl pl-5 cursor-default"
+        >
+          Publications
+        </h1>
+      </div>
+      <div ref={pubsRef} className="flex justify-center">
+        <div className="w-[1165px]">
+          {publications.map((publication, index) => (
+            <PublicationCard
+              key={index}
+              lien={publication.link[2]["@href"]}
+              namePub={publication["prism:publicationName"]}
+              title={publication["dc:title"]}
+              creator={publication["dc:creator"]}
+              datePub={publication["prism:coverDisplayDate"]}
+              desc={publication["subtypeDescription"]}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

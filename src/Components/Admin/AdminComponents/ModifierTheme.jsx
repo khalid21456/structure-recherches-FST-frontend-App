@@ -4,7 +4,7 @@ import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
 import ImageUploaderTheme from "../../ImageUploaders/ImageUploaderTheme";
-import { Button } from "@mui/material";
+import { Button, Autocomplete } from "@mui/material";
 import { imageThemeName } from "../../ImageUploaders/ImageUploaderTheme";
 
 export default function AjouterTheme() {
@@ -14,6 +14,9 @@ export default function AjouterTheme() {
     contentTheme: "",
     imagePath: "",
   });
+  const [structure,setStructure] = useState({value:0,label:""})
+  const [structures,setStructures] = useState([])
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,30 +35,51 @@ export default function AjouterTheme() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchStructuresNoms = async () => {
+      try {
+        const responseLabos = await axios.get(
+          "http://localhost:8080/FSTBM/Admin/Structures/getNames"
+        );
+        setStructures(responseLabos.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+        setStructures([]);
+      }
+    };
+
+    fetchStructuresNoms();
+  }, []);
+
   function AjouterTheme() {
     themeAdded.imagePath = imageThemeName();
     axios
-      .post("http://localhost:8080/FSTBM/Admin/Theme/AjouterTheme",themeAdded)
-      .then((response) => {setThemes(response.data)})
+      .post("http://localhost:8080/FSTBM/Admin/Theme/AjouterTheme", themeAdded)
+      .then((response) => {
+        setThemes(response.data);
+      })
       .catch((error) => {
         console.log("Error: " + error);
       });
   }
 
   function supprimerTheme(event) {
-    let id = event.target.parentElement.id
-    axios.delete(`http://localhost:8080/FSTBM/Admin/Theme/SupprimerTheme/${id}`).then((response)=>{
-      setThemes(response.data);
-    }).catch((error)=>{
-      console.log("Error: ",error)
-    })
+    let id = event.target.parentElement.id;
+    axios
+      .delete(`http://localhost:8080/FSTBM/Admin/Theme/SupprimerTheme/${id}`)
+      .then((response) => {
+        setThemes(response.data);
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   }
 
   return (
     <>
       <div className="flex h-full">
         <div
-          style={{ height: "700px" }}
+          style={{ height: "730px" }}
           className="formulaire w-1/2 mr-5 bg-white shadow-md"
         >
           <h1
@@ -87,6 +111,25 @@ export default function AjouterTheme() {
                 style={{ fontSize: "20px", fontFamily: "Poppins" }}
                 className="pl-3"
               >
+                Structure
+              </lable>
+              <br />
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                value={structure}
+                onChange={(event, newValue) => {
+                  setStructure(newValue);
+                }}
+                options={structures}
+                sx={{ width: 520 }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <br />
+              <lable
+                style={{ fontSize: "20px", fontFamily: "Poppins" }}
+                className="pl-3"
+              >
                 Déscription
               </lable>
               <br />
@@ -97,7 +140,7 @@ export default function AjouterTheme() {
                 }}
                 className="w-full"
                 multiline
-                rows={6}
+                rows={5}
               />
               <br />
               <br />
@@ -123,7 +166,7 @@ export default function AjouterTheme() {
           </div>
         </div>
         <div
-          style={{ height: "700px" }}
+          style={{ height: "730px" }}
           className="formulaire h-full w-1/2 bg-white shadow-md overflow-auto"
         >
           <h1
@@ -160,7 +203,6 @@ export default function AjouterTheme() {
             </div>
           </div>
         </div>
-        
       </div>
     </>
   );

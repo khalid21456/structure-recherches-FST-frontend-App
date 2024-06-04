@@ -73,6 +73,7 @@ export default function EquipePage(props) {
       doctorants.push(membre.doctorants)
     })
     setCountDoctorant(doctorants.length)
+    console.log(countDoctorant)
   })
 
   const pubsRef = useRef();

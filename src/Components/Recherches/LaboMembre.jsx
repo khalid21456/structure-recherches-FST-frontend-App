@@ -1,4 +1,6 @@
-import React from "react";
+import React,{useRef} from "react";
+import ReactDOM from "react-dom"
+import ProfileRech from "./ProfileRech";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,8 +12,31 @@ import Paper from "@mui/material/Paper";
 export default function LaboMembre(props) {
 
 
+  function renderProfile(event) {
+    ReactDOM.render(
+      <ProfileRech nomMembre={event.target.parentElement.children[0].textContent} ident={event.target.parentElement.id} />,document.getElementById("main")
+    )
+  }
+
+  function mouseEnteredHandle(event) {
+    event.target.parentElement.style.backgroundColor = "#DDE6ED";
+  }
+
+  function mouseLeavedHandle(event) {
+    event.target.parentElement.style.backgroundColor = "";
+  }
+
+
+  const refM = useRef();
+
+  let heightMembres = props.membresLabo.length * 100;
+
+  if (refM.current) {
+    refM.current.style.marginBottom = heightMembres + "px";
+  }
+
   return (
-    <div className="w-2/3 " style={{ marginLeft: "290px" }}>
+    <div className="w-2/3 " ref={refM} style={{ marginLeft: "290px" }}>
       <div className="mt-10">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -25,9 +50,16 @@ export default function LaboMembre(props) {
             <TableBody>
               {props.membresLabo.map((memb) => (
                 <TableRow
-                 
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                onClick={renderProfile}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                key={memb.id}
+                className={memb.id}
+                id={memb.id}
+                onMouseEnter={mouseEnteredHandle}
+                onMouseLeave={mouseLeavedHandle}
+                style={{cursor:"pointer"}}
                 >
+                  <div className="hidden">{memb.nom},{memb.prenom.charAt(0)}</div>
                   <TableCell component="th" scope="row">
                     {memb.prenom} {memb.nom} 
                   </TableCell>

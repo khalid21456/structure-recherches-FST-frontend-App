@@ -60,7 +60,6 @@ export default function DepartementCard(props) {
           <Button size="small" id={props.id} onClick={renderPage}>
             Membres
           </Button>
-          <Button size="small">Recherches</Button>
         </CardActions>
       </Card>
     </div>

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
 import "../../style/Recherche.css";
 import ThemeCard from "./ThemeCard";
 import axios from "axios";
@@ -13,8 +13,6 @@ import Paper from "@mui/material/Paper";
 import EquipePage from "./Equipe-page";
 import LaboPage from "./Labo-page";
 
-
-
 window.addEventListener("scroll", () => {
   let image = document.querySelectorAll(".trans");
   for (var i = 0; i < image.length; i++) {
@@ -27,17 +25,14 @@ window.addEventListener("scroll", () => {
   }
 });
 
-
 window.addEventListener("scroll", () => {
   let cards = document.querySelectorAll(".researchCard");
-  let headerTheme = document.getElementsByClassName("headerA")[0];
   for (var i = 0; i < cards.length; i++) {
     var windowHeight = window.innerHeight;
     var cardTop = cards[i].getBoundingClientRect().top;
     var cardPoint = 150;
     if (cardTop < windowHeight - cardPoint) {
       cards[i].classList.add("activeResearach");
-      headerTheme.classList.add("headerB");
     }
   }
 });
@@ -125,8 +120,12 @@ export default function Recherche() {
       // behavior: "smooth",
     });
     ReactDOM.render(
-      <EquipePage nomRespo={event.target.parentElement.children[0].textContent} ident={event.target.parentElement.id}/>,document.getElementById("main")
-    )
+      <EquipePage
+        nomRespo={event.target.parentElement.children[0].textContent}
+        ident={event.target.parentElement.id}
+      />,
+      document.getElementById("main")
+    );
     // console.log(event.target.parentElement.children[0].textContent);
   }
 
@@ -138,8 +137,12 @@ export default function Recherche() {
     });
     // console.log(event.target.parentElement.id)
     ReactDOM.render(
-      <LaboPage ident={event.target.parentElement.id}/>,document.getElementById("main")
-    )
+      <LaboPage
+        nomRespo={event.target.parentElement.children[0].textContent}
+        ident={event.target.parentElement.id}
+      />,
+      document.getElementById("main")
+    );
   }
 
   function mouseEnteredHandle(event) {
@@ -261,12 +264,16 @@ export default function Recherche() {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     key={labo.id}
                     onClick={renderLaboPage}
-                    style={{cursor:"pointer"}}
+                    style={{ cursor: "pointer" }}
                     onMouseEnter={mouseEnteredHandle}
                     onMouseLeave={mouseLeavedHandle}
                     id={labo.id}
-
                   >
+                    <div className="hidden">
+                      {labo.responsable.nom},
+                      {labo.responsable.prenom.charAt(0)}
+                    </div>
+
                     <TableCell component="th" scope="row">
                       {labo.nomLaboratoire}
                     </TableCell>
@@ -324,12 +331,15 @@ export default function Recherche() {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     id={equipe.id}
                     onClick={renderEquipePage}
-                    style={{cursor:"pointer"}}
+                    style={{ cursor: "pointer" }}
                     onMouseEnter={mouseEnteredHandle}
                     onMouseLeave={mouseLeavedHandle}
                     key={equipe.id}
                   >
-                    <div className="hidden">{equipe.responsable.nom},{equipe.responsable.prenom.charAt(0)}</div>
+                    <div className="hidden">
+                      {equipe.responsable.nom},
+                      {equipe.responsable.prenom.charAt(0)}
+                    </div>
                     <TableCell component="th" scope="row">
                       {equipe.nomEquipe}
                     </TableCell>
@@ -345,7 +355,7 @@ export default function Recherche() {
         </div>
       </div>
 
-      <div className="headerA flex ml-52 mt-32 max-xl:ml-32">
+      <div className=" flex ml-52 mt-32 max-xl:ml-32">
         <div
           style={{ borderLeftWidth: "14px" }}
           className="h-15 border-l-yellow-400"

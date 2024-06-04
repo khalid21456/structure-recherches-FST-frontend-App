@@ -56,7 +56,15 @@
   height:500px;
 }
 
+.membre-labo {
+  height:500px;
+}
+
 .equipe-page-container {
+  height: 2200px;
+}
+
+.labo-page-container {
   height: 2200px;
 }
 
@@ -71,5 +79,9 @@
 }
 
 .doctorant-equipe {
+  height: 260px;
+}
+
+.doctorant-labo {
   height: 260px;
 }

@@ -85,7 +85,7 @@ export default function ProfileRech(props) {
         <div className="w-[800px] bg-slate-100">
           <div className="mt-32">
             <p style={{ fontFamily: "Poppins" }} className="text-3xl pl-16">
-              {enseignant.nom} {enseignant.prenom}
+            {enseignant.prenom} {enseignant.nom}
             </p>
           </div>
           <div className="mt-5">
