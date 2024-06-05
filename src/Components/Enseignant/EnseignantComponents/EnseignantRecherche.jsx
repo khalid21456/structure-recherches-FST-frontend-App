@@ -1,9 +1,6 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useRef, useState } from "react";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { DatePicker } from "@mui/x-date-pickers";
 import Box from "@mui/material/Box";
 export default function EnseignantRecherche() {
   const [titre, setTitre] = useState("");

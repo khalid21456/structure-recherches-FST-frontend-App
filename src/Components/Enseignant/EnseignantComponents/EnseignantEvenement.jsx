@@ -6,9 +6,6 @@ import { Alert, Snackbar, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { Modal } from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { DatePicker } from "@mui/x-date-pickers";
 import axios from "axios";
 export default function EnseignantEvenement({ loginData }) {
   const titre = useRef();

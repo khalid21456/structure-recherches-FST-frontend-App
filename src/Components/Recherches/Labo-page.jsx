@@ -67,9 +67,6 @@ export default function LaboPage(props) {
   let heightAdded = heightMembres + heightPubs + heightDoctorants;
   let newHeight = minHeight + heightAdded;
 
-  // if (publications.length == 0) {
-  //   return <div>Loading...</div>;
-  // }
 
   if (myRef.current) {
     myRef.current.style.height = newHeight + "px";

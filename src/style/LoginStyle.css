@@ -39,10 +39,18 @@
     left: 525px;
     width: 36%;
     margin-top: 30px;
-    margin-left: 220px;
+    margin-left: 300px;
     position: absolute;
    
 }   
+
+@media (max-width: 1280px) {
+  .login-content {
+    margin-left: 220px;
+   
+}  
+}
+
 .formLogin {
     width: 80%;
   
