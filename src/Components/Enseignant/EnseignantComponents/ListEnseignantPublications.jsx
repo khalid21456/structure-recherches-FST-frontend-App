@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import EnseignantPublication from "./EnseignantPublication";
 import PublicationDetails from "./PublicationDetails";
 import PublicationCard from "./../../Publications/PublicationCard";
+import PublicationCards from "./PublicationCards";
 export default function ListEnseignantPublications({ loginData }) {
   console.log(loginData);
   const [publications, setPublications] = useState([]);
@@ -173,7 +174,7 @@ export default function ListEnseignantPublications({ loginData }) {
           );
         })} */}
         {publications.map((publication, index) => (
-          <PublicationCard
+          <PublicationCards
             key={index}
             lien={publication.link[2]["@href"]}
             namePub={publication["prism:publicationName"]}

@@ -4,6 +4,7 @@ import axios from "axios";
 import "../../style/AdminDashboard.css";
 import "../../style/EnseignantDashboard.css";
 export default function AdminProfileCard({ loginData }) {
+  console.log(loginData);
   // useEffect(() => {
   //   while(true) {
   //       let test = document.getElementsByClassName("online")[0];

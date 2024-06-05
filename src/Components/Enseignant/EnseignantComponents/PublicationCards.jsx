@@ -1,0 +1,38 @@
+import React from "react";
+
+export default function PublicationCards(props) {
+  if (props.creator == null) {
+    return <div>Loading</div>;
+  }
+  return (
+    <div className="w-[1000px]">
+      {/* <div className="ml-[290px]"> */}
+      <div className="pubCard mt-7 w-full min-h-[250px] bg-white rounded-md shadow-md h-auto flex flex-col">
+        <p className="pl-5 pt-3">{props.desc}</p>
+        <div className="w-11/12 ml-5 mt-5">
+          <h1 style={{ fontFamily: "Platypi" }} className="text-2xl">
+            {props.title}
+          </h1>
+        </div>
+        <p style={{ fontFamily: "Poppins" }} className="pl-5 pt-3">
+          {props.creator}
+        </p>
+        <div className="mt-5 flex justify-start">
+          <p className="pl-5 text-gray-400 font-bold italic">
+            {props.namePub},{" "}
+          </p>
+          <p>
+            <pre> {props.datePub}</pre>{" "}
+          </p>
+        </div>
+        <div className="mt-auto flex justify-end mr-6 mb-4">
+          <a href={props.lien} target="_blank">
+            <p className="underline hover:text-yellow-300 text-blue-600 cursor-pointer">
+              Voir La publication
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
