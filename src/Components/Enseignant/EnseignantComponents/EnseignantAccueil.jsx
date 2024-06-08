@@ -115,7 +115,7 @@ export default function EnseignantAccueil({ loginData }) {
               </h1>
               <span className="col-span-9 ml-4 text-gray-500 font-semibold">
                 {/* Equipe Mathématiques et Interactions */}
-                {loginData.equipe ? loginData.equipe : "----"}
+                {loginData.equipe ? loginData.equipe.nomEquipe : "----"}
               </span>
             </div>
             <div className="bg-gray-300 h-[1px] w-[642px] ml-6"></div>
@@ -127,7 +127,9 @@ export default function EnseignantAccueil({ loginData }) {
                 Laboratoire
               </h1>
               <span className="col-span-9 ml-4 text-gray-500 font-semibold">
-                {loginData.laboratoire ? loginData.laboratoire : "----"}
+                {loginData.laboratoire
+                  ? loginData.laboratoire.nomLaboratoire
+                  : "----"}
               </span>
             </div>
             <div className="bg-gray-300 h-[1px] w-[642px] ml-6"></div>

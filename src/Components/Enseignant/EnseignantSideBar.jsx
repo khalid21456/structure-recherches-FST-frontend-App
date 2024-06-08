@@ -7,6 +7,7 @@ import EnseignantEvenement from "./EnseignantComponents/EnseignantEvenement";
 import EnseignantPublication from "./EnseignantComponents/EnseignantPublication";
 import EnseignantRecherche from "./EnseignantComponents/EnseignantRecherche";
 import ListEnseignantPublications from "./EnseignantComponents/ListEnseignantPublications";
+import EnseignantParameter from "./EnseignantComponents/EnseignantParameter";
 
 export default function EnseignantSideBar({ loginData }) {
   const renderEnseignantAccueil = () => {
@@ -30,6 +31,12 @@ export default function EnseignantSideBar({ loginData }) {
   const renderEnseignantPublication = () => {
     ReactDOM.render(
       <ListEnseignantPublications loginData={loginData} />,
+      document.getElementById("EnseignantContent")
+    );
+  };
+  const renderEnseignantParamaetre = () => {
+    ReactDOM.render(
+      <EnseignantParameter loginData={loginData} />,
       document.getElementById("EnseignantContent")
     );
   };
@@ -112,7 +119,7 @@ export default function EnseignantSideBar({ loginData }) {
             </span>
           </div>
         </button>
-        <button className="w-full">
+        <button className="w-full" onClick={renderEnseignantParamaetre}>
           <div className="flex items-center px-6 py-2 mt-4 duration-200 div">
             <svg
               xmlns="http://www.w3.org/2000/svg"
