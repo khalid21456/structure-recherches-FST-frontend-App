@@ -78,8 +78,7 @@ export default function LaboPage(props) {
     refMembres.current.style.height = heightMembres + minHeightMembre + "px";
   }
   if (refDoctorants.current) {
-    refMembres.current.style.height =
-      heightDoctorants + minHeightDoctorants + "px";
+    refMembres.current.style.height = heightDoctorants + minHeightDoctorants + "px";
   }
   if (themeRef.current) {
     themeRef.current.style.height = (minHeightTheme+heightThemes) + "px";
@@ -166,7 +165,7 @@ export default function LaboPage(props) {
           style={{ fontFamily: "Roboto" }}
           className="text-4xl pl-5 cursor-default"
         >
-          Theme de recherches
+          Themes de recherches
         </h1>
       </div>
       <div ref={themeRef} className="flex justify-center">

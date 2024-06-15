@@ -200,7 +200,7 @@ const styleModal = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 1000,
-  height: 600,
+  height: 500,
   bgcolor: "background.paper",
   boxShadow: 0,
   p: 4,
@@ -439,7 +439,7 @@ export default function EquipeAdmin() {
                   <div className="formulaire w-full flex justify-center mt-8">
                     <div className="w-11/12 h-64">
                       <div className="w-full flex justify-between">
-                        <div>
+                        <div className="w-full">
                           <label className="text-black font-bold">
                             Nom de l'équipe
                           </label>
@@ -452,9 +452,11 @@ export default function EquipeAdmin() {
                               });
                             }}
                             value={equipeAdded.nomEquipe}
-                            style={{ width: "500px" }}
+                            style={{ width: "100%" }}
                           />
                         </div>
+                      </div>
+                      <div className="w-full flex justify-between mt-6">
                         <div>
                           <label className="text-black font-bold">
                             Résponsable
@@ -468,12 +470,10 @@ export default function EquipeAdmin() {
                               setResponsable(newValue);
                             }}
                             options={candidats}
-                            sx={{ width: 300 }}
+                            sx={{ width: 500 }}
                             renderInput={(params) => <TextField {...params} />}
                           />
                         </div>
-                      </div>
-                      <div className="w-full flex justify-between mt-6">
                         <div>
                           <label className="text-black font-bold">
                             Acronyme
@@ -490,7 +490,7 @@ export default function EquipeAdmin() {
                             style={{ width: "300px" }}
                           />
                         </div>
-                        <div>
+                        {/* <div>
                           <label className="text-black font-bold">
                             Membres
                           </label>
@@ -523,7 +523,7 @@ export default function EquipeAdmin() {
                               </Listbox>
                             ) : null}
                           </Root>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="mt-10 flex justify-center">
                         <div>

@@ -245,7 +245,7 @@ export default function EnseignantAdmin(props) {
                         <TableCell align="left">{enseignant.tele}</TableCell>
                         <TableCell align="left">
                           <div className="flex">
-                            <div style={{ color: "green" }} id={enseignant.id}>
+                            {/* <div style={{ color: "green" }} id={enseignant.id}>
                               <Tooltip title="Profile" arrow>
                                 <PersonIcon
                                   onClick={renderProfile}
@@ -254,7 +254,7 @@ export default function EnseignantAdmin(props) {
                                   className="cursor-pointer mr-5"
                                 />
                               </Tooltip>
-                            </div>
+                            </div> */}
                             <div
                               style={{ color: "red" }}
                               id={enseignant.id}

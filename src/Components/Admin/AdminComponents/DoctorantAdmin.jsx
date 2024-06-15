@@ -200,7 +200,7 @@ export default function DoctorantAdmin(props) {
                         </TableCell>
                         <TableCell align="left">
                           <div className="flex">
-                            <div style={{ color: "green" }} id={doctorant.id}>
+                            {/* <div style={{ color: "green" }} id={doctorant.id}>
                               <Tooltip title="Profile" arrow>
                                 <PersonIcon
                                   // onClick={renderProfile}
@@ -209,7 +209,7 @@ export default function DoctorantAdmin(props) {
                                   className="cursor-pointer mr-5"
                                 />
                               </Tooltip>
-                            </div>
+                            </div> */}
                             <div style={{ color: "red" }} id={doctorant.id}>
                               <DeleteIcon
                                 style={{ fontSize: "30px" }}

@@ -187,7 +187,7 @@ export default function EquipePage(props) {
         </div>
       </div>
       
-      <div style={{ marginLeft: "290px" }} className="flex mt-10 ml-52">
+      <div style={{ marginLeft: "290px" }} className="flex mt-32 ml-52">
         <div
           style={{ borderLeftWidth: "14px" }}
           className="h-15 border-l-yellow-400"
@@ -196,7 +196,7 @@ export default function EquipePage(props) {
           style={{ fontFamily: "Roboto" }}
           className="text-4xl pl-5 cursor-default"
         >
-          Theme de recherches
+          Themes de recherches
         </h1>
       </div>
       <div ref={themeRef} className="flex justify-center">

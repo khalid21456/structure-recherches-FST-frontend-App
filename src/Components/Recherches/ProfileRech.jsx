@@ -89,9 +89,13 @@ export default function ProfileRech(props) {
             </p>
           </div>
           <div className="mt-5">
+            <p style={{ fontFamily: "Poppins",fontSize:"20px" }} className=" pl-16">
+              {enseignant.email}
+            </p> 
             <p style={{ fontFamily: "Poppins" }} className=" pl-16">
-              Enseignant à la faculté des sciences et technique Béni Mellal
+              {/* Enseignant à la faculté des sciences et technique Béni Mellal */}
             </p>
+            
           </div>
         </div>
         <div className="pb-20 pl-20 pr-16 pt-14">

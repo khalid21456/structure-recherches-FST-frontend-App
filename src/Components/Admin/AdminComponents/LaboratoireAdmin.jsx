@@ -203,7 +203,7 @@ const styleModal = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 1000,
-  height: 600,
+  height: 500,
   bgcolor: "background.paper",
   boxShadow: 0,
   p: 4,
@@ -266,8 +266,6 @@ export default function LaboratoireAdmin() {
     setIsHovered(true);
   };
 
-
-
   // const handleMouseLeave = () => {
   //   setIsHovered(false);
   // };
@@ -293,7 +291,7 @@ export default function LaboratoireAdmin() {
           "http://localhost:8080/FSTBM/Admin/Enseignant/getNames"
         );
         setCandidats(response.data);
-        console.log(candidats)
+        console.log(candidats);
       } catch (error) {
         console.log(error.response.data.message);
         setCandidats([]);
@@ -322,13 +320,16 @@ export default function LaboratoireAdmin() {
   const [idLaboClicked, setIdLaboClicked] = useState();
 
   function renderMembreLabo(event) {
-    let ident = event.target.id
-    setIdLaboClicked(ident)
-    console.log(ident)
+    let ident = event.target.id;
+    setIdLaboClicked(ident);
+    console.log(ident);
     document.getElementById("addMembreIcon").style.display = "";
     document.getElementById("returnIcon").style.display = "";
     document.getElementById("addEquipeIcon").style.display = "none";
-    ReactDOM.render(<MembreLabo ident={ident}/>, document.getElementById("Equipes"));
+    ReactDOM.render(
+      <MembreLabo ident={ident} />,
+      document.getElementById("Equipes")
+    );
     let titleBare = document.getElementById("titleBare");
     Labos.forEach((elem) => {
       if (elem.id == event.target.id) {
@@ -443,7 +444,7 @@ export default function LaboratoireAdmin() {
                   <div className="formulaire w-full flex justify-center mt-8">
                     <div className="w-11/12 h-64">
                       <div className="w-full flex justify-between">
-                        <div>
+                        <div className="w-full">
                           <label className="text-black font-bold">
                             Nom de laboratoire
                           </label>
@@ -456,9 +457,11 @@ export default function LaboratoireAdmin() {
                               });
                             }}
                             value={laboAdded.nomLaboratoire}
-                            style={{ width: "500px" }}
+                            style={{ width: "100%" }}
                           />
                         </div>
+                      </div>
+                      <div className="w-full flex justify-between mt-6">
                         <div>
                           <label className="text-black font-bold">
                             Résponsable
@@ -471,14 +474,11 @@ export default function LaboratoireAdmin() {
                             onChange={(event, newValue) => {
                               setResponsable(newValue);
                             }}
-              
                             options={candidats}
-                            sx={{ width: 300 }}
+                            sx={{ width: 500 }}
                             renderInput={(params) => <TextField {...params} />}
                           />
                         </div>
-                      </div>
-                      <div className="w-full flex justify-between mt-6">
                         <div>
                           <label className="text-black font-bold">
                             Acronyme
@@ -495,7 +495,7 @@ export default function LaboratoireAdmin() {
                             style={{ width: "300px" }}
                           />
                         </div>
-                        <div>
+                        {/* <div>
                           <label className="text-black font-bold">
                             Membres
                           </label>
@@ -528,7 +528,7 @@ export default function LaboratoireAdmin() {
                               </Listbox>
                             ) : null}
                           </Root>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="mt-10 flex justify-center">
                         <div>
