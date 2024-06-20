@@ -40,7 +40,6 @@ export default function EnseignantAccueil({ loginData }) {
 
   //   fetchDataCountPublications();
   // }, []);
-
   return (
     <div className="" style={{ height: "1800px" }}>
       <Grid container spacing={4}>
@@ -115,7 +114,9 @@ export default function EnseignantAccueil({ loginData }) {
               </h1>
               <span className="col-span-9 ml-4 text-gray-500 font-semibold">
                 {/* Equipe Mathématiques et Interactions */}
-                {loginData.equipe ? loginData.equipe.nomEquipe : "----"}
+                {loginData.equipe !== null
+                  ? loginData.equipe.nomEquipe
+                  : "----"}
               </span>
             </div>
             <div className="bg-gray-300 h-[1px] w-[642px] ml-6"></div>
@@ -127,8 +128,8 @@ export default function EnseignantAccueil({ loginData }) {
                 Laboratoire
               </h1>
               <span className="col-span-9 ml-4 text-gray-500 font-semibold">
-                {loginData.laboratoire
-                  ? loginData.laboratoire.nomLaboratoire
+                {loginData.labo !== null
+                  ? loginData.labo.nomLaboratoire
                   : "----"}
               </span>
             </div>

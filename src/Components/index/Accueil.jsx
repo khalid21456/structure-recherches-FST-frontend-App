@@ -187,7 +187,7 @@ export default function Accueil() {
     ReactDOM.render(<Recherche />, main);
   }
   return (
-    <div className="Accueil-Container h-auto mb-[860px]">
+    <div className="Accueil-Container h-auto">
       <div className="bg-white flex justify-around h-[700px]">
         <div className="mt-32 pl-2">
           <h1
@@ -582,9 +582,9 @@ export default function Accueil() {
         </ul>
       </div>
       {/* <!--End Background Animation Body--> */}
-      <div className="pt-16 mt-[450px]">
+      {/* <div className="pt-16 mt-[450px]">
         <AccueilGalerie />
-      </div>
+      </div> */}
     </div>
   );
 }

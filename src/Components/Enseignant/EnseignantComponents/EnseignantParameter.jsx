@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import { Alert, Snackbar, Typography } from "@mui/material";
 export default function EnseignantParameter({ loginData }) {
   const [enseignantUpdated, setUpdatedEnseignant] = useState({
     nom: loginData.nom,
@@ -12,6 +13,16 @@ export default function EnseignantParameter({ loginData }) {
     address: loginData.address,
     profile: loginData.profile,
   });
+  const [openSnackBar, setOpenSnackBar] = React.useState(false);
+  const handleSnackBarClick = () => {
+    setOpenSnackBar(true);
+  };
+  const handleSnackBarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackBar(false);
+  };
   console.log(enseignantUpdated);
   const REST_API_BASE_URL = `http://localhost:8080/FSTBM/Enseignant/updateEnseignant/${loginData.id}`;
   const updateEnseignant = (enseignant) => {
@@ -22,6 +33,7 @@ export default function EnseignantParameter({ loginData }) {
     updateEnseignant(enseignantUpdated).then((response) => {
       console.log(response.data);
     });
+    handleSnackBarClick();
   };
   return (
     <div className="mr-9 ml-14 my-7 rounded-lg bg-white">
@@ -87,10 +99,11 @@ export default function EnseignantParameter({ loginData }) {
             onChange={(e) => {
               setUpdatedEnseignant({
                 ...enseignantUpdated,
-                prenom: e.target.value.trim(),
+                prenom: e.target.value,
               });
               // document.getElementById("nom-error").style.visibility = "hidden";
             }}
+            value={loginData.prenom}
           />
           <br />
           <label
@@ -197,6 +210,36 @@ export default function EnseignantParameter({ loginData }) {
         >
           Modifier
         </Button>
+        <Snackbar
+          open={openSnackBar}
+          autoHideDuration={6000}
+          onClose={handleSnackBarClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          // sx={{ marginBottom: "550px" }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Alert
+            onClose={handleSnackBarClose}
+            severity="success"
+            variant="filled"
+            sx={{
+              width: "600px",
+              height: "70px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <p className="ml-28" style={{ fontSize: "18px" }}>
+              {" "}
+              Votre modification est effectuer!
+            </p>
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ export default function EnseignantRecherche() {
           className="text-white font-bold pl-8 py-4 text-xl"
           style={{
             backgroundImage:
-              "linear-gradient(to right, #061b9a, #0a1eaf, #1021c5, #1724db, #2026f1)",
+              "linear-gradient(to right, #3e3232, #4d3e3e, #5d4a4a, #6d5656, #7e6363)",
           }}
         >
           Publier un recherche
@@ -40,7 +40,7 @@ export default function EnseignantRecherche() {
             <Button
               variant="contained"
               style={{
-                backgroundColor: "#061b9a",
+                backgroundColor: "#3e3232",
                 padding: "12px 45px",
                 marginRight: "20px",
                 fontSize: "17px",

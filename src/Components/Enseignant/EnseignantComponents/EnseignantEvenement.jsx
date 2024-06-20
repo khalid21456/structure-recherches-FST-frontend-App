@@ -374,7 +374,7 @@ export default function EnseignantEvenement({ loginData }) {
             <Button
               variant="contained"
               style={{
-                backgroundColor: "#061b9a",
+                backgroundColor: "#3e3232",
                 padding: "12px 45px",
                 marginRight: "20px",
                 fontSize: "17px",
@@ -382,7 +382,7 @@ export default function EnseignantEvenement({ loginData }) {
               onClick={submitForm}
               disabled={!isFormValid}
             >
-              Envoyer
+              Ajouter
             </Button>
             <Button
               variant="outlined"
