@@ -140,7 +140,7 @@ export default function LaboPage(props) {
         <LaboMembre membresLabo={labo.membresLabo} />
       </div>
       <div className="doctorant-equipe max-xl:mr-14" ref={refDoctorants}>
-        <div style={{ marginLeft: "290px" }} className="flex mt-8 ml-52">
+        <div style={{ marginLeft: "290px" }} className="flex mt-20 ml-52">
           <div
             style={{ borderLeftWidth: "14px" }}
             className="h-15 border-l-yellow-400"

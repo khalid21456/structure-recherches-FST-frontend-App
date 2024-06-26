@@ -52,14 +52,14 @@ export default function EnseignantList() {
                     Email
                   </lable>
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <lable
                     style={{ fontSize: "20px", color: "white" }}
                     className="font-bold"
                   >
                     Date d'embauche
                   </lable>
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
                   <lable
                     style={{ fontSize: "20px", color: "white" }}
@@ -84,9 +84,9 @@ export default function EnseignantList() {
                     {enseignant.nom} {enseignant.prenom}
                   </TableCell>
                   <TableCell align="left">{enseignant.email}</TableCell>
-                  <TableCell align="left">
-                    {/* {enseignant.dateEmbauche.substring(0, 10)} */}
-                  </TableCell>
+                  {/* <TableCell align="left">
+                 
+                  </TableCell> */}
                   <TableCell align="left">{enseignant.tele}</TableCell>
                 </TableRow>
               ))}

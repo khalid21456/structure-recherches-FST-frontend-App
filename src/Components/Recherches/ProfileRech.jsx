@@ -71,7 +71,7 @@ export default function ProfileRech(props) {
 
   return (
     <>
-      <div className="header-profile w-full h-[250px] bg-green-500">
+      <div className="header-profile w-full h-[250px] bg-slate-100">
         <div className="absolute top-60  left-20">
           <img
             src={require("../../pictures/userUnknown.jpg")}

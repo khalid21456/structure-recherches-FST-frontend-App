@@ -38,6 +38,7 @@ window.addEventListener("scroll", () => {
 });
 
 export default function Recherche() {
+  
   const myRef = useRef();
 
   const myRef2 = useRef();
@@ -199,9 +200,9 @@ export default function Recherche() {
                 className="max-xl:h-full"
               />
             </div>
-            <div className="trans cardRetarded Introduction-content mt-1 ml-10 w-6/12 text-justify max-xl:w-5/12">
+            <div className="trans cardRetarded Introduction-content mt-4 ml-10 w-6/12 text-justify max-xl:w-5/12">
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                {/* Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Recusandae laborum aut laboriosam neque voluptates? Non,
                 corrupti sunt ipsa ducimus pariatur nam id, repudiandae
                 doloremque accusantium deleniti autem fugiat esse quae! Lorem
@@ -215,7 +216,17 @@ export default function Recherche() {
                 voluptatem quibusdam. cimus voluptatem quibusdamcimus voluptatem
                 quibusdamcimus voluptatem quibusdam cimus voluptatem
                 quibusdamcimus voluptatem quibusdamcimus voluptatem quibusdam
-                cimus voluptatem quibusdamcimus voluptatem quibusdam
+                cimus voluptatem quibusdamcimus voluptatem quibusdam */}
+                La Faculté des Sciences et Techniques de Beni Mellal (FSTBM)
+                relevant de l’Université Sultan Moulay Slimane a été créée en
+                1994. C’est un établissement public d’enseignement supérieur
+                scientifique et technique à accès régulé dont le but est de
+                développer des programmes d’enseignement et de recherche
+                répartis sur quatre cycles (Licence, Master, Cycle d’Ingénieur
+                et Doctorat) offerts par neuf départements : Sciences de la Vie,
+                Sciences de la Terre, Chimie et Environnement, Physique,
+                Mathématiques, Informatique, Génie Electrique, Génie Mécanique
+                et Langues et Communication.
               </p>
             </div>
           </div>
@@ -270,8 +281,7 @@ export default function Recherche() {
                     id={labo.id}
                   >
                     <div className="hidden">
-                      {labo.responsable.nom},
-                      {labo.responsable.prenom.charAt(0)}
+                      {labo.responsable.nom},{labo.responsable.prenom.charAt(0)}
                     </div>
 
                     <TableCell component="th" scope="row">
